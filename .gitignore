@@ -238,4 +238,21 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
+# Nuxt dev/build outputs
+.data
+.nitro
+.cache
+
+# Logs
+logs
+
+# Misc
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij+all,vim,vuejs,macos,gradle,nuxtjs,visualstudiocode
