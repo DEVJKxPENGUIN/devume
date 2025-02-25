@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+body {
+  position: relative;
+  min-width: 360px;
+  overflow-x: hidden !important;
+  text-rendering: optimizeLegibility;
+  font-family: "Bebas Neue", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: xxx-large;
+  background-color: black;
+  color: gainsboro;
+}
+
+:root {
+
+}
