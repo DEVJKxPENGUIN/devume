@@ -1,18 +1,51 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* theme */
+:root {
+  --color-background: #111111;
+  --color-first: #8449BF;
+  --color-second: #4E458C;
+  --color-third: #3E3C73;
+  --color-fourth: #292840;
+  --color-fifth: #4EBFD9;
+
+  --color-white: #ebf0f7;
+  --color-white2: #C7C6D3;
+
+  --font-family-title: "Bebas Neue", serif;
+  --font-family-subtitle: "Bebas Neue", serif;
+  --font-family-content: "Noto Sans", roboto;
+}
 
 body {
   position: relative;
   min-width: 360px;
   overflow-x: hidden !important;
   text-rendering: optimizeLegibility;
-  font-family: "Bebas Neue", serif;
+  font-family: var(--font-family-title);
   font-weight: 400;
   font-style: normal;
-  font-size: xxx-large;
-  background-color: black;
-  color: gainsboro;
+  background-color: var(--color-background);
+  color: var(--color-white);
 }
 
-:root {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
 
+.container, .container-fluid, .container-xxl, .container-xl, .container-lg, .container-md, .container-sm {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: -moz-calc(var(--bs-gutter-x) * 0.5);
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: -moz-calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
 }

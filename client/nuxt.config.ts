@@ -1,5 +1,4 @@
 import tailwindcss from "@tailwindcss/vite"
-import colors from 'tailwindcss/colors'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -8,9 +7,18 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   vite: {
     plugins: [
-      tailwindcss()
+      tailwindcss(),
     ]
   },
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {}
+    }
+  },
+  plugins: [
+
+  ],
   runtimeConfig: {
     // private keys which are only available server-sied
     // apiSecret: '123'
@@ -19,13 +27,7 @@ export default defineNuxtConfig({
   tailwindcss: {
     // https://tailwindcss.com/docs/configuration
     config: {
-      theme: {
-        extend: {
-          colors: {
-            primary: colors.green
-          }
-        }
-      }
+
     }
   },
   app: {
@@ -48,5 +50,8 @@ export default defineNuxtConfig({
       name: 'fade',
       mode: 'out-in'
     }
-  }
+  },
+  modules: [
+      '@pinia/nuxt'
+  ]
 })
