@@ -4,29 +4,13 @@
   <main v-show="!store.isLoading">
     <slot/>
   </main>
-
-  <footer v-show="!store.isLoading" class="footer">
-    <div class="content">
-      <div class="">
-        <div class="">
-          <div class="">
-            <div class="">123</div>
-            <div class="">456</div>
-            <div class="">789</div>
-          </div>
-          <div class="">
-            <div class="">정자동 펭귄마을</div>
-            <div class="">abc</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <Footer/>
 </template>
 
 <script setup lang="ts">
 import Loader from '@/components/Loader.vue'
 import {useMainStore} from "~/store";
+import Footer from "~/components/Footer.vue";
 
 const store = useMainStore()
 </script>
@@ -43,38 +27,8 @@ const store = useMainStore()
   background-size: cover;
   background-repeat: no-repeat;
   /* fimxe - 이거 아래 사진 교체해야함. */
-  /* background-image: url('https://mixdesign.club/themeforest/braxton/img/demo/1920x1080-bg.webp'); */
+  opacity: 50%;
+  background-image: url('assets/img/bg2.jpg');
+   /*background-image: url('https://mixdesign.club/themeforest/braxton/img/demo/1920x1080-bg.webp');*/
 }
-
-.footer {
-  background-color: var(--color-background);
-  background-repeat: no-repeat;
-  background-position-x: center;
-  background-position-y: bottom;
-  background-size: 250%;
-}
-
-.footer .content {
-  position: relative;
-  padding: 0 1.5rem;
-  text-align: center;
-  font-family: var(--font-family-content);
-}
-
-@media only screen and (min-width: 1200px) {
-  .footer {
-    background-size: 100%;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .footer {
-    background-size: 150%;
-  }
-
-  .footer .content {
-    padding: 0 6rem;
-  }
-}
-
 </style>

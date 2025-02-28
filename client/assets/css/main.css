@@ -11,12 +11,19 @@
   --color-fourth: #292840;
   --color-fifth: #4EBFD9;
 
-  --color-white: #ebf0f7;
-  --color-white2: #C7C6D3;
+  --color-white: #ffffff;
+  --color-white2: #d7d7d7;
+  --color-white3: #bbbbbb;
 
   --font-family-title: "Bebas Neue", serif;
   --font-family-subtitle: "Bebas Neue", serif;
-  --font-family-content: "Noto Sans", roboto;
+  --font-family-content: "Saira", "42dot Sans", serif;
+
+  --font-color-normal: var(--color-white2);
+  --font-color-light: var(--color-white3);
+  --font-color-bold: var(--color-white);
+  --font-color-dark: var(--color-fourth);
+  --font-color-accent: var(--color-first);
 }
 
 body {
@@ -28,7 +35,12 @@ body {
   font-weight: 400;
   font-style: normal;
   background-color: var(--color-background);
-  color: var(--color-white);
+  color: var(--font-color-normal);
+}
+
+b {
+  font-weight: 600;
+  color: var(--font-color-bold)
 }
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
@@ -48,4 +60,44 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   padding-left: calc(var(--bs-gutter-x) * 0.5);
   margin-right: auto;
   margin-left: auto;
+}
+
+.font-color-normal {
+  color: var(--font-color-normal);
+}
+
+.font-color-light {
+  color: var(--font-color-light);
+}
+
+.font-color-bold {
+  color: var(--font-color-bold);
+}
+
+.animate-text-hover-default {
+  position: relative;
+  text-decoration: none;
+}
+
+.animate-text-hover-default::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  border-radius: 4px;
+  background-color: var(--color-first);
+  bottom: 0;
+  left: 0;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.animate-text-hover-default:hover::before {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.animate-text-hover-default:hover {
+  color: var(--color-second);
 }

@@ -8,7 +8,7 @@ export const ApiHandler = {
       setTimeout(() => {
         store.stopLoading()
         resolve({data: 'mock data'})
-      }, 2000)
+      }, 1000)
     })
   }
 

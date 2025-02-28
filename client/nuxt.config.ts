@@ -1,4 +1,3 @@
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
@@ -10,9 +9,7 @@ export default defineNuxtConfig({
       autoprefixer: {}
     }
   },
-  plugins: [
-
-  ],
+  plugins: [],
   runtimeConfig: {
     // private keys which are only available server-sied
     // apiSecret: '123'
@@ -29,8 +26,8 @@ export default defineNuxtConfig({
         {rel: "preconnect", href: "https://fonts.gstatic.com"},
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
-        },
+          href: "https://fonts.googleapis.com/css2?family=42dot+Sans:wght@300..800&family=Bebas+Neue&family=Nanum+Gothic&family=Saira:ital,wght@0,100..900;1,100..900&display=swap"
+        }
       ]
     },
     pageTransition: {
@@ -39,6 +36,6 @@ export default defineNuxtConfig({
     }
   },
   modules: [
-      '@pinia/nuxt'
+    '@pinia/nuxt'
   ]
 })
