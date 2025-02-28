@@ -7,16 +7,16 @@
 
   <footer v-show="!store.isLoading" class="footer">
     <div class="content">
-      <div class="container-fluid p-0">
-        <div class="flex flex-col flex-wrap">
-          <div class="flex flex-col items-center">
-            <div class="flex">123</div>
-            <div class="flex">456</div>
-            <div class="flex">789</div>
+      <div class="">
+        <div class="">
+          <div class="">
+            <div class="">123</div>
+            <div class="">456</div>
+            <div class="">789</div>
           </div>
-          <div class="flex flex-row justify-between">
-            <div class="flex text-7xl">정자동 펭귄마을</div>
-            <div class="flex">abc</div>
+          <div class="">
+            <div class="">정자동 펭귄마을</div>
+            <div class="">abc</div>
           </div>
         </div>
       </div>

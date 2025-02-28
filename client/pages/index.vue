@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-xl">HELLO WORLD!!</h1>
+  <div class="text-3xl">HELLO WORLD!!</div>
 
 </template>
 

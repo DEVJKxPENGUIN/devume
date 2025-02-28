@@ -1,15 +1,9 @@
-import tailwindcss from "@tailwindcss/vite"
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: {enabled: true},
   css: ['~/assets/css/main.css'],
-  vite: {
-    plugins: [
-      tailwindcss(),
-    ]
-  },
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -22,13 +16,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // private keys which are only available server-sied
     // apiSecret: '123'
-  },
-  // @ts-ignore
-  tailwindcss: {
-    // https://tailwindcss.com/docs/configuration
-    config: {
-
-    }
   },
   app: {
     head: {
