@@ -1,10 +1,10 @@
 <template>
-  <footer v-show="!store.isLoading" class="footer backdrop-filter">
-    <div class="content">
+  <footer v-show="!store.isLoading" class="footer">
+    <div class="content backdrop-blur-md">
       <div class="flex flex-col">
         <div class="flex flex-col font-color-light font-light">
           <div class="flex justify-center">
-            <img class="w-40 h-40 invert" src="~/assets/img/penguin.svg" alt="penguin"/>
+            <img class="w-40 h-40 invert" src="../../assets/img/penguin.svg" alt="penguin"/>
           </div>
           <div class="flex justify-center">
             Elevate your career with devume. Craft a resume that showcases your expertise.
