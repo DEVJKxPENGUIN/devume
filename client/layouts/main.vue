@@ -2,7 +2,7 @@
   <Loader/>
   <div v-show="!store.isLoading" class="image-background"/>
   <FloatControl/>
-  <main v-show="!store.isLoading">
+  <main v-show="!store.isLoading" class="content">
     <slot/>
   </main>
   <Footer/>
@@ -32,5 +32,11 @@ const store = useMainStore()
   opacity: 50%;
   background-image: url('assets/img/bg2.jpg');
   /*background-image: url('https://mixdesign.club/themeforest/braxton/img/demo/1920x1080-bg.webp');*/
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  min-width: 360px;
 }
 </style>
