@@ -31,6 +31,22 @@
           <ButtonDefault text="Write Now" :type="BTN_TYPES.LARGE" class="mt-3 sm:mt-0 sm:ml-3"/>
         </div>
       </div>
+      <div class="marquee">
+        <div class="inner">
+          <div class="part">
+            DEVUME is a platform for developers to showcase their skills and get hired by top companies.
+          </div>
+          <div class="part">
+            DEVUME is a platform for developers to showcase their skills and get hired by top companies.
+          </div>
+          <div class="part">
+            DEVUME is a platform for developers to showcase their skills and get hired by top companies.
+          </div>
+          <div class="part">
+            DEVUME is a platform for developers to showcase their skills and get hired by top companies.
+          </div>
+        </div>
+      </div>
     </div>
 
 
@@ -83,6 +99,30 @@ onMounted(async () => {
   position: relative;
   padding: 0 1rem;
   margin-bottom: 10rem;
+}
+
+.marquee {
+  position: relative;
+  height: 3rem;
+  line-height: 3rem;
+  background: linear-gradient(135deg, var(--color-first) 0%, var(--color-second) 100%);
+  color: var(--font-color-light);
+  font-size: 1.6rem;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.marquee .inner {
+  display: flex;
+  width: fit-content;
+  flex-direction: row;
+  flex: auto;
+}
+
+.marquee .part {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .headline .subtitle {
@@ -161,6 +201,12 @@ onMounted(async () => {
   .headline .btn-holder {
     margin-top: 4.6rem;
     padding-bottom: 5rem;
+  }
+
+  .marquee {
+    position: absolute;
+    bottom:0;
+    left: 0;
   }
 }
 
