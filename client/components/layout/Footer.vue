@@ -50,7 +50,7 @@ const store = useMainStore()
 
 .footer .content {
   position: relative;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
   text-align: center;
   font-family: var(--font-family-content);
 }

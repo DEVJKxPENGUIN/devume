@@ -26,6 +26,8 @@
   --font-color-bold: var(--color-white);
   --font-color-dark: var(--color-fourth);
   --font-color-accent: var(--color-first);
+
+  --max-width: 1920px;
 }
 
 body {
@@ -57,7 +59,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 }
 
 .container, .container-fluid, .container-xxl, .container-xl, .container-lg, .container-md, .container-sm {
-  --bs-gutter-x: 1.5rem;
+  --bs-gutter-x: 1rem;
   --bs-gutter-y: 0;
   width: 100%;
   padding-right: -moz-calc(var(--bs-gutter-x) * 0.5);

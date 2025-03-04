@@ -19,7 +19,8 @@
   border-radius: 50px;
   overflow: hidden;
   outline: none;
-  border: 1px solid var(--color-background-reverse);
+  //border: 1px solid var(--color-background-reverse);
+  box-shadow: 0 0 0 0.2px var(--color-background-reverse);
   cursor: pointer;
   background: transparent;
   transition: background-color ease 0.3s;
@@ -64,7 +65,8 @@
     border-radius: 50px;
     overflow: hidden;
     outline: none;
-    border: 1px solid var(--color-background-reverse);
+    //border: 1px solid var(--color-background-reverse);
+    box-shadow: 0 0 0 0.2px var(--color-background-reverse);
     cursor: pointer;
     background: transparent;
     transition: background-color ease 0.3s;
