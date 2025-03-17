@@ -33,21 +33,8 @@
       </div>
       <div class="marquee">
         <div class="inner">
-          <div class="part">
-            DEVUME is a platform for developers to showcase their skills and get hired by top
-            companies.
-          </div>
-          <div class="part">
-            DEVUME is a platform for developers to showcase their skills and get hired by top
-            companies.
-          </div>
-          <div class="part">
-            DEVUME is a platform for developers to showcase their skills and get hired by top
-            companies.
-          </div>
-          <div class="part">
-            DEVUME is a platform for developers to showcase their skills and get hired by top
-            companies.
+          <div class="part" v-for="i in 10" :key="i">
+            DEVUME is a platform for developers to showcase their skills and get hired by top companies.
           </div>
         </div>
       </div>
@@ -123,12 +110,23 @@ onMounted(async () => {
   width: fit-content;
   flex-direction: row;
   flex: auto;
+  animation: marquee 20s linear infinite;
 }
 
 .marquee .part {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  padding-right: 20px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
 }
 
 .headline .subtitle {
