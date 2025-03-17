@@ -26,9 +26,10 @@ const props = withDefaults(defineProps<{
   //border: 1px solid var(--color-background-reverse);
   box-shadow: 0 0 0 0.2px var(--color-background-reverse);
   border-radius: 6px;
-  font-family: var(--font-family-subtitle);
+  font-family: var(--font-family-content);
   font-weight: 400;
-  font-size: medium;
+  //font-size: small;
+  font-size: xx-small;
   background: transparent;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -82,9 +83,9 @@ const props = withDefaults(defineProps<{
     //border: 1px solid var(--color-background-reverse);
     box-shadow: 0 0 0 0.2px var(--color-background-reverse);
     border-radius: 6px;
-    font-family: var(--font-family-subtitle);
+    font-family: var(--font-family-content);
     font-weight: 400;
-    font-size: large;
+    font-size: medium;
     background: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -140,9 +141,9 @@ const props = withDefaults(defineProps<{
   //border: 1px solid var(--color-background-reverse);
   box-shadow: 0 0 0 0.2px var(--color-background-reverse);
   border-radius: 6px;
-  font-family: var(--font-family-subtitle);
+  font-family: var(--font-family-content);
   font-weight: 400;
-  font-size: x-large;
+  font-size: large;
   background: transparent;
   backdrop-filter: blur(10px);
   cursor: pointer;
@@ -194,12 +195,12 @@ const props = withDefaults(defineProps<{
   .large {
     width: 160px;
     height: 48px;
-    //border: 1px solid var(--color-background-reverse);
+    /*border: 1px solid var(--color-background-reverse);*/
     box-shadow: 0 0 0 0.2px var(--color-background-reverse);
     border-radius: 6px;
-    font-family: var(--font-family-subtitle);
+    font-family: var(--font-family-content);
     font-weight: 400;
-    font-size: x-large;
+    font-size: large;
     background: transparent;
     cursor: pointer;
     transition: all 0.3s ease;

@@ -3,10 +3,10 @@
     <div class="intro-header">
       <div class="flex header-container">
         <div class="flex hover:cursor-pointer">
-          <div class="logo-img mr-4">
+          <div class="logo-img">
             <img src="~/assets/img/logo.png" alt="logo"/>
           </div>
-          <div class="logo text-center align-middle justify-center h-full text-5xl">
+          <div class="logo text-center align-middle justify-center h-full">
             <p>DEVUME</p>
           </div>
         </div>
@@ -34,16 +34,20 @@
       <div class="marquee">
         <div class="inner">
           <div class="part">
-            DEVUME is a platform for developers to showcase their skills and get hired by top companies.
+            DEVUME is a platform for developers to showcase their skills and get hired by top
+            companies.
           </div>
           <div class="part">
-            DEVUME is a platform for developers to showcase their skills and get hired by top companies.
+            DEVUME is a platform for developers to showcase their skills and get hired by top
+            companies.
           </div>
           <div class="part">
-            DEVUME is a platform for developers to showcase their skills and get hired by top companies.
+            DEVUME is a platform for developers to showcase their skills and get hired by top
+            companies.
           </div>
           <div class="part">
-            DEVUME is a platform for developers to showcase their skills and get hired by top companies.
+            DEVUME is a platform for developers to showcase their skills and get hired by top
+            companies.
           </div>
         </div>
       </div>
@@ -107,9 +111,11 @@ onMounted(async () => {
   line-height: 3rem;
   background: linear-gradient(135deg, var(--color-first) 0%, var(--color-second) 100%);
   color: var(--font-color-light);
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+  text-transform: uppercase;
   overflow: hidden;
   z-index: 2;
+  font-family: var(--font-family-content);
 }
 
 .marquee .inner {
@@ -136,10 +142,12 @@ onMounted(async () => {
   backdrop-filter: blur();
   font-family: var(--font-family-subtitle);
   margin-bottom: 1rem;
+  font-size: small;
 }
 
 .headline .title {
-  font: normal 700 3.8rem / 1.2 var(--font-family-title);
+  font: normal 400 2.6rem / 1.2 var(--font-family-title);
+  text-transform: uppercase;
   color: var(--font-color-bold);
   background: var(--font-color-bold);
   background: -webkit-linear-gradient(15deg, var(--font-color-accent) 0%, var(--font-color-light) 80%);
@@ -155,11 +163,18 @@ onMounted(async () => {
 .logo-img {
   width: 3rem;
   height: 3rem;
+  margin-right: 0rem;
+}
+
+.logo-img img {
+  width: 2.5rem;
+  //height: 2rem;
 }
 
 .logo {
   color: var(--font-color-normal);
-  height: 3rem;
+  font-family: var(--font-family-logo);
+  font-size: x-large;
 }
 
 @media only screen and (min-width: 1280px) {
@@ -195,17 +210,17 @@ onMounted(async () => {
   }
 
   .headline .title {
-    font-size: 6rem;
+    font-size: 5rem;
   }
 
   .headline .btn-holder {
-    margin-top: 4.6rem;
+    margin-top: 2rem;
     padding-bottom: 5rem;
   }
 
   .marquee {
     position: absolute;
-    bottom:0;
+    bottom: 0;
     left: 0;
   }
 }
@@ -233,12 +248,32 @@ onMounted(async () => {
   }
 
   .headline .title {
-    font-size: 5rem;
+    font-size: 3.5rem;
     max-width: 600px;
   }
 
   .headline .btn-holder {
-    margin-top: 4.6rem;
+    margin-top: 2rem;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .logo-img {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 1rem;
+  }
+
+  .logo-img img {
+    width: 3rem;
+    //height: 2rem;
+  }
+
+  .logo {
+    color: var(--font-color-normal);
+    font-family: var(--font-family-logo);
+    font-size: xx-large;
   }
 }
 </style>
+

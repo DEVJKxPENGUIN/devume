@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   },
   plugins: [],
   runtimeConfig: {
-    // private keys which are only available server-sied
+    // private keys which are only available server-side
     // apiSecret: '123'
   },
   app: {
@@ -26,7 +26,7 @@ export default defineNuxtConfig({
         {rel: "preconnect", href: "https://fonts.gstatic.com"},
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=42dot+Sans:wght@300..800&family=Bebas+Neue&family=Nanum+Gothic&family=Saira:ital,wght@0,100..900;1,100..900&display=swap"
+          href: "https://fonts.googleapis.com/css2?family=42dot+Sans:wght@300..800&family=Bebas+Neue&family=Nanum+Gothic&family=Saira:ital,wght@0,100..900;1,100..900&family=Tektur:wght@400..900&family=Orbitron:wght@400..900&display=swap"
         }
       ]
     },

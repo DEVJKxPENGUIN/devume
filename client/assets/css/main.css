@@ -16,10 +16,15 @@
   --color-white2: #d7d7d7;
   --color-white3: #bbbbbb;
 
-  --font-family-title: "Bebas Neue", serif;
-  --font-family-subtitle: "Bebas Neue", serif;
-  --font-family-content: "Saira", "42dot Sans", serif;
+  /*--font-family-title: "Bebas Neue", serif;*/
+  /*--font-family-subtitle: "Bebas Neue", serif;*/
+  /*--font-family-content: "Saira", "42dot Sans", serif;*/
 
+  --font-family-title: "Orbitron", serif;
+  --font-family-subtitle: "Orbitron", serif;
+  --font-family-content: "Tektur", "42dot Sans", serif;
+
+  --font-family-logo: "Tektur", serif;
 
   --font-color-normal: var(--color-white2);
   --font-color-light: var(--color-white3);
