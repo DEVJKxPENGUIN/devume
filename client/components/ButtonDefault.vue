@@ -7,13 +7,13 @@
 <script setup lang="ts">
 import {BTN_TYPES} from "~/common/commons";
 
-const props = withDefaults(defineProps<{
-  text: string,
-  type: BTN_TYPES
-}>(), {
-  type: BTN_TYPES.NORMAL
+const props = defineProps({
+  text: String,
+  type: {
+    type: String,
+    default: BTN_TYPES.NORMAL
+  }
 })
-
 
 </script>
 
@@ -23,12 +23,10 @@ const props = withDefaults(defineProps<{
 .normal {
   width: 40px;
   height: 32px;
-  //border: 1px solid var(--color-background-reverse);
   box-shadow: 0 0 0 0.2px var(--color-background-reverse);
   border-radius: 6px;
   font-family: var(--font-family-content);
   font-weight: 400;
-  //font-size: small;
   font-size: xx-small;
   background: transparent;
   cursor: pointer;
@@ -80,7 +78,6 @@ const props = withDefaults(defineProps<{
   .normal {
     width: 62px;
     height: 32px;
-    //border: 1px solid var(--color-background-reverse);
     box-shadow: 0 0 0 0.2px var(--color-background-reverse);
     border-radius: 6px;
     font-family: var(--font-family-content);
@@ -138,7 +135,6 @@ const props = withDefaults(defineProps<{
 .large {
   width: 100%;
   height: 48px;
-  //border: 1px solid var(--color-background-reverse);
   box-shadow: 0 0 0 0.2px var(--color-background-reverse);
   border-radius: 6px;
   font-family: var(--font-family-content);
@@ -249,7 +245,6 @@ const props = withDefaults(defineProps<{
 }
 
 .accent {
-  //background-color: var(--font-color-accent);
   background: var(--font-color-bold);
   background: -webkit-linear-gradient(15deg, var(--color-second) 0%, var(--color-first) 80%);
 }

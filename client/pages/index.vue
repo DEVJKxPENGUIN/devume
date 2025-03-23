@@ -13,6 +13,10 @@ definePageMeta({
   layout: 'main'
 })
 
+// sample fetching data on server side
+const ssrData = await useFetch('/api/user')
+const hello = ssrData.data.value?.hello
+
 onMounted(async () => {
   // sample fetching data on client side
   const data = await ApiHandler.getMock()

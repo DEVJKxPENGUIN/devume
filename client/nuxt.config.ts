@@ -29,10 +29,6 @@ export default defineNuxtConfig({
           href: "https://fonts.googleapis.com/css2?family=42dot+Sans:wght@300..800&family=Bebas+Neue&family=Nanum+Gothic&family=Saira:ital,wght@0,100..900;1,100..900&family=Tektur:wght@400..900&family=Orbitron:wght@400..900&display=swap"
         }
       ]
-    },
-    pageTransition: {
-      name: 'fade',
-      mode: 'out-in'
     }
   },
   modules: [
