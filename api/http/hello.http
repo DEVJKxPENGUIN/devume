@@ -1,0 +1,6 @@
+
+GRPC localhost:9090/Hello/SayHello
+
+{
+  "name": "Hi"
+}
