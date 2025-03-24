@@ -8,17 +8,20 @@ import {definePageMeta} from "#imports";
 import {ApiHandler} from "~/common/apiHandler";
 import LivePreview from "~/components/pages/index/LivePreview.vue";
 import Intro from "~/components/pages/index/Intro.vue";
+import type {HelloResponse} from "~/.proto/HelloResponse";
 
 definePageMeta({
   layout: 'main'
 })
 
 // sample fetching data on server side
-const ssrData = await useFetch('/api/user')
-const hello = ssrData.data.value?.hello
+const ssr = await useFetch('/api/user')
+const hello = ssr.data.value as HelloResponse
 
+console.log('SSR FETCH', hello)
+
+// sample fetching data on client side
 onMounted(async () => {
-  // sample fetching data on client side
   const data = await ApiHandler.getMock()
   console.log(data)
 

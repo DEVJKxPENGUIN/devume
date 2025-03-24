@@ -298,3 +298,6 @@ out/
 ### Kotlin ###
 .kotlin
 
+
+### GRPC ###
+client/.proto/

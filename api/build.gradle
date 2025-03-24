@@ -60,6 +60,7 @@ protobuf {
             artifact = 'io.grpc:protoc-gen-grpc-java'
         }
     }
+
     generateProtoTasks {
         all()*.plugins {
             grpc {
@@ -72,4 +73,12 @@ protobuf {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDir '../proto'
+        }
+    }
 }
