@@ -56,74 +56,84 @@ spec:
     }
 
     stages {
-        if (params.role == 'devume-client') {
-            stage('Build Node') {
-                steps {
-                    container('node') {
-                        script {
-                            slackSend(channel: '#devume-cicd', message: "[${params.role}] Build integration start #${BUILD_NUMBER}")
-
-                            sh """
-                            echo 'Building..'       
+        stage('Build Node') {
+            when {
+                expression {
+                    return params.role == 'devume-client'
+                }
+            }
+            steps {
+                container('node') {
+                    script {
+                        slackSend(channel: '#devume-cicd', message: "[${params.role}] Build integration start #${BUILD_NUMBER}")
+                        sh """
+                            echo 'Building..'
                             echo "${params.role}"
                             ./run_client.sh -install
                             ./run_client.sh -build
                         """
-                        }
                     }
                 }
             }
-        } else if (params.role == 'devume-api') {
-            stage('Unit Test') {
-                steps {
-                    container('gradle') {
-                        script {
-                            slackSend(channel: '#devume-cicd', message: "[${params.role}] Build integration start #${BUILD_NUMBER}")
+        }
 
-                            withCredentials([string(credentialsId: 'devume-unit-test', variable: 'DEVUME_UNIT_TEST')]) {
-                                writeFile(file: '.env.secret', text: DEVUME_UNIT_TEST)
+        stage('Unit Test') {
+            when {
+                expression {
+                    return params.role == 'devume-api'
+                }
+            }
+            steps {
+                container('gradle') {
+                    script {
+                        slackSend(channel: '#devume-cicd', message: "[${params.role}] Build integration start #${BUILD_NUMBER}")
+                        withCredentials([string(credentialsId: 'devume-unit-test', variable: 'DEVUME_UNIT_TEST')]) {
+                            writeFile(file: '.env.secret', text: DEVUME_UNIT_TEST)
+                            def testOutput = sh(
+                                script: """
+                                set -a
+                                . ./.env.secret
+                                set +a
+                                ./run_local.sh -${params.role} -test -summary
+                            """,
+                                returnStdout: true
+                            )
 
-                                def testOutput = sh(
-                                        script: """
-                                        set -a
-                                        . ./.env.secret
-                                        set +a
-                                        ./run_local.sh -${params.role} -test -summary
-                                    """,
-                                        returnStdout: true
-                                )
+                            echo testOutput
 
-                                echo testOutput
-
-                                if (testOutput.contains("BUILD FAILED")) {
-                                    slackSend(channel: '#devume-cicd', message: "[${params.role}] :x: Unit test failed #${BUILD_NUMBER}\n```" + testOutput + "```")
-                                } else {
-                                    slackSend(channel: '#devume-cicd', message: "[${params.role}] :white_check_mark: Unit test success #${BUILD_NUMBER}\n```" + testOutput + "```")
-                                }
-
-                                sh """
-                                echo 'Copying test results..'   
-                                mkdir -p test-esults && cp -r ./${params.role}/build/test-results/test/ test-results/
-                                chmod -R a+r test-results/
-                                chown -R 1000:1000 test-results/ || true
-                            """
-                                stash includes: 'test-results/**', name: "${params.role}-test-results"
+                            if (testOutput.contains("BUILD FAILED")) {
+                                slackSend(channel: '#devume-cicd', message: "[${params.role}] :x: Unit test failed #${BUILD_NUMBER}\n```" + testOutput + "```")
+                            } else {
+                                slackSend(channel: '#devume-cicd', message: "[${params.role}] :white_check_mark: Unit test success #${BUILD_NUMBER}\n```" + testOutput + "```")
                             }
+
+                            sh """
+                            echo 'Copying test results..'   
+                            mkdir -p test-results && cp -r ./${params.role}/build/test-results/test/ test-results/
+                            chmod -R a+r test-results/
+                            chown -R 1000:1000 test-results/ || true
+                            """
+                            stash includes: 'test-results/**', name: "${params.role}-test-results"
                         }
                     }
                 }
             }
+        }
 
-            stage('Build Jar') {
-                steps {
-                    container('gradle') {
-                        sh """
+        stage('Build Jar') {
+            when {
+                expression {
+                    return params.role == 'devume-api'
+                }
+            }
+            steps {
+                container('gradle') {
+                    sh """
                     echo 'Building..'
                     echo "${params.role}"
                     gradle ${params.role}:bootJar
                     ls -la ./${params.role}/build/libs
                     """
-                    }
                 }
             }
         }
@@ -163,24 +173,24 @@ spec:
                 }
             }
         }
+    }
 
-        post {
-            if (params.role == 'devume-api') {
-                always {
-                    unstash "${params.role}-test-results"
-                    junit "test-results/*.xml"
-                    script {
-                        def reportUrl = "${env.BUILD_URL}testReport"
-                        slackSend(channel: '#devume-cicd', message: "[${params.role}] 테스트 결과 보기 👉 ${reportUrl}")
-                    }
+    post {
+        if (params.role == 'devume-api') {
+            always {
+                unstash "${params.role}-test-results"
+                junit "test-results/*.xml"
+                script {
+                    def reportUrl = "${env.BUILD_URL}testReport"
+                    slackSend(channel: '#devume-cicd', message: "[${params.role}] 테스트 결과 보기 👉 ${reportUrl}")
                 }
             }
-            success {
-                slackSend(channel: '#devume-cicd', message: "${params.role} :white_check_mark: Build integration success! #${BUILD_NUMBER}")
-            }
-            failure {
-                slackSend(channel: '#devume-cicd', message: "${params.role} :x: Build integration failed #${BUILD_NUMBER}")
-            }
+        }
+        success {
+            slackSend(channel: '#devume-cicd', message: "${params.role} :white_check_mark: Build integration success! #${BUILD_NUMBER}")
+        }
+        failure {
+            slackSend(channel: '#devume-cicd', message: "${params.role} :x: Build integration failed #${BUILD_NUMBER}")
         }
     }
 }
