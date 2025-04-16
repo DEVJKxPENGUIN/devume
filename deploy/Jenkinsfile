@@ -1,0 +1,186 @@
+def PORT
+if (params.role == 'devume-client') {
+    PORT = 8081
+} else if (params.role == 'devume-api') {
+    PORT = 8082
+}
+
+pipeline {
+    agent {
+        kubernetes {
+            yaml """
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: docker
+    image: docker:23.0-dind
+    securityContext:
+      privileged: true
+    env:
+    - name: DOCKER_TLS_CERTDIR
+      value: ""
+    - name: DOCKER_BUILDKIT
+      value: "1"
+    ports:
+    - containerPort: 2375
+    - containerPort: 2376
+    args:
+    - --insecure-registry=registry-docker-registry.registry.svc.cluster.local:5000
+  - name: gradle
+    image: gradle:8.5.0-jdk21
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+    - name: gradle-cache
+      mountPath: /home/gradle/.gradle
+  - name: node
+    image: node:22-alpine
+    command:
+    - cat
+    tty: true
+  volumes:
+  - name: gradle-cache
+    persistentVolumeClaim:
+      claimName: gradle-pvc
+"""
+        }
+    }
+
+    environment {
+//        DOCKER_CERT_PATH = credentials('dockerhub')
+//        DOCKER_HOST = 'tcp://localhost:2375'
+        DOCKER_REGISTRY = 'registry-docker-registry.registry.svc.cluster.local:5000'
+        DOCKER_REGISTRY_IP = '10.105.58.187:5000'
+    }
+
+    stages {
+        if (params.role == 'devume-client') {
+            stage('Build Node') {
+                steps {
+                    container('node') {
+                        script {
+                            slackSend(channel: '#devume-cicd', message: "[${params.role}] Build integration start #${BUILD_NUMBER}")
+
+                            sh """
+                            echo 'Building..'       
+                            echo "${params.role}"
+                            ./run_client.sh -install
+                            ./run_client.sh -build
+                        """
+                        }
+                    }
+                }
+            }
+        } else if (params.role == 'devume-api') {
+            stage('Unit Test') {
+                steps {
+                    container('gradle') {
+                        script {
+                            slackSend(channel: '#devume-cicd', message: "[${params.role}] Build integration start #${BUILD_NUMBER}")
+
+                            withCredentials([string(credentialsId: 'devume-unit-test', variable: 'DEVUME_UNIT_TEST')]) {
+                                writeFile(file: '.env.secret', text: DEVUME_UNIT_TEST)
+
+                                def testOutput = sh(
+                                        script: """
+                                        set -a
+                                        . ./.env.secret
+                                        set +a
+                                        ./run_local.sh -${params.role} -test -summary
+                                    """,
+                                        returnStdout: true
+                                )
+
+                                echo testOutput
+
+                                if (testOutput.contains("BUILD FAILED")) {
+                                    slackSend(channel: '#devume-cicd', message: "[${params.role}] :x: Unit test failed #${BUILD_NUMBER}\n```" + testOutput + "```")
+                                } else {
+                                    slackSend(channel: '#devume-cicd', message: "[${params.role}] :white_check_mark: Unit test success #${BUILD_NUMBER}\n```" + testOutput + "```")
+                                }
+
+                                sh """
+                                echo 'Copying test results..'   
+                                mkdir -p test-esults && cp -r ./${params.role}/build/test-results/test/ test-results/
+                                chmod -R a+r test-results/
+                                chown -R 1000:1000 test-results/ || true
+                            """
+                                stash includes: 'test-results/**', name: "${params.role}-test-results"
+                            }
+                        }
+                    }
+                }
+            }
+
+            stage('Build Jar') {
+                steps {
+                    container('gradle') {
+                        sh """
+                    echo 'Building..'
+                    echo "${params.role}"
+                    gradle ${params.role}:bootJar
+                    ls -la ./${params.role}/build/libs
+                    """
+                    }
+                }
+            }
+        }
+
+        stage('Build Docker') {
+            steps {
+                container('docker') {
+                    sh """
+                        docker --version
+                        docker info
+                        docker build -t ${DOCKER_REGISTRY}/${params.role}:${BUILD_NUMBER} ./${params.role}
+                        docker push ${DOCKER_REGISTRY}/${params.role}:${BUILD_NUMBER}
+                    """
+                }
+            }
+        }
+
+        stage('Update Manifest') {
+            steps {
+                dir("deploy") {
+                    sshagent(credentials: ['github-deploy-ssh']) {
+                        sh """
+                            sed -e 's/{{DOCKER_NAME}}/${params.role}/g' \
+                                -e 's/{{ROLE}}/${params.role}/g' \
+                                -e 's/{{PORT}}/${PORT}/g' \
+                                -e 's/{{TAG}}/${BUILD_NUMBER}/g' \
+                                -e 's/{{DOCKER_REGISTRY}}/${DOCKER_REGISTRY_IP}/g' \
+                                deployment-template.yaml > ${params.role}/deployment.yaml
+                            git config --global user.email rmsghk4254@naver.com
+                            git config --global user.name devjk
+                            git remote -v
+                            git add .
+                            git commit -m "[jenkins] ${params.role}-${BUILD_NUMBER} deployment.yaml"
+                            git push origin main
+                        """
+                    }
+                }
+            }
+        }
+
+        post {
+            if (params.role == 'devume-api') {
+                always {
+                    unstash "${params.role}-test-results"
+                    junit "test-results/*.xml"
+                    script {
+                        def reportUrl = "${env.BUILD_URL}testReport"
+                        slackSend(channel: '#devume-cicd', message: "[${params.role}] 테스트 결과 보기 👉 ${reportUrl}")
+                    }
+                }
+            }
+            success {
+                slackSend(channel: '#devume-cicd', message: "${params.role} :white_check_mark: Build integration success! #${BUILD_NUMBER}")
+            }
+            failure {
+                slackSend(channel: '#devume-cicd', message: "${params.role} :x: Build integration failed #${BUILD_NUMBER}")
+            }
+        }
+    }
+}

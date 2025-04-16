@@ -1,19 +1,15 @@
 #!/bin/bash
 
-MODE="local"
+NODE_ENV="local"
 RUN_TYPE="serve"
-
 # parse arguments
 while (("$#")); do
 
+  if [ "-install" = $1 ]; then
+    RUN_TYPE="install"
+  fi
   if [ "-build" = $1 ]; then
     RUN_TYPE="build"
-  fi
-  if [ "-local" = $1 ]; then
-    MODE=local
-  fi
-  if [ "-dev" = $1 ]; then
-    MODE=dev
   fi
   shift
 done
@@ -28,7 +24,12 @@ if [ "$RUN_TYPE" = "build" ]; then
   FULL_ARGS="npm run --prefix ./client build"
 fi
 
-echo MODE : ${MODE}
+if [ "$RUN_TYPE" = "install" ]; then
+  FULL_ARGS="npm install --prefix ./client"
+fi
+
+echo NODE_ENV : ${NODE_ENV}
 echo FULL_ARGS : "${FULL_ARGS}"
+export NODE_ENV=${NODE_ENV}
 ${FULL_ARGS}
 
