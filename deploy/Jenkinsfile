@@ -90,13 +90,13 @@ spec:
                         withCredentials([string(credentialsId: 'devume-unit-test', variable: 'DEVUME_UNIT_TEST')]) {
                             writeFile(file: '.env.secret', text: DEVUME_UNIT_TEST)
                             def testOutput = sh(
-                                script: """
+                                    script: """
                                 set -a
                                 . ./.env.secret
                                 set +a
                                 ./run_local.sh -${params.role} -test -summary
                             """,
-                                returnStdout: true
+                                    returnStdout: true
                             )
 
                             echo testOutput
@@ -176,14 +176,17 @@ spec:
     }
 
     post {
-        if (params.role == 'devume-api') {
-            always {
-                unstash "${params.role}-test-results"
-                junit "test-results/*.xml"
-                script {
-                    def reportUrl = "${env.BUILD_URL}testReport"
-                    slackSend(channel: '#devume-cicd', message: "[${params.role}] 테스트 결과 보기 👉 ${reportUrl}")
+        always {
+            when {
+                expression {
+                    return params.role == 'devume-api'
                 }
+            }
+            unstash "${params.role}-test-results"
+            junit "test-results/*.xml"
+            script {
+                def reportUrl = "${env.BUILD_URL}testReport"
+                slackSend(channel: '#devume-cicd', message: "[${params.role}] 테스트 결과 보기 👉 ${reportUrl}")
             }
         }
         success {
