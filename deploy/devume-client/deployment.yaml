@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ROLE}}
+  name: devume-client
   namespace: devume
 spec:
   selector:
     matchLabels:
-      app: {{ROLE}}
+      app: devume-client
   replicas: 2
   template:
     metadata:
       labels:
-        app: {{ROLE}}
+        app: devume-client
     spec:
       containers:
-        - name: {{ROLE}}
-          image: {{DOCKER_REGISTRY}}/{{DOCKER_NAME}}:{{TAG}}
+        - name: devume-client
+          image: 10.105.58.187:5000/devume-client:8
           imagePullPolicy: Always
           envFrom:
           - secretRef:
               name: devume-secret
           ports:
-          - containerPort: {{PORT}}
+          - containerPort: 8081
           readinessProbe:
             httpGet:
               path: /api/health
-              port: {{PORT}}
+              port: 8081
             initialDelaySeconds: 5
             periodSeconds: 5
 
