@@ -178,16 +178,15 @@ spec:
 
     post {
         always {
-            when {
-                expression {
-                    return params.role == 'devume-api'
-                }
-            }
-            unstash "${params.role}-test-results"
-            junit "test-results/*.xml"
             script {
-                def reportUrl = "${env.BUILD_URL}testReport"
-                slackSend(channel: '#devume-cicd', message: "[${params.role}] 테스트 결과 보기 👉 ${reportUrl}")
+                if (params.role == 'devume-api') {
+                    unstash "${params.role}-test-results"
+                    junit "test-results/*.xml"
+                    script {
+                        def reportUrl = "${env.BUILD_URL}testReport"
+                        slackSend(channel: '#devume-cicd', message: "[${params.role}] 테스트 결과 보기 👉 ${reportUrl}")
+                    }
+                }
             }
         }
         success {

@@ -300,4 +300,4 @@ out/
 
 
 ### GRPC ###
-client/.proto/
+devume-client/.proto/
