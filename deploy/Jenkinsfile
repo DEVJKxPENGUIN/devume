@@ -69,6 +69,7 @@ spec:
                         sh """
                             echo 'Building..'
                             echo "${params.role}"
+                            ls -la
                             ./run_client.sh -install
                             ./run_client.sh -build
                         """
