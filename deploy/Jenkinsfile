@@ -1,6 +1,6 @@
 def PORT
 if (params.role == 'devume-client') {
-    PORT = 8081
+    PORT = 3000
 } else if (params.role == 'devume-api') {
     PORT = 8082
 }
