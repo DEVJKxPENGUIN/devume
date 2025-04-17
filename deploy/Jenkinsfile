@@ -36,7 +36,7 @@ spec:
     - name: gradle-cache
       mountPath: /home/gradle/.gradle
   - name: node
-    image: node:22-alpine
+    image: node:22
     command:
     - cat
     tty: true
