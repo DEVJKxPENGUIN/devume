@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ROLE}}
+  namespace: devume
+spec:
+  selector:
+    matchLabels:
+      app: {{ROLE}}
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: {{ROLE}}
+    spec:
+      containers:
+        - name: {{ROLE}}
+          image: {{DOCKER_REGISTRY}}/{{DOCKER_NAME}}:{{TAG}}
+          imagePullPolicy: Always
+          envFrom:
+          - secretRef:
+              name: devume-secret
+          ports:
+          - containerPort: {{PORT}}
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: {{PORT}}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
