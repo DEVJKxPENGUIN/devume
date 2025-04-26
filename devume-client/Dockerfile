@@ -5,4 +5,4 @@ ENV NODE_ENV=prod
 
 COPY ${OUT_FILE} /app/
 
-ENTRYPOINT ["node", "/app/index.mjs"]
+ENTRYPOINT ["node", "/app/server/index.mjs"]
