@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: dev-devume.ink
+  - host: devume.ink
     http:
       paths:
       - path: /
