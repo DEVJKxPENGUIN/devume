@@ -1,0 +1,79 @@
+spring:
+  profiles:
+    group:
+      "local": "local, common"
+      "prod": "prod, common"
+---
+spring:
+  config:
+    activate:
+      on-profile: "common"
+
+  grpc:
+    server:
+      port: 9090
+      reflection:
+        enabled: true
+
+  #jpa:
+  #  database: mysql
+  #  show-sql: true
+  #  hibernate:
+  #    ddl-auto: validate
+  #  properties:
+  #    hibernate:
+  #      format_sql: true
+  #  open-in-view: true
+
+  output:
+    ansi:
+      enabled: always
+
+  #datasource:
+  #  driver-class-name: com.mysql.cj.jdbc.Driver
+  #  type: com.zaxxer.hikari.HikariDataSource
+
+#server:
+#  port: 8181
+#  tomcat:
+#    threads:
+#      max: 200
+#    maxConnections: 10000
+#    acceptCount: 100
+#    maxKeepAliveRequests: 100
+#    connectionTimeout: 60000
+#
+#management:
+#  endpoint:
+#    health:
+#      show-details: always
+#      show-components: always
+
+#db-host: ${DB_HOST}
+#db-username: ${DB_USERNAME}
+#db-password: ${DB_PASSWORD}
+#redis-host: ${REDIS_HOST}
+#redis-port: ${REDIS_PORT}
+#redis-password: ${REDIS_PASSWORD}
+---
+spring:
+  config:
+    activate:
+      on-profile: "local"
+#  devtools:
+#    livereload:
+#      enabled: true
+
+logging:
+  level:
+    root: debug
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+
+logging:
+  level:
+    root: info

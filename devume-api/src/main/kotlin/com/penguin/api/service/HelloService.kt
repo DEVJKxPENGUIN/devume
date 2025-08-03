@@ -26,7 +26,7 @@ class HelloService : HelloGrpc.HelloImplBase() {
         }
 
         val res: HelloResponse = HelloResponse.newBuilder()
-            .setMessage("Hello ==> ${request.name}")
+            .setMessage("Hello : ${request.name}")
             .build()
 
         responseObserver.onNext(res)
@@ -42,7 +42,7 @@ class HelloService : HelloGrpc.HelloImplBase() {
 
         while (count < 10) {
             val res: HelloResponse = HelloResponse.newBuilder()
-                .setMessage("Hello($count ==> ${request.name}")
+                .setMessage("Hello($count : ${request.name}")
                 .build()
 
             responseObserver.onNext(res)

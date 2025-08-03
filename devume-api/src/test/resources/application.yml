@@ -1,0 +1,10 @@
+#db-host: "localhost:5432"
+#db-username: "root"
+#db-password: "develop"
+#redis-host: localhost
+#redis-port: 1234
+#redis-password: 0
+
+spring:
+  profiles:
+    active: "local"
