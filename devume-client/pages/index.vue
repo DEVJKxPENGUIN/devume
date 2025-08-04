@@ -1,5 +1,5 @@
 <template>
-  <Intro />
+  <Intro :phase="phase" />
   <LivePreview />
 </template>
 
@@ -9,6 +9,7 @@ import {ApiHandler} from "~/common/apiHandler";
 import LivePreview from "~/components/pages/index/LivePreview.vue";
 import Intro from "~/components/pages/index/Intro.vue";
 import type {HelloResponse} from "~/.proto/HelloResponse";
+import {getPhase} from "~/common/commons";
 
 definePageMeta({
   layout: 'main'
@@ -19,6 +20,8 @@ const ssr = await useFetch('/api/user')
 const hello = ssr.data.value as HelloResponse
 
 console.log('SSR FETCH', hello)
+const phase = getPhase()
+console.log('Phase:', phase)
 
 // sample fetching data on client side
 onMounted(async () => {

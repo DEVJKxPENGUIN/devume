@@ -23,6 +23,8 @@ export default class GrpcHandler {
   private constructor() {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
+    const config = useRuntimeConfig()
+    const grpcUrl = config.public.grpcUrl as string
 
     for (const protoName of this.protoNames) {
       const PROTO_PATH = join(__dirname, `../../../proto/${protoName}.proto`);
@@ -36,7 +38,7 @@ export default class GrpcHandler {
 
       const protoDescriptor = grpc.loadPackageDefinition(packageDefinition)
       this.services.set(protoName, new (protoDescriptor[protoName] as ServiceClientConstructor)(
-          'localhost:9090', grpc.credentials.createInsecure()))
+          grpcUrl, grpc.credentials.createInsecure()))
     }
   }
 

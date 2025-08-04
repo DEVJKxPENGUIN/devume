@@ -7,7 +7,7 @@
             <img src="~/assets/img/logo.png" alt="logo"/>
           </div>
           <div class="logo text-center align-middle justify-center h-full">
-            <p>DEVUME</p>
+            <p>DEVUME-{{phase}}</p>
           </div>
         </div>
       </div>
@@ -46,6 +46,13 @@
 <script setup lang="ts">
 
 import {BTN_TYPES} from "~/common/commons";
+
+defineProps({
+  phase: {
+    type: String,
+    required: true
+  }
+})
 </script>
 
 <style scoped>
