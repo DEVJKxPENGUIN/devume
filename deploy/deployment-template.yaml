@@ -24,8 +24,8 @@ spec:
           - containerPort: {{PORT}}
           readinessProbe:
             httpGet:
-              path: /api/health
-              port: {{PORT}}
+              path: /actuator/health
+              port: {{HEALTH_PORT}}
             initialDelaySeconds: 5
             periodSeconds: 5
 

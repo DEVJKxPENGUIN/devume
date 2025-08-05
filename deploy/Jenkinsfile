@@ -1,8 +1,11 @@
 def PORT
+def HEALTH_PORT
 if (params.role == 'devume-client') {
     PORT = 8081
+    HEALTH_PORT = 8081
 } else if (params.role == 'devume-api') {
     PORT = 8082
+    HEALTH_PORT = 8083
 }
 
 pipeline {
@@ -160,6 +163,7 @@ spec:
                             sed -e 's/{{DOCKER_NAME}}/${params.role}/g' \
                                 -e 's/{{ROLE}}/${params.role}/g' \
                                 -e 's/{{PORT}}/${PORT}/g' \
+                                -e 's/{{HEALTH_PORT}}/${HEALTH_PORT}/g' \
                                 -e 's/{{TAG}}/${BUILD_NUMBER}/g' \
                                 -e 's/{{DOCKER_REGISTRY}}/${DOCKER_REGISTRY_IP}/g' \
                                 deployment-template.yaml > ${params.role}/deployment.yaml
