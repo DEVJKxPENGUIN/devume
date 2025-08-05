@@ -91,7 +91,7 @@ spec:
                 container('gradle') {
                     script {
                         slackSend(channel: '#devume-cicd', message: "[${params.role}] Build integration start #${BUILD_NUMBER}")
-                        withCredentials([string(credentialsId: 'devume-unit-test', variable: 'DEVUME_UNIT_TEST')]) {
+                        withCredentials([string(credentialsId: 'penguin-unit-test', variable: 'DEVUME_UNIT_TEST')]) {
                             writeFile(file: '.env.secret', text: DEVUME_UNIT_TEST)
                             def testOutput = sh(
                                     script: """
