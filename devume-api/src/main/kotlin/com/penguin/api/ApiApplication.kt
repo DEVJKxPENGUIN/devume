@@ -1,5 +1,6 @@
 package com.penguin.api
 
+import com.penguin.core.utils.PhaseUtils
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
@@ -7,5 +8,6 @@ import org.springframework.boot.runApplication
 class ApiApplication
 
 fun main(args: Array<String>) {
-    runApplication<ApiApplication>(*args)
+    val context = runApplication<ApiApplication>(*args)
+    PhaseUtils.initialize(context.environment.activeProfiles)
 }

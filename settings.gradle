@@ -1,2 +1,3 @@
 rootProject.name = 'devume'
 include("devume-api")
+include('devume-core')
