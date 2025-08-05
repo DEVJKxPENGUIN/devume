@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+
+option java_multiple_files = true;
+option java_package = "com.penguin.api";
+option java_outer_classname = "TitleProto";
+
+service Title {
+  rpc getTitle (TitleRequest) returns (TitleResponse) {}
+}
+
+message TitleRequest {
+
+}
+
+message TitleResponse {
+  string title = 1;
+}

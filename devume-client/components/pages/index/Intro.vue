@@ -7,7 +7,7 @@
             <img src="~/assets/img/logo.png" alt="logo"/>
           </div>
           <div class="logo text-center align-middle justify-center h-full">
-            <p>DEVUME</p>
+            <p>DEVUME-{{ phase }}</p>
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
           <span class="ml-2">Show Who you are!</span>
         </p>
         <h1 class="title">
-          Your next career starts here.
+          {{ title }}
         </h1>
         <div class="btn-holder flex flex-col sm:flex-row">
           <ButtonDefault text="View Resumes" :type="BTN_TYPES.LARGE_ACCENT"/>
@@ -46,6 +46,17 @@
 <script setup lang="ts">
 
 import {BTN_TYPES} from "~/common/commons";
+
+defineProps({
+  phase: {
+    type: String,
+    required: true
+  },
+  title: {
+    type: String,
+    required: true
+  }
+})
 </script>
 
 <style scoped>

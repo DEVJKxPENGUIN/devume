@@ -13,6 +13,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // private keys which are only available server-side
     // apiSecret: '123'
+    public: {
+      grpcUrl: process.env.GRPC_API_URL || 'localhost:9090',
+      phase: process.env.PHASE
+    }
   },
   app: {
     head: {

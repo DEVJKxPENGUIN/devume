@@ -5,7 +5,7 @@
   "scripts": {
     "proto": "./node_modules/.bin/proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=.proto ../proto/*.proto",
     "build": "npm run proto && nuxt build",
-    "dev": "npm run proto && nuxt dev",
+    "dev": "npm run proto && nuxt dev --dotenv .env.local",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"

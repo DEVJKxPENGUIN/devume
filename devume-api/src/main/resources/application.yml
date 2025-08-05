@@ -1,0 +1,48 @@
+spring:
+  profiles:
+    group:
+      "local": "local, common"
+      "prod": "prod, common"
+---
+spring:
+  config:
+    activate:
+      on-profile: "common"
+
+  grpc:
+    server:
+      port: 9090
+      reflection:
+        enabled: true
+
+  output:
+    ansi:
+      enabled: always
+
+management:
+  server:
+    port: 9091
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "local"
+
+logging:
+  level:
+    root: debug
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+
+logging:
+  level:
+    root: info
