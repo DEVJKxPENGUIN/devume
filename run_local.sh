@@ -25,6 +25,9 @@ while (("$#")); do
   if [ "-dev" = $1 ]; then
     MODE=dev
   fi
+  if [ "-api" = $1 ]; then
+    RUN_MODULE=devume-api
+  fi
   if [ "-test" = $1 ]; then
     GRADLE_TASK=test
   fi
