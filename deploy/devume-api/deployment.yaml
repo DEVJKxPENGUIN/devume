@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: devume-api
-          image: 10.105.58.187:5000/devume-api:8
+          image: 10.105.58.187:5000/devume-api:23
           imagePullPolicy: Always
           envFrom:
           - secretRef:
@@ -23,13 +23,9 @@ spec:
           ports:
           - containerPort: 9090
           readinessProbe:
-            exec:
-              command: ["/bin/grpc_health_probe", "-addr=:9090"]
-            initialDelaySeconds: 15
-            periodSeconds: 10
-          livenessProbe:
-            exec:
-              command: ["/bin/grpc_health_probe", "-addr=:9090"]
-            initialDelaySeconds: 15
-            periodSeconds: 10
+            httpGet:
+              path: /actuator/health
+              port: 9091
+            initialDelaySeconds: 5
+            periodSeconds: 5
 
