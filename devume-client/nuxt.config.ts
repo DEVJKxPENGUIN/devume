@@ -19,10 +19,10 @@ export default defineNuxtConfig({
     }
   },
   nitro: {
-    publicAssets: [
+    serverAssets: [
       {
-        dir: './proto',
-        baseURL: 'proto'
+        baseName: 'proto',
+        dir: '../proto'
       }
     ]
   },

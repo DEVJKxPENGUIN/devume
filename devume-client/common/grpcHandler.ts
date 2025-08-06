@@ -57,7 +57,7 @@ export default class GrpcHandler {
     return new Promise((resolve, reject) => {
       this.services.get('Hello')?.sayHello({name}, (err: any, response: HelloResponse) => {
         if (err) {
-          reject()
+          reject(err)
         } else {
           resolve(response)
         }
@@ -69,7 +69,7 @@ export default class GrpcHandler {
     return new Promise((resolve, reject) => {
       this.services.get('Title')?.getTitle({}, (err: any, response: TitleResponse) => {
         if (err) {
-          reject()
+          reject(err)
         } else {
           resolve(response)
         }
