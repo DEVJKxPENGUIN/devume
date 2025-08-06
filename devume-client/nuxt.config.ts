@@ -18,6 +18,14 @@ export default defineNuxtConfig({
       phase: process.env.PHASE
     }
   },
+  nitro: {
+    publicAssets: [
+      {
+        dir: './proto',
+        baseURL: 'proto'
+      }
+    ]
+  },
   app: {
     head: {
       title: 'Devume',
