@@ -19,6 +19,7 @@ definePageMeta({
 const fetch = await useFetch('/api/title')
 const titleResponse = fetch.data.value as TitleResponse
 const title = titleResponse.title as string
+// const title = 'test'
 
 const phase = getPhase()
 
