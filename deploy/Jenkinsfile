@@ -191,7 +191,7 @@ spec:
                         ls -R test-results/
                     """
 
-                    junit "test-results/*.xml"
+                    junit "test-results/test/*.xml"
                     script {
                         def reportUrl = "${env.BUILD_URL}testReport"
                         slackSend(channel: '#devume-cicd', message: "[${params.role}] 테스트 결과 보기 👉 ${reportUrl}")
