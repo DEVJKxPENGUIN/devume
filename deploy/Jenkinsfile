@@ -174,9 +174,16 @@ spec:
             steps {
                 dir("deploy") {
                     sshagent(credentials: ['github-deploy-ssh']) {
+                        def deploymentFile = readYaml file: "${params.role}/deployment.yaml"
+                        def currentTime = new Date().format("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone('UTC'))
+                        if (!deployment.spec.template.metadata.annotations) {
+                            deployment.spec.template.metadata.annotations = [:]
+                        }
+                        deployment.spec.template.metadata.annotations.'kubectl.kubernetes.io/restartedAt' = currentTime
+
+                        writeYaml file: "${params.role}/deployment.yaml", data: deploymentFile, overwrite: true
+
                         sh """
-                            sed -e 's/{{CURRENT_TIME}}/${new Date().format("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone('UTC'))}/g' \
-                                ${params.role}/deployment.yaml > ${params.role}/deployment.yaml
                             git config --global user.email rmsghk4254@naver.com
                             git config --global user.name devjk
                             git remote -v
