@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devume-client
+  namespace: devume
+spec:
+  selector:
+    matchLabels:
+      app: devume-client
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: devume-client
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2025-08-09T13:50:29Z"
+    spec:
+      containers:
+        - name: devume-client
+          image: 10.105.58.187:5000/devume-client:32
+          imagePullPolicy: Always
+          envFrom:
+          - secretRef:
+              name: devume-secret
+          ports:
+          - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
