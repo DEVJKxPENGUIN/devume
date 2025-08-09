@@ -13,16 +13,17 @@ export enum PHASE {
 }
 
 export function getPhase(): PHASE {
-  const config = useRuntimeConfig();
-  return config.public.phase as PHASE;
+  return (process.env.PHASE || PHASE.LOCAL) as PHASE;
 }
 
 export function isLocal(): Boolean {
-  const config = useRuntimeConfig();
-  return config.public.phase === PHASE.LOCAL;
+  return getPhase() === PHASE.LOCAL;
 }
 
 export function isProd(): Boolean {
-  const config = useRuntimeConfig();
-  return config.public.phase === PHASE.PROD;
+  return getPhase() === PHASE.PROD;
+}
+
+export function getGrpcUrl(): string {
+  return process.env.GRPC_API_URL || 'localhost:9090';
 }
