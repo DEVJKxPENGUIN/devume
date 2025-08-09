@@ -7,6 +7,11 @@ if (params.role == 'devume-client') {
     PORT = 9090
     HEALTH_PORT = 9091
 }
+if (params.action == 'deploy') {
+
+} else if(params.action == 'restart only') {
+
+}
 
 pipeline {
     agent {
@@ -62,7 +67,7 @@ spec:
         stage('Build Node') {
             when {
                 expression {
-                    return params.role == 'devume-client'
+                    return params.role == 'devume-client' && params.action == 'deploy'
                 }
             }
             steps {
@@ -84,7 +89,7 @@ spec:
         stage('Unit Test') {
             when {
                 expression {
-                    return params.role == 'devume-api'
+                    return params.role == 'devume-api' && params.action == 'deploy'
                 }
             }
             steps {
@@ -127,7 +132,7 @@ spec:
         stage('Build Jar') {
             when {
                 expression {
-                    return params.role == 'devume-api'
+                    return params.role == 'devume-api' && params.action == 'deploy'
                 }
             }
             steps {
@@ -143,6 +148,11 @@ spec:
         }
 
         stage('Build Docker') {
+            when {
+                expression {
+                    return params.action == 'deploy'
+                }
+            }
             steps {
                 container('docker') {
                     sh """
