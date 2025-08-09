@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: devume-client
-          image: 10.105.58.187:5000/devume-client:28
+          image: 10.105.58.187:5000/devume-client:29
           imagePullPolicy: Always
           envFrom:
           - secretRef:
