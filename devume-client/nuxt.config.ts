@@ -14,17 +14,10 @@ export default defineNuxtConfig({
     // private keys which are only available server-side
     // apiSecret: '123'
     public: {
+      protoDir: `${process.cwd()}/.proto`,
       grpcUrl: process.env.GRPC_API_URL || 'localhost:9090',
       phase: process.env.PHASE
     }
-  },
-  nitro: {
-    serverAssets: [
-      {
-        baseName: 'proto',
-        dir: '../proto'
-      }
-    ]
   },
   app: {
     head: {

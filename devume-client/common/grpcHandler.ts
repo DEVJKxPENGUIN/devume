@@ -7,7 +7,6 @@ import fs from 'fs'; // fs 모듈 임포트
 import type {ServiceClient} from "@grpc/grpc-js/build/src/make-client";
 import type {HelloResponse} from "~/.proto/HelloResponse";
 import type {TitleResponse} from "~/.proto/TitleResponse";
-import {isLocal} from "~/common/commons";
 
 export default class GrpcHandler {
   private static instance: GrpcHandler | null = null
@@ -25,10 +24,7 @@ export default class GrpcHandler {
     const __dirname = dirname(__filename)
     const config = useRuntimeConfig()
     const grpcUrl = config.public.grpcUrl as string
-    let protoDir = join(process.cwd(), 'public/proto/')
-    if (isLocal()) {
-      protoDir = join(__dirname, '../../../proto/')
-    }
+    const protoDir = config.public.protoDir as string;
 
     // proto 디렉토리에서 .proto 파일 목록을 동적으로 읽어옴
     const protoFiles = fs.readdirSync(protoDir)
@@ -37,6 +33,8 @@ export default class GrpcHandler {
     for (const protoFile of protoFiles) {
       const protoName = protoFile.replace('.proto', ''); // 'Hello.proto' -> 'Hello'
       const PROTO_PATH = join(protoDir, protoFile);
+
+      console.log( `Loading gRPC service from: ${PROTO_PATH} with URL: ${grpcUrl}`)
 
       const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
         keepCase: true,

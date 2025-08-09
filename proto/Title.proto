@@ -6,12 +6,10 @@ option java_package = "com.penguin.api";
 option java_outer_classname = "TitleProto";
 
 service Title {
-  rpc getTitle (TitleRequest) returns (TitleResponse) {}
+  rpc GetTitle (TitleRequest) returns (TitleResponse) {}
 }
 
-message TitleRequest {
-
-}
+message TitleRequest {}
 
 message TitleResponse {
   string title = 1;

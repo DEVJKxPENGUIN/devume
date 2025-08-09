@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "proto": "./node_modules/.bin/proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=.proto ../proto/*.proto && cp ../proto/*.proto .proto/",
+    "proto": "./node_modules/.bin/proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=.proto ../proto/*.proto",
     "build": "npm run proto && nuxt build",
     "dev": "npm run proto && nuxt dev --dotenv .env.local",
     "generate": "nuxt generate",
