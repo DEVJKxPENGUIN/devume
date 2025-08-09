@@ -12,6 +12,8 @@ spec:
     metadata:
       labels:
         app: {{ROLE}}
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "{{CURRENT_TIME}}"
     spec:
       containers:
         - name: {{ROLE}}

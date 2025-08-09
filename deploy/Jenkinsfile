@@ -9,7 +9,7 @@ if (params.role == 'devume-client') {
 }
 if (params.action == 'deploy') {
 
-} else if(params.action == 'restart only') {
+} else if (params.action == 'restart only') {
 
 }
 
@@ -165,7 +165,36 @@ spec:
             }
         }
 
-        stage('Update Manifest') {
+        stage('Update Restart Manifest') {
+            when {
+                expression {
+                    return params.action == 'restart only'
+                }
+            }
+            steps {
+                dir("deploy") {
+                    sshagent(credentials: ['github-deploy-ssh']) {
+                        sh """
+                            sed -e 's/{{CURRENT_TIME}}/${new Date().format("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone('UTC'))}/g' \
+                                ${params.role}/deployment.yaml > ${params.role}/deployment.yaml
+                            git config --global user.email rmsghk4254@naver.com
+                            git config --global user.name devjk
+                            git remote -v
+                            git add .
+                            git commit -m "[jenkins] ${params.role}-${BUILD_NUMBER} deployment.yaml"
+                            git push origin main
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Update Deploy Manifest') {
+            when {
+                expression {
+                    return params.action == 'deploy'
+                }
+            }
             steps {
                 dir("deploy") {
                     sshagent(credentials: ['github-deploy-ssh']) {
@@ -176,6 +205,7 @@ spec:
                                 -e 's/{{HEALTH_PORT}}/${HEALTH_PORT}/g' \
                                 -e 's/{{TAG}}/${BUILD_NUMBER}/g' \
                                 -e 's/{{DOCKER_REGISTRY}}/${DOCKER_REGISTRY_IP}/g' \
+                                -e 's/{{CURRENT_TIME}}/${new Date().format("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone('UTC'))}/g' \
                                 deployment-template.yaml > ${params.role}/deployment.yaml
                             git config --global user.email rmsghk4254@naver.com
                             git config --global user.name devjk
