@@ -185,12 +185,6 @@ spec:
             script {
                 if (params.role == 'devume-api') {
                     unstash "${params.role}-test-results"
-
-                    sh"""
-                        echo 'test-results 디렉터리 구조'
-                        ls -R test-results/
-                    """
-
                     junit "test-results/test/*.xml"
                     script {
                         def reportUrl = "${env.BUILD_URL}testReport"
