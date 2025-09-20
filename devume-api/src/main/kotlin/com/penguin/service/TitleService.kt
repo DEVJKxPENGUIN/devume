@@ -1,10 +1,9 @@
-package com.penguin.api.service
+package com.penguin.service
 
 import com.penguin.api.TitleGrpc
 import com.penguin.api.TitleRequest
 import com.penguin.api.TitleResponse
-import com.penguin.core.framework.constants.Phase
-import com.penguin.core.utils.PhaseUtils
+import com.penguin.utils.Profiles
 import io.grpc.stub.StreamObserver
 import org.slf4j.LoggerFactory
 import org.springframework.grpc.server.service.GrpcService
@@ -19,14 +18,14 @@ class TitleService : TitleGrpc.TitleImplBase() {
     ) {
         log.info("Received request [getTitle]: $request")
 
-        val phase: Phase = PhaseUtils.getPhase()
+        val phase: String = Profiles.getActiveProfile()
 
-        val title = if (PhaseUtils.isLocal()) {
+        val title = if (Profiles.isLocal()) {
             "local-Your next career starts $phase"
-        } else if (PhaseUtils.isProd()) {
+        } else if (Profiles.isProd()) {
             "prod-Your next career starts $phase"
         } else {
-            throw IllegalArgumentException("Unknown phase ${phase.name}")
+            throw IllegalArgumentException("Unknown phase $phase")
         }
 
         val res: TitleResponse = TitleResponse.newBuilder()

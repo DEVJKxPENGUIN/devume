@@ -47,13 +47,27 @@ subprojects {
         implementation("org.springframework.grpc:spring-grpc-spring-boot-starter")
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.springframework.boot:spring-boot-starter-actuator")
-
+        implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+        implementation("org.springframework.boot:spring-boot-starter-data-redis")
+        implementation("org.springframework.boot:spring-boot-starter-validation")
+        implementation("org.springframework.boot:spring-boot-starter-webflux")
+        implementation("org.springframework.boot:spring-boot-starter-aop")
+        implementation("org.apache.commons:commons-lang3")
+        implementation("io.lettuce:lettuce-core")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+        implementation("com.mysql:mysql-connector-j:9.0.0")
+        implementation("io.jsonwebtoken:jjwt:0.12.3")
 
         // test
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("org.springframework.grpc:spring-grpc-test")
         testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+        testImplementation("com.h2database:h2")
+        testImplementation("com.github.codemonstur:embedded-redis:1.4.2")
+        testImplementation("org.assertj:assertj-core:3.27.3")
+        testImplementation("org.mockito:mockito-inline:4.11.0")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+        annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     }
 
     kotlin {

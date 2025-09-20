@@ -7,5 +7,5 @@ tasks.getByName("jar") {
 }
 
 dependencies {
-    implementation("org.springframework:spring-context")
+
 }

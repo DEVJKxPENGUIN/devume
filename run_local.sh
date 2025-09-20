@@ -2,12 +2,18 @@
 
 DEBUG=false
 CLEAN=""
-RUN_MODULE="devume-api"
+RUN_MODULE=""
 RUN_DIRECTORY=""
 MODE="local"
 RUN_TYPE="spring" ## spring or npm
 GRADLE_TASK="bootRun"
 EXTRA=""
+DB_HOST="localhost:43306"
+DB_USERNAME="root"
+DB_PASSWORD="develop"
+REDIS_HOST="localhost"
+REDIS_PORT="46379"
+REDIS_PASSWORD="develop"
 
 # parse arguments
 while (("$#")); do
@@ -50,6 +56,10 @@ if [ ${RUN_TYPE} = "spring" ]; then
   if [ ${DEBUG} = true ]; then
     ARGS="${ARGS} --debug-jvm ${EXTRA}"
   fi
+  if [ -z ${RUN_MODULE} ]; then
+    echo 'you should choose module option (-api)'
+    exit 1
+  fi
 
   # make full args
   # shellcheck disable=SC2089
@@ -65,11 +75,11 @@ if [ ${RUN_TYPE} = "spring" ]; then
 
   # gradle run
   # shellcheck disable=SC2090
-  #export DB_HOST=${DB_HOST}
-  #export DB_USERNAME=${DB_USERNAME}
-  #export DB_PASSWORD=${DB_PASSWORD}
-  #export REDIS_HOST=${REDIS_HOST}
-  #export REDIS_PORT=${REDIS_PORT}
-  #export REDIS_PASSWORD=${REDIS_PASSWORD}
+  export DB_HOST=${DB_HOST}
+  export DB_USERNAME=${DB_USERNAME}
+  export DB_PASSWORD=${DB_PASSWORD}
+  export REDIS_HOST=${REDIS_HOST}
+  export REDIS_PORT=${REDIS_PORT}
+  export REDIS_PASSWORD=${REDIS_PASSWORD}
   ${FULL_ARGS}
 fi

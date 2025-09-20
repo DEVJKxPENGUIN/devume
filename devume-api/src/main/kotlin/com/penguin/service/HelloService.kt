@@ -1,4 +1,4 @@
-package com.penguin.api.service
+package com.penguin.service
 
 import com.penguin.api.HelloGrpc
 import com.penguin.api.HelloRequest
