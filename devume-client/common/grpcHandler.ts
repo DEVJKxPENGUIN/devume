@@ -8,6 +8,8 @@ import type {ServiceClient} from "@grpc/grpc-js/build/src/make-client";
 import type {HelloResponse} from "~/.proto/HelloResponse";
 import type {TitleResponse} from "~/.proto/TitleResponse";
 import {getGrpcUrl, isLocal} from "~/common/commons";
+import type {LoginResponse} from "~/.proto/LoginResponse";
+import type {TokenResponse} from "~/.proto/TokenResponse";
 
 export default class GrpcHandler {
   private static instance: GrpcHandler | null = null
@@ -78,5 +80,33 @@ export default class GrpcHandler {
         }
       })
     })
+  }
+
+  async login(state: string): Promise<LoginResponse> {
+    return new Promise((resolve, reject) =>
+        this.services.get('Login')?.login({
+          state: state
+        }, (err: any, response: LoginResponse) => {
+          if (err) {
+            reject(err)
+          } else {
+            resolve(response)
+          }
+        })
+    )
+  }
+
+  async penguinToken(code: string): Promise<TokenResponse> {
+    return new Promise((resolve, reject) =>
+        this.services.get('Login')?.penguinToken({
+          code: code
+        }, (err: any, response: TokenResponse) => {
+          if (err) {
+            reject(err)
+          } else {
+            resolve(response)
+          }
+        })
+    )
   }
 }

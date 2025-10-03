@@ -4,6 +4,5 @@ import com.penguin.framework.error.ErrorCode
 
 class BaseException(
     val errorCode: ErrorCode,
-    val detailMessage: String? = null
-) : RuntimeException(detailMessage ?: errorCode.message) {
-}
+    detailMessage: String? = null
+) : RuntimeException(detailMessage ?: errorCode.message)

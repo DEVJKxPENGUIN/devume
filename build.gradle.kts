@@ -1,5 +1,6 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.9.25"
@@ -52,10 +53,12 @@ subprojects {
         implementation("org.springframework.boot:spring-boot-starter-validation")
         implementation("org.springframework.boot:spring-boot-starter-webflux")
         implementation("org.springframework.boot:spring-boot-starter-aop")
+        implementation("com.mysql:mysql-connector-j:9.0.0")
         implementation("org.apache.commons:commons-lang3")
         implementation("io.lettuce:lettuce-core")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-        implementation("com.mysql:mysql-connector-j:9.0.0")
+        implementation("com.auth0:jwks-rsa:0.23.0")
+        implementation("com.auth0:java-jwt:4.5.0")
         implementation("io.jsonwebtoken:jjwt:0.12.3")
 
         // test
@@ -76,12 +79,12 @@ subprojects {
         }
     }
 
-//    tasks.withType<KotlinCompile> {
-//        kotlinOptions {
-//            freeCompilerArgs += "-Xjsr305=strict"
-//            jvmTarget = "21"
-//        }
-//    }
+    tasks.withType<KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs += "-Xjsr305=strict"
+            jvmTarget = "21"
+        }
+    }
 
     tasks.withType<Test> {
         useJUnitPlatform()

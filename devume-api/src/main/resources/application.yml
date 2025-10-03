@@ -19,10 +19,6 @@ spring:
     ansi:
       enabled: always
 
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    type: com.zaxxer.hikari.HikariDataSource
-
 management:
   server:
     port: 9091
@@ -37,6 +33,10 @@ db-password: ${DB_PASSWORD}
 redis-host: ${REDIS_HOST}
 redis-port: ${REDIS_PORT}
 redis-password: ${REDIS_PASSWORD}
+penguin-client-id: ${PENGUIN_CLIENT_ID}
+penguin-client-secret: ${PENGUIN_CLIENT_SECRET}
+jwt-private-key: ${JWT_PRIVATE_KEY}
+jwt-public-key: ${JWT_PUBLIC_KEY}
 ---
 spring:
   config:

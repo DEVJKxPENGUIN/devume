@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+
+option java_multiple_files = true;
+option java_package = "com.penguin.api";
+option java_outer_classname = "LoginProto";
+
+service Login {
+  rpc Login (LoginRequest) returns (LoginResponse) {}
+  rpc PenguinToken (TokenRequest) returns (TokenResponse) {}
+}
+
+message LoginRequest {
+  string state = 1;
+}
+
+message LoginResponse {
+  string loginUrl = 1;
+}
+
+message TokenRequest {
+  string code = 1;
+}
+
+message TokenResponse {
+  string token = 1;
+}
