@@ -21,9 +21,7 @@ export default defineEventHandler(async (event) => {
     throw createError({statusCode: 400, statusMessage: 'Invalid state'})
   }
 
-  console.log(`getredirectUri: ${session.redirectUri}`)
-
-  const response: TokenResponse = await GrpcHandler.getInstance().penguinToken(code);
+  const response: TokenResponse = await GrpcHandler.getInstance().penguinToken(event, code);
 
   setCookie(event, 'devumeauth', response['token']!!, {
     httpOnly: true,

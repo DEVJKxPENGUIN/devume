@@ -1,15 +1,16 @@
 import type {ServiceClientConstructor} from '@grpc/grpc-js';
-import grpc from '@grpc/grpc-js';
+import grpc, {Metadata} from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
 import {fileURLToPath} from 'url';
 import {dirname, join} from 'path';
 import fs from 'fs'; // fs 모듈 임포트
 import type {ServiceClient} from "@grpc/grpc-js/build/src/make-client";
-import type {HelloResponse} from "~/.proto/HelloResponse";
 import type {TitleResponse} from "~/.proto/TitleResponse";
 import {getGrpcUrl, isLocal} from "~/common/commons";
 import type {LoginResponse} from "~/.proto/LoginResponse";
 import type {TokenResponse} from "~/.proto/TokenResponse";
+import type {UserResponse} from "~/.proto/UserResponse";
+import type {H3Event} from "h3";
 
 export default class GrpcHandler {
   private static instance: GrpcHandler | null = null
@@ -58,55 +59,65 @@ export default class GrpcHandler {
     }
   }
 
-  async sayHello(name: string): Promise<HelloResponse> {
-    return new Promise((resolve, reject) => {
-      this.services.get('Hello')?.sayHello({name}, (err: any, response: HelloResponse) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(response)
-        }
-      })
-    })
-  }
-
-  async getTitle(): Promise<TitleResponse> {
+  async getTitle(event: H3Event): Promise<TitleResponse> {
     return new Promise((resolve, reject) => {
       this.services.get('Title')?.getTitle({}, (err: any, response: TitleResponse) => {
-        if (err) {
-          reject(err)
-        } else {
-          resolve(response)
-        }
+        this.handleGrpcResponse(resolve, reject, response, err, event)
       })
     })
   }
 
-  async login(state: string): Promise<LoginResponse> {
+  async login(event: H3Event, state: string): Promise<LoginResponse> {
     return new Promise((resolve, reject) =>
         this.services.get('Login')?.login({
           state: state
-        }, (err: any, response: LoginResponse) => {
-          if (err) {
-            reject(err)
-          } else {
-            resolve(response)
-          }
+        }, this.getAuthentication(event), (err: any, response: LoginResponse) => {
+          this.handleGrpcResponse(resolve, reject, response, err, event)
         })
     )
   }
 
-  async penguinToken(code: string): Promise<TokenResponse> {
+  async penguinToken(event: H3Event, code: string): Promise<TokenResponse> {
     return new Promise((resolve, reject) =>
         this.services.get('Login')?.penguinToken({
           code: code
-        }, (err: any, response: TokenResponse) => {
-          if (err) {
-            reject(err)
-          } else {
-            resolve(response)
-          }
+        }, this.getAuthentication(event), (err: any, response: TokenResponse) => {
+          this.handleGrpcResponse(resolve, reject, response, err, event)
         })
     )
+  }
+
+  async getUser(event: H3Event): Promise<UserResponse> {
+    return new Promise((resolve, reject) =>
+        this.services.get('User')?.getUser({}, this.getAuthentication(event), (err: any, response: UserResponse) => {
+          this.handleGrpcResponse(resolve, reject, response, err, event)
+        })
+    )
+  }
+
+  async handleGrpcResponse(resolve: any, reject: any, response: any, err: any, event: H3Event) {
+    if (err) {
+      if (err.details && err.details.includes('::')) {
+        const [errorCode, message] = err.details.split('::', 2);
+        if (errorCode === 'NO_AUTHORIZED_ROLE_REDIRECT') {
+          await sendRedirect(event, '/api/login?redirectUri=' + encodeURIComponent(getRequestURL(event).toString()));
+          return
+        }
+      }
+      reject(err)
+    } else {
+      resolve(response)
+    }
+  }
+
+  getAuthentication(event: H3Event): Metadata {
+    let token = ''
+    try {
+      token = getCookie(event, 'devumeauth') as string
+    } catch (e) {
+    }
+    const metadata = new Metadata()
+    metadata.add('Authorization', `Bearer ${token}`)
+    return metadata
   }
 }

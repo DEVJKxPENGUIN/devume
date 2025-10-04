@@ -1,11 +1,14 @@
 package com.penguin.utils
 
+import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import java.security.KeyFactory
 import java.security.interfaces.RSAPrivateKey
+import java.security.interfaces.RSAPublicKey
 import java.security.spec.PKCS8EncodedKeySpec
+import java.security.spec.X509EncodedKeySpec
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 import java.util.*
@@ -25,7 +28,7 @@ class JwtUtils(
     }
 
     fun create(id: Long, email: String?, role: String, nickname: String): String {
-        val privateKey = loadRsaPrivateKey()
+        val privateKey = this.loadRsaPrivateKey()
         val now = Instant.now()
         return Jwts.builder()
             .subject(id.toString())
@@ -43,6 +46,20 @@ class JwtUtils(
             .compact()
     }
 
+    fun getClaimsWithVerify(token: String): Claims? {
+        try {
+            val publicKey = loadRsaPublicKey()
+            val jwt = Jwts.parser()
+                .verifyWith(publicKey)
+                .build()
+                .parseSignedClaims(token)
+
+            return jwt.payload
+        } catch (e: Exception) {
+            return null
+        }
+    }
+
     fun loadRsaPrivateKey(): RSAPrivateKey {
         val key = privateKey
             .replace("-----BEGIN PRIVATE KEY-----", "")
@@ -51,5 +68,15 @@ class JwtUtils(
         val keyFactory = KeyFactory.getInstance(KTY)
         val keySpec = PKCS8EncodedKeySpec(Base64.getDecoder().decode(key))
         return keyFactory.generatePrivate(keySpec) as RSAPrivateKey
+    }
+
+    fun loadRsaPublicKey(): RSAPublicKey {
+        val key = publicKey
+            .replace("-----BEGIN PUBLIC KEY-----", "")
+            .replace("-----END PUBLIC KEY-----", "")
+            .replace("\\s".toRegex(), "")
+        val keyFactory = KeyFactory.getInstance(KTY)
+        val keySpec = X509EncodedKeySpec(Base64.getDecoder().decode(key))
+        return keyFactory.generatePublic(keySpec) as RSAPublicKey
     }
 }

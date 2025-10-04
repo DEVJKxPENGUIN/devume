@@ -1,6 +1,6 @@
 import GrpcHandler from "~/common/grpcHandler";
-import {HelloResponse} from "~/.proto/HelloResponse";
+import {UserResponse} from "~/.proto/UserResponse";
 
-export default defineEventHandler(async (event): Promise<HelloResponse> => {
-  return await GrpcHandler.getInstance().sayHello('devjk')
+export default defineEventHandler(async (event): Promise<UserResponse> => {
+  return await GrpcHandler.getInstance().getUser(event)
 })

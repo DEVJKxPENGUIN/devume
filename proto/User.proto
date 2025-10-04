@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+
+option java_multiple_files = true;
+option java_package = "com.penguin.api";
+option java_outer_classname = "UserProto";
+
+service User {
+  rpc GetUser (UserRequest) returns (UserResponse) {}
+}
+
+message UserRequest {}
+
+message UserResponse {
+  int64 id = 1;
+  string nickname = 2;
+  string email = 3;
+  string role = 4;
+  string lastLoginAt = 5;
+  string createdAt = 6;
+}
