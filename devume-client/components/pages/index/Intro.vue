@@ -1,269 +1,101 @@
 <template>
-  <section class="intro">
-    <div class="intro-header">
-      <div class="flex header-container">
-        <div class="flex hover:cursor-pointer">
-          <div class="logo-img">
-            <img src="~/assets/img/logo.png" alt="logo"/>
-          </div>
-          <div class="logo text-center align-middle justify-center h-full">
-            <p>DEVUME-{{ phase }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="intro-content">
-      <div class="headline">
-        <p class="subtitle">
-          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="13px" height="13px"
-               viewBox="0 0 13 13" fill="currentColor">
-            <path fill="currentColor" d="M5.6,12.6c-0.5-0.8-0.7-2.4-1.7-3.5c-1-1-2.7-1.2-3.5-1.7C-0.1,7-0.1,6,0.4,5.6c0.8-0.5,2.3-0.6,3.5-1.8
-                  C5,2.8,5.1,1.2,5.6,0.4C6-0.1,7-0.1,7.4,0.4c0.5,0.8,0.7,2.4,1.8,3.5c1.2,1.2,2.6,1.2,3.5,1.7c0.6,0.4,0.6,1.4,0,1.7
-                  C11.8,7.9,10.2,8,9.1,9.1c-1,1-1.2,2.7-1.7,3.5C7,13.1,6,13.1,5.6,12.6z"></path>
-          </svg>
-          <span class="ml-2">Show Who you are!</span>
-        </p>
-        <h1 class="title">
-          {{ title }}
+  <div
+    ref="target"
+    class="relative flex flex-col items-center justify-center w-full min-h-screen p-4 overflow-hidden bg-background text-primary-text"
+  >
+    <div
+      class="absolute inset-0 w-full h-full bg-gradient-to-br from-background via-indigo-900/30 to-background"
+    ></div>
+
+    <div
+      :style="cardStyle"
+      class="relative z-10 w-full max-w-4xl p-8 transition-all duration-300 ease-out transform bg-gray-900/50 rounded-3xl ring-1 ring-white/10 backdrop-blur-sm"
+    >
+      <div
+        v-motion
+        :initial="{ opacity: 0, y: 50 }"
+        :enter="{ opacity: 1, y: 0, transition: { duration: 1000, delay: 300 } }"
+        class="text-center"
+      >
+        <h1 class="text-5xl font-bold md:text-7xl">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary-accent to-accent">
+            박종권
+          </span>
+          입니다.
         </h1>
-        <div class="btn-holder flex flex-col sm:flex-row">
-          <ButtonDefault text="View Resumes" :type="BTN_TYPES.LARGE_ACCENT"/>
-          <ButtonDefault text="Write Now" :type="BTN_TYPES.LARGE" class="mt-3 sm:mt-0 sm:ml-3"/>
-        </div>
+        <p class="mt-4 text-lg md:text-2xl text-primary-text/80">
+          시니어 소프트웨어 엔지니어 | Devops | Infrastructure
+        </p>
+        <p class="max-w-2xl mx-auto mt-6 text-base md:text-lg text-primary-text/60">
+          사용자 중심의 안정적이고 확장 가능한 웹 서비스를 만듭니다.
+          <br />
+          새로운 기술을 배우고 적용하는 것을 즐깁니다.
+        </p>
       </div>
-      <div class="marquee">
-        <div class="inner">
-          <div class="part" v-for="i in 10" :key="i">
-            DEVUME is a platform for developers to showcase their skills and get hired by top
-            companies.
-          </div>
-        </div>
+
+      <div
+        v-motion
+        :initial="{ opacity: 0, y: 50 }"
+        :enter="{ opacity: 1, y: 0, transition: { duration: 1000, delay: 600 } }"
+        class="flex flex-col items-center justify-center mt-10 sm:flex-row gap-4"
+      >
+        <button
+          class="relative inline-flex items-center justify-center px-8 py-3 text-lg font-medium transition-all duration-300 border-2 rounded-full border-accent text-accent hover:bg-accent hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
+        >
+          프로젝트 보기
+        </button>
+        <button
+          class="relative inline-flex items-center justify-center px-8 py-3 text-lg font-medium transition-all duration-300 border-2 rounded-full border-muted text-primary-text/80 hover:bg-muted hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-muted"
+        >
+          연락하기
+        </button>
       </div>
     </div>
-  </section>
+
+    <div
+      v-motion
+      :initial="{ opacity: 0, y: 20 }"
+      :enter="{ opacity: 1, y: 0, transition: { duration: 1000, delay: 900 } }"
+      class="absolute bottom-8 text-sm text-primary-text/40 animate-pulse"
+    >
+      Scroll Down
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+import { useMouseInElement } from '@vueuse/core'
+import { computed } from 'vue'
 
-import {BTN_TYPES} from "~/common/commons";
+const target = ref(null)
 
-defineProps({
-  phase: {
-    type: String,
-    required: true
-  },
-  title: {
-    type: String,
-    required: true
+const { elementX, elementY, isOutside, elementHeight, elementWidth } = useMouseInElement(target)
+
+const cardTransform = computed(() => {
+  if (isOutside.value) {
+    return ''
   }
+
+  const MAX_ROTATION = 6
+
+  const rX = (
+    MAX_ROTATION * 2 * (elementY.value / elementHeight.value - 0.5)
+  ).toFixed(2)
+
+  const rY = (
+    MAX_ROTATION * -2 * (elementX.value / elementWidth.value - 0.5)
+  ).toFixed(2)
+
+  return `perspective(1000px) rotateX(${rX}deg) rotateY(${rY}deg)`
 })
+
+const cardStyle = computed(() => ({
+  transform: cardTransform.value,
+  transition: 'transform 0.25s ease-out',
+}))
 </script>
 
 <style scoped>
-.intro {
-  position: relative;
-  width: 100%;
-  min-width: 360px;
-  overflow: hidden;
-}
-
-.intro-header {
-  position: relative;
-  padding: 1rem 0;
-}
-
-.intro-content {
-  position: relative;
-  padding-top: 8.5rem;
-}
-
-.header-container {
-  padding: 0 1rem;
-}
-
-.headline {
-  position: relative;
-  padding: 0 1rem;
-  margin-bottom: 10rem;
-}
-
-.marquee {
-  position: relative;
-  height: 3rem;
-  line-height: 3rem;
-  background: linear-gradient(135deg, var(--color-first) 0%, var(--color-second) 100%);
-  color: var(--font-color-light);
-  font-size: 1.4rem;
-  text-transform: uppercase;
-  overflow: hidden;
-  z-index: 2;
-  font-family: var(--font-family-content);
-}
-
-.marquee .inner {
-  display: flex;
-  width: fit-content;
-  flex-direction: row;
-  flex: auto;
-  animation: marquee 20s linear infinite;
-}
-
-.marquee .part {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  padding-right: 20px;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(-200%);
-  }
-}
-
-.headline .subtitle {
-  display: inline-flex;
-  align-items: center;
-  height: 2rem;
-  padding: 0 1rem;
-  border-radius: 12px;
-  border: 1px solid var(--color-first);
-  background-color: transparent;
-  backdrop-filter: blur();
-  font-family: var(--font-family-subtitle);
-  margin-bottom: 1rem;
-  font-size: small;
-}
-
-.headline .title {
-  font: normal 500 2.6rem / 1.2 var(--font-family-title);
-  color: var(--font-color-bold);
-  background: var(--font-color-bold);
-  background: -webkit-linear-gradient(15deg, var(--font-color-accent) 0%, var(--font-color-light) 80%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.headline .btn-holder {
-  width: 100%;
-  margin-top: 2rem;
-}
-
-.logo-img {
-  width: 3rem;
-  height: 3rem;
-  margin-right: 0rem;
-}
-
-.logo-img img {
-  width: 2.5rem;
-  //height: 2rem;
-}
-
-.logo {
-  color: var(--font-color-normal);
-  font-family: var(--font-family-logo);
-  font-size: x-large;
-}
-
-@media only screen and (min-width: 1280px) {
-  .intro {
-    height: 100vh;
-  }
-
-  .intro-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding-top: 0;
-  }
-
-  .header-container {
-    padding: 0 6rem;
-  }
-
-  .headline {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    bottom: auto;
-    transform: translateY(-50%);
-    margin-bottom: 0;
-    z-index: 2;
-  }
-
-  .headline .subtitle {
-    margin-bottom: 1.7rem;
-  }
-
-  .headline .title {
-    font-size: 5rem;
-  }
-
-  .headline .btn-holder {
-    margin-top: 2rem;
-    padding-bottom: 5rem;
-  }
-
-  .marquee {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .intro-header {
-    padding: 3rem 0;
-  }
-
-  .intro-content {
-    padding-top: 9rem;
-  }
-
-  .header-container {
-    padding: 0 6rem;
-  }
-
-  .headline {
-    padding: 0 6rem;
-    margin-bottom: 12rem;
-  }
-
-  .headline .subtitle {
-    margin-bottom: 1.4rem;
-  }
-
-  .headline .title {
-    font-size: 3.5rem;
-    max-width: 600px;
-  }
-
-  .headline .btn-holder {
-    margin-top: 2rem;
-  }
-}
-
-@media only screen and (min-width: 640px) {
-  .logo-img {
-    width: 3rem;
-    height: 3rem;
-    margin-right: 1rem;
-  }
-
-  .logo-img img {
-    width: 3rem;
-  }
-
-  .logo {
-    color: var(--font-color-normal);
-    font-family: var(--font-family-logo);
-    font-size: xx-large;
-  }
-}
+/* Scoped styles can be added here if needed */
 </style>

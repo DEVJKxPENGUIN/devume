@@ -8,8 +8,16 @@ export default {
     "./app.vue",
     "./error.vue",
   ],
+  darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        background: 'var(--color-background)',
+        'primary-text': 'var(--color-primary-text)',
+        accent: 'var(--color-accent)',
+        muted: 'var(--color-muted)',
+      },
+    },
   },
   plugins: [],
 }

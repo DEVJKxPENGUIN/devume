@@ -2,7 +2,8 @@ import {defineStore} from "pinia";
 
 export const useMainStore = defineStore('main', {
   state: () => ({
-    isLoading: true
+    isLoading: true,
+    theme: 'light',
   }),
   actions: {
     startLoading() {
@@ -13,5 +14,8 @@ export const useMainStore = defineStore('main', {
       console.log('stop loading...')
       this.isLoading = false
     },
+    toggleTheme() {
+      this.theme = this.theme === 'light' ? 'dark' : 'light';
+    }
   }
 })

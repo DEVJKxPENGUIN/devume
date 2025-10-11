@@ -4,7 +4,14 @@
 
 /* theme */
 :root {
-  --color-background: #111111;
+  /* New Theme Variables */
+  --color-background: #f8f9fa; /* light */
+  --color-primary-text: #1f2937; /* light */
+  --color-accent: #6366f1; /* light */
+  --color-muted: #d1d5db; /* light */
+
+  /* Old Theme Variables */
+  --color-background-old: #111111;
   --color-background-reverse: #efefef;
   --color-first: #8449BF;
   --color-second: #4E458C;
@@ -33,6 +40,13 @@
   --font-color-accent: var(--color-first);
 
   --max-width: 1920px;
+}
+
+.dark {
+  --color-background: #111827; /* dark */
+  --color-primary-text: #d1d5db; /* dark */
+  --color-accent: #6366f1; /* dark */
+  --color-muted: #374151; /* dark */
 }
 
 body {

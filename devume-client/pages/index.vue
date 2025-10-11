@@ -1,13 +1,17 @@
 <template>
-  <Intro :phase="phase" :title="title"/>
-  <LivePreview/>
+  <!-- <Intro :phase="phase" :title="title"/> -->
+  <IntroV2 :phase="phase" :title="title" />
+  <!-- <LivePreview/> -->
+  <LivePreviewV2 />
 </template>
 
 <script setup lang="ts">
 import {definePageMeta} from "#imports";
 import {ApiHandler} from "~/common/apiHandler";
-import LivePreview from "~/components/pages/index/LivePreview.vue";
-import Intro from "~/components/pages/index/Intro.vue";
+// import LivePreview from "~/components/pages/index/LivePreview.vue";
+import LivePreviewV2 from "~/components/pages/index/LivePreviewV2.vue";
+// import Intro from "~/components/pages/index/Intro.vue";
+import IntroV2 from "~/components/pages/index/IntroV2.vue";
 import {getPhase} from "~/common/commons";
 import type {TitleResponse} from "~/.proto/TitleResponse";
 
