@@ -2,6 +2,7 @@ import { motion, useAnimation } from 'framer-motion';
 import Link from 'next/link';
 import ThemeToggle from '../ThemeToggle';
 import { useEffect, useState } from 'react';
+import StarBorder from '../effects/StarBorder';
 
 const Header = () => {
   const navItems = [
@@ -87,12 +88,11 @@ const Header = () => {
       {/* Header container with animated width */}
       <motion.div 
         animate={headerControls}
-        className="bg-white dark:bg-[#111] backdrop-filter backdrop-blur-sm
-                   bg-opacity-80 dark:bg-opacity-80 mx-4 sm:mx-6 lg:mx-8"
+        className="backdrop-filter backdrop-blur-sm mx-4 sm:mx-6 lg:mx-8"
       >
         {/* Inner header content */}
         <div className="w-full py-1 flex justify-between items-center 
-                       border-b border-t border-gray-200 dark:border-gray-800 px-4">
+                       px-4 border rounded-full border-black/50 dark:border-white/50">
           {/* Logo */}
           <div className="flex items-center cursor-default">
             <span className="font-display text-2xl sm:text-3xl font-bold tracking-wide">

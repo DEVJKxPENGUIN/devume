@@ -16,7 +16,7 @@
 /* Dark/Light Mode Base Styles */
 @layer base {
   body {
-    @apply bg-white text-light-text transition-colors duration-300 ease-in-out;
+    @apply bg-gray-50 text-light-text transition-colors duration-300 ease-in-out;
   }
 
   .dark body {

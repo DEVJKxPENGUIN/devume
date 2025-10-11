@@ -11,7 +11,8 @@ const portfolios = [
     tags: ["React", "TypeScript", "Node.js"],
     image: "/portfolio1.png",
     color: "from-anime-pink to-anime-purple",
-    size: "row-span-2 col-span-2"
+    size: "row-span-2 col-span-2",
+    background: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1920&h=1080&fit=crop&crop=center&q=80&auto=format&fm=webp"
   },
   {
     id: 2,
@@ -21,7 +22,8 @@ const portfolios = [
     tags: ["Python", "TensorFlow", "Data Science"],
     image: "/portfolio2.png",
     color: "from-anime-blue to-anime-cyan",
-    size: "row-span-1 col-span-1"
+    size: "row-span-1 col-span-1",
+    background: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1920&h=1080&fit=crop&crop=center&q=80&auto=format&fm=webp"
   },
   {
     id: 3,
@@ -31,7 +33,8 @@ const portfolios = [
     tags: ["Unity", "3D Modeling", "Game Dev"],
     image: "/portfolio3.png",
     color: "from-anime-green to-anime-yellow",
-    size: "row-span-1 col-span-1"
+    size: "row-span-1 col-span-1",
+    background: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1920&h=1080&fit=crop&crop=center&q=80&auto=format&fm=webp"
   },
   {
     id: 4,
@@ -41,7 +44,8 @@ const portfolios = [
     tags: ["Swift", "Kotlin", "Flutter"],
     image: "/portfolio4.png",
     color: "from-anime-red to-anime-pink",
-    size: "row-span-1 col-span-1"
+    size: "row-span-1 col-span-1",
+    background: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1920&h=1080&fit=crop&crop=center&q=80&auto=format&fm=webp"
   },
   {
     id: 5,
@@ -51,7 +55,8 @@ const portfolios = [
     tags: ["React", "Express", "MongoDB"],
     image: "/portfolio5.png",
     color: "from-anime-purple to-anime-blue",
-    size: "row-span-1 col-span-1"
+    size: "row-span-1 col-span-1",
+    background: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1920&h=1080&fit=crop&crop=center&q=80&auto=format&fm=webp"
   },
 ];
 
@@ -60,6 +65,44 @@ const BentoCard = ({ portfolio, index }: { portfolio: any, index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px -10% 0px" });
   const controls = useAnimation();
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0, lightX: 50, lightY: 50 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const relativeX = (x - centerX) / centerX; // -1 ~ 1
+    const relativeY = (y - centerY) / centerY; // -1 ~ 1
+
+    // 단순한 계산 (원본 CSS 코드 패턴 참고)
+    const rotateX = -relativeY * 10; // Y축 마우스 → X축 회전 (음수)
+    const rotateY = relativeX * 5;  // X축 마우스 → Y축 회전 (양수)
+
+    // 광원 위치 계산 (마우스 정확한 위치)
+    const lightX = (x / rect.width) * 100; // 0 ~ 100%
+    const lightY = (y / rect.height) * 100; // 0 ~ 100%
+
+    setMousePosition({
+      x: rotateX,
+      y: rotateY,
+      lightX: lightX,
+      lightY: lightY
+    });
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    // 광원 위치는 그대로 유지하고 회전만 초기화
+    setMousePosition(prev => ({ ...prev, x: 0, y: 0 }));
+  };
   
   useEffect(() => {
     if (isInView) {
@@ -71,6 +114,13 @@ const BentoCard = ({ portfolio, index }: { portfolio: any, index: number }) => {
     <motion.div
       ref={ref}
       className={`${portfolio.size} relative overflow-hidden group cursor-pointer`}
+      onMouseMove = {handleMouseMove}
+      onMouseEnter = {handleMouseEnter}
+      onMouseLeave = {handleMouseLeave}
+      style = {{
+        transformStyle: 'preserve-3d',
+        perspective: '1000px'
+      }}
       variants={{
         hidden: { opacity: 0, y: 50 },
         visible: { 
@@ -86,18 +136,72 @@ const BentoCard = ({ portfolio, index }: { portfolio: any, index: number }) => {
       initial="hidden"
       animate={controls}
       whileHover={{ 
-        y: -5,
-        transition: { duration: 0.3 } 
+        rotateX: mousePosition.x,
+        rotateY: mousePosition.y,
+        transition: { duration: 0.1 }
       }}
     >
-      {/* Semi-transparent colored backdrop */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${portfolio.color} opacity-5`}></div>
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url(${portfolio.background})`,
+          imageRendering: 'high-quality',
+          WebkitImageRendering: 'high-quality',
+        }}
+      ></div>
       
-      {/* Glass effect background */}
-      <div className="absolute inset-0 bg-white/70 dark:bg-[#111]/70 backdrop-blur-sm border border-gray-200/20 dark:border-gray-700/20"></div>
+      {/* Semi-transparent colored overlay */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${portfolio.color} opacity-20`}></div>
+      
+      {/* 3D 그림자 효과 */}
+      <div 
+        className="absolute inset-0 bg-white/70 dark:bg-[#111]/70 backdrop-blur-sm border border-gray-200/30 dark:border-gray-700/30 dark:shadow-[0_0_20px_rgba(255,20,147,0.3)]"
+        style={{
+          boxShadow: `
+            ${mousePosition.x * 2}px ${mousePosition.y * 2}px 20px rgba(0, 0, 0, 0.1),
+            ${mousePosition.x * 4}px ${mousePosition.y * 4}px 40px rgba(0, 0, 0, 0.05)
+          `,
+          transform: `translateZ(20px)`,
+        }}
+      ></div>
+      
+      {/* 광원 효과 (마우스 포인터 정확한 위치) - hover 시에만 표시 */}
+      <div 
+        className="absolute inset-0 pointer-events-none transition-opacity duration-200"
+        style={{
+          opacity: isHovered ? 1 : 0,
+          background: `radial-gradient(
+            circle at ${mousePosition.lightX}% ${mousePosition.lightY}%,
+            rgba(255, 20, 147, 0.2) 0%,
+            rgba(255, 105, 180, 0.1) 15%,
+            transparent 40%
+          )`,
+          transform: `translateZ(25px)`,
+        }}
+      ></div>
+      
+      {/* 보조 광원 효과 - hover 시에만 표시 */}
+      <div 
+        className="absolute inset-0 pointer-events-none transition-opacity duration-200"
+        style={{
+          opacity: isHovered ? 1 : 0,
+          background: `radial-gradient(
+            circle at ${mousePosition.lightX}% ${mousePosition.lightY}%,
+            rgba(255, 255, 255, 0.15) 0%,
+            transparent 30%
+          )`,
+          transform: `translateZ(30px)`,
+        }}
+      ></div>
       
       {/* Content */}
-      <div className="relative z-10 p-6 h-full flex flex-col justify-between">
+      <div className="relative z-10 p-6 h-full flex flex-col justify-between"
+      style = {{
+        transform: 'translateZ(40px)',
+        textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+      }}
+      >
         <div>
           <div className="flex justify-between items-center mb-3">
             <h3 className="text-xl font-mono font-bold text-gray-900 dark:text-white">
@@ -124,6 +228,10 @@ const BentoCard = ({ portfolio, index }: { portfolio: any, index: number }) => {
               <span
                 key={tag}
                 className="px-2 py-1 text-xs font-mono bg-white/50 dark:bg-[#1a1a2e]/50 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 text-gray-800 dark:text-gray-200"
+                style={{
+                  transform: 'translateZ(10px)',
+                  boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
+                }}
               >
                 {tag}
               </span>
@@ -131,7 +239,13 @@ const BentoCard = ({ portfolio, index }: { portfolio: any, index: number }) => {
           </div>
           
           {/* Hover effect - view details */}
-          <div className="absolute bottom-6 right-6 flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+          <div 
+            className="absolute bottom-6 right-6 flex items-center opacity-0 group-hover:opacity-100 transition-opacity"
+            style={{
+              transform: 'translateZ(15px)',
+              textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
+            }}
+          >
             <span className="text-sm font-mono text-light-primary dark:text-dark-primary mr-1">View</span>
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
