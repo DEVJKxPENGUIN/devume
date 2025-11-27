@@ -1,0 +1,33 @@
+.header {
+  width: 100%;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-background);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--color-text-primary);
+}
+
+.navLink {
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+  color: var(--color-text-primary);
+}
