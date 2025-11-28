@@ -3,24 +3,31 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "proto": "rm -rf src/proto/generated && mkdir -p src/proto/generated && grpc_tools_node_protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts --js_out=import_style=commonjs,binary:src/proto/generated --grpc_out=grpc_js:src/proto/generated --ts_out=grpc_js:src/proto/generated -I ../proto ../proto/*.proto",
+    "dev": "npm run proto && next dev",
+    "build": "npm run proto && next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.10.8",
+    "@grpc/proto-loader": "^0.7.13",
     "@reduxjs/toolkit": "^2.2.5",
-    "next": "^14.2.33",
-    "react": "^18",
-    "react-dom": "^18",
+    "google-protobuf": "^3.21.2",
+    "next": "^16.0.5",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "react-redux": "^9.1.2"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
+    "@types/google-protobuf": "^3.15.12",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.1",
     "eslint-config-next": "^16.0.5",
-    "typescript": "^5"
+    "grpc_tools_node_protoc_ts": "^5.3.3",
+    "grpc-tools": "^1.12.4",
+    "typescript": "^5.9.3"
   }
 }
