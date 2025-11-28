@@ -1,0 +1,13 @@
+var R=require("../../chunks/ssr/[turbopack]_runtime.js")("server/app/_not-found/page.js")
+R.c("server/chunks/ssr/devume-client3_45acefb2._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__fd5b2216._.js")
+R.c("server/chunks/ssr/a0d80_next_dist_esm_build_templates_app-page_5720eb9e.js")
+R.c("server/chunks/ssr/[root-of-the-server]__b7af001a._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__6a92fd30._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__40fb28c9._.js")
+R.c("server/chunks/ssr/devume-client3_a3c89982._.js")
+R.c("server/chunks/ssr/a0d80_next_dist_client_components_9559470d._.js")
+R.c("server/chunks/ssr/a0d80_next_dist_client_components_builtin_forbidden_9a106c64.js")
+R.c("server/chunks/ssr/devume-client3__next-internal_server_app__not-found_page_actions_58f213a6.js")
+R.m(62876)
+module.exports=R.m(62876).exports

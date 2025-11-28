@@ -21,9 +21,9 @@ class TitleService : TitleGrpc.TitleImplBase() {
         val phase: String = PhaseUtils.getActiveProfile()
 
         val title = if (PhaseUtils.isLocal()) {
-            "local-Your next career starts $phase"
+            "[$phase]Your next career starts"
         } else if (PhaseUtils.isProd()) {
-            "prod-Your next career starts $phase"
+            "Your next career starts"
         } else {
             throw IllegalArgumentException("Unknown phase $phase")
         }

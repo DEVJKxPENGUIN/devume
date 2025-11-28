@@ -1,0 +1,39 @@
+/* [project]/devume-client3/src/components/layout/Header.module.css [app-client] (css) */
+.Header-module__qYSeNa__header {
+  width: 100%;
+  height: fit-content;
+  -webkit-backdrop-filter: drop-shadow();
+  backdrop-filter: drop-shadow();
+  background-color: var(--color-background);
+  transition: background-color .3s, border-color .3s;
+  position: fixed;
+}
+
+.Header-module__qYSeNa__container {
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+}
+
+.Header-module__qYSeNa__logo {
+  color: var(--color-text-primary);
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.Header-module__qYSeNa__navLink {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.Header-module__qYSeNa__navLink:hover {
+  color: var(--color-text-primary);
+  text-decoration: underline;
+}
+
+/*# sourceMappingURL=devume-client3_src_components_layout_Header_module_css_bad6b30c._.single.css.map*/

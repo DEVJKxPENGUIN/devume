@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/devume-client3/src/components/layout/Header.module.css"],"sourcesContent":[".header {\n  position: fixed;\n  width: 100%;\n  height: fit-content;\n  backdrop-filter: drop-shadow();\n  /*border-bottom: 1px solid var(--color-border);*/\n  background-color: var(--color-background);\n  transition: background-color 0.3s ease, border-color 0.3s ease;\n}\n\n.container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 1rem 2rem;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\n.logo {\n  font-size: 1.5rem;\n  font-weight: bold;\n  text-decoration: none;\n  color: var(--color-text-primary);\n}\n\n.navLink {\n  text-decoration: none;\n  color: var(--color-text-secondary);\n  font-size: 1rem;\n}\n\n.navLink:hover {\n  text-decoration: underline;\n  color: var(--color-text-primary);\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;;AAUA;;;;;;;;;AASA;;;;;;;AAOA;;;;;;AAMA"}}]
+}

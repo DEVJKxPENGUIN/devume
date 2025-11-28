@@ -1,0 +1,30 @@
+/* [project]/devume-client3/src/components/common/ThemeToggleButton.module.css [app-client] (css) */
+.ThemeToggleButton-module__K82ucW__toggleButton {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card);
+  width: 50px;
+  height: 50px;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  z-index: 1000;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  transition: background-color .3s, transform .2s, border-color .3s;
+  display: flex;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+}
+
+.ThemeToggleButton-module__K82ucW__toggleButton:hover {
+  border-color: var(--color-text-secondary);
+  transform: scale(1.1);
+}
+
+.ThemeToggleButton-module__K82ucW__toggleButton:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/*# sourceMappingURL=devume-client3_src_components_common_ThemeToggleButton_module_css_bad6b30c._.single.css.map*/
