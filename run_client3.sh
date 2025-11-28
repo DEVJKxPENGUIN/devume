@@ -16,15 +16,15 @@ done
 
 FULL_ARGS=""
 if [ "$RUN_TYPE" = "serve" ]; then
-  FULL_ARGS="npm run --prefix ./devume-client2 dev"
+  FULL_ARGS="npm run --prefix ./devume-client3 dev"
 fi
 
 if [ "$RUN_TYPE" = "build" ]; then
-  FULL_ARGS="npm run --prefix ./devume-client2 build"
+  FULL_ARGS="npm run --prefix ./devume-client3 build"
 fi
 
 if [ "$RUN_TYPE" = "install" ]; then
-  FULL_ARGS="npm install --prefix ./devume-client2"
+  FULL_ARGS="npm install --prefix ./devume-client3"
 fi
 
 echo NODE_ENV : ${NODE_ENV}

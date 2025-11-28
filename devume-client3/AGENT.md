@@ -68,13 +68,28 @@ src/
 - **Redux**: For business logic and data that is shared across many components (e.g., user data, portfolio content). The setup is in `src/store`.
 - **React Context**: For UI state that is not frequently updated but needs to be accessed globally (e.g., the current theme).
 
-## 5. How to Run
+## 5. Environment Variables
 
-1.  **Install dependencies**:
+Before running the application, you need to set up your environment variables.
+
+Create a file named `.env.local` in the root of the `devume-client3` directory. This file is ignored by Git and will contain your local configuration.
+
+**File: `.env.local`**
+```
+# The URL of the gRPC-web proxy server.
+NEXT_PUBLIC_GRPC_API_URL=http://localhost:9090
+```
+
+For production builds, the `NEXT_PUBLIC_GRPC_API_URL` will be sourced from the deployment environment's system variables. No `.env.production` file is needed in the repository.
+
+## 6. How to Run
+
+1.  **Set up environment variables** (see section above).
+2.  **Install dependencies**:
     ```bash
     npm install
     ```
-2.  **Run the development server**:
+3.  **Run the development server**:
     ```bash
     npm run dev
     ```
