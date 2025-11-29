@@ -6,18 +6,19 @@
   flex-direction: column;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   border: 1px solid var(--border-color);
+  opacity: 75%;
 }
 
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  opacity: 100%;
 }
 
 .imageWrapper {
   position: relative;
   width: 100%;
   padding-top: 40%; /* 16:9 Aspect Ratio */
-  opacity: 0.75;
 }
 
 .imageWrapper img {

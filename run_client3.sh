@@ -11,6 +11,9 @@ while (("$#")); do
   if [ "-build" = $1 ]; then
     RUN_TYPE="build"
   fi
+  if [ "-proto" = $1 ]; then
+    RUN_TYPE="proto"
+  fi
   shift
 done
 
@@ -25,6 +28,10 @@ fi
 
 if [ "$RUN_TYPE" = "install" ]; then
   FULL_ARGS="npm install --prefix ./devume-client3"
+fi
+
+if [ "$RUN_TYPE" = "proto" ]; then
+  FULL_ARGS="npm run --prefix ./devume-client3 proto"
 fi
 
 echo NODE_ENV : ${NODE_ENV}

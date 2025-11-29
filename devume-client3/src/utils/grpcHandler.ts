@@ -1,19 +1,35 @@
 import * as grpc from '@grpc/grpc-js';
 import {Metadata} from '@grpc/grpc-js';
 import {TitleClient} from "@/proto/generated/Title_grpc_pb";
+import {PortfolioClient} from "@/proto/generated/Portfolio_grpc_pb";
 
 let titleClient: TitleClient | null = null
+let portfolioClient: PortfolioClient | null = null;
+
+function getGrpcApiUrl(): string {
+  const grpcApiUrl = process.env.GRPC_API_URL;
+  if (!grpcApiUrl) {
+    throw new Error('gRPC API URL is not defined in environment variables.');
+  }
+  return grpcApiUrl;
+}
 
 export function getTitleClient(): TitleClient {
   if (!titleClient) {
-    const grpcApiUrl = process.env.GRPC_API_URL
-    if (!grpcApiUrl) {
-      throw new Error('gRPC API URL is not defined in environment variables.')
-    }
-    console.log(`Initializing gRPC client for URL: ${grpcApiUrl}`)
-    titleClient = new TitleClient(grpcApiUrl, grpc.credentials.createInsecure())
+    const grpcApiUrl = getGrpcApiUrl();
+    console.log(`Initializing gRPC Title client for URL: ${grpcApiUrl}`);
+    titleClient = new TitleClient(grpcApiUrl, grpc.credentials.createInsecure());
   }
-  return titleClient
+  return titleClient;
+}
+
+export function getPortfolioClient(): PortfolioClient {
+  if (!portfolioClient) {
+    const grpcApiUrl = getGrpcApiUrl();
+    console.log(`Initializing gRPC Portfolio client for URL: ${grpcApiUrl}`);
+    portfolioClient = new PortfolioClient(grpcApiUrl, grpc.credentials.createInsecure());
+  }
+  return portfolioClient;
 }
 
 export function grpcRequest<TRequest, TResponse>(
