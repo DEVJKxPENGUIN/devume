@@ -4,6 +4,8 @@ import {getTitleClient, grpcRequest} from "@/utils/grpcHandler";
 import {Metadata} from "@grpc/grpc-js";
 import DevumeTitle from "@/components/home/DevumeTitle";
 import BackgroundLoop from "@/components/home/BackgroundLoop";
+import PortfolioCard from "@/components/home/PortfolioCard";
+import { mockPortfolios } from '@/data/mockPortfolios';
 
 export default async function HomePage() {
 
@@ -21,13 +23,33 @@ export default async function HomePage() {
             </p>
           </div>
         </section>
+
         <section className={styles.commonSection}>
-          <h2 className={styles.sectionTitle}>Portfolios</h2>
-          {/* Portfolio content will go here */}
+          <div className={styles.subSection}>
+            <h2 className={styles.sectionTitle}>Portfolios</h2>
+          </div>
+          <div className={styles.contentSection}>
+            {mockPortfolios.map((portfolio, index) => (
+              <PortfolioCard
+                key={index}
+                title={portfolio.title}
+                description={portfolio.description}
+                nickname={portfolio.nickname}
+                image={portfolio.image}
+                thumbs={portfolio.thumbs}
+                views={portfolio.views}
+              />
+            ))}
+          </div>
         </section>
+
         <section className={styles.commonSection}>
-          <h2 className={styles.sectionTitle}>Blogs</h2>
-          {/* Portfolio content will go here */}
+          <div className={styles.subSection}>
+            <h2 className={styles.sectionTitle}>Blogs</h2>
+          </div>
+          <div className={styles.contentSection}>
+            {/* Blog content will go here */}
+          </div>
         </section>
       </main>
   );

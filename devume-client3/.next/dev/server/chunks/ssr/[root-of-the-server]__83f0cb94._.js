@@ -13,11 +13,13 @@ __turbopack_context__.n(__turbopack_context__.i("[project]/devume-client3/src/ap
 
 __turbopack_context__.v({
   "commonSection": "page-module__Xo0ciW__commonSection",
+  "contentSection": "page-module__Xo0ciW__contentSection",
   "description": "page-module__Xo0ciW__description",
   "heroContent": "page-module__Xo0ciW__heroContent",
   "heroSection": "page-module__Xo0ciW__heroSection",
   "main": "page-module__Xo0ciW__main",
   "sectionTitle": "page-module__Xo0ciW__sectionTitle",
+  "subSection": "page-module__Xo0ciW__subSection",
   "subtitle": "page-module__Xo0ciW__subtitle",
   "title": "page-module__Xo0ciW__title",
 });
@@ -560,15 +562,25 @@ async function HomePage() {
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$devume$2d$client3$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
                 className: __TURBOPACK__imported__module__$5b$project$5d2f$devume$2d$client3$2f$src$2f$app$2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].commonSection,
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$devume$2d$client3$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                    className: __TURBOPACK__imported__module__$5b$project$5d2f$devume$2d$client3$2f$src$2f$app$2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].sectionTitle,
-                    children: "Portfolios"
-                }, void 0, false, {
-                    fileName: "[project]/devume-client3/src/app/page.tsx",
-                    lineNumber: 25,
-                    columnNumber: 11
-                }, this)
-            }, void 0, false, {
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$devume$2d$client3$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$devume$2d$client3$2f$src$2f$app$2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].subSection,
+                        children: "Portfolio"
+                    }, void 0, false, {
+                        fileName: "[project]/devume-client3/src/app/page.tsx",
+                        lineNumber: 26,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$devume$2d$client3$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$devume$2d$client3$2f$src$2f$app$2f$page$2e$module$2e$css__$5b$app$2d$rsc$5d$__$28$css__module$29$__["default"].contentSection,
+                        children: "sdklfjslkdjflskdjfklsjdkflsjkdlfjskldjfklsjdfkjsadk"
+                    }, void 0, false, {
+                        fileName: "[project]/devume-client3/src/app/page.tsx",
+                        lineNumber: 29,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/devume-client3/src/app/page.tsx",
                 lineNumber: 24,
                 columnNumber: 9
@@ -580,12 +592,12 @@ async function HomePage() {
                     children: "Blogs"
                 }, void 0, false, {
                     fileName: "[project]/devume-client3/src/app/page.tsx",
-                    lineNumber: 29,
+                    lineNumber: 35,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/devume-client3/src/app/page.tsx",
-                lineNumber: 28,
+                lineNumber: 34,
                 columnNumber: 9
             }, this)
         ]

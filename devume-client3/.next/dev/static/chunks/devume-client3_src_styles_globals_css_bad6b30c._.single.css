@@ -1,6 +1,6 @@
 /* [project]/devume-client3/src/styles/globals.css [app-client] (css) */
 :root {
-  --layout-max-width: 80rem;
+  --layout-max-width: 96rem;
   --breakpoint-tablet: 64rem;
   --breakpoint-mobile: 48rem;
   --font-heading: "Montserrat", sans-serif;

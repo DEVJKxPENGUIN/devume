@@ -4,13 +4,13 @@ import { useEffect, useRef } from 'react';
 import styles from './BackgroundLoop.module.css';
 
 const BackgroundLoop = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.6; // 2배 느리게 재생
     }
-  }, []);
+  }, [])
 
   return (
       <div className={styles.background}>
@@ -24,7 +24,7 @@ const BackgroundLoop = () => {
             className={styles.video}
         />
       </div>
-  );
-};
+  )
+}
 
-export default BackgroundLoop;
+export default BackgroundLoop
