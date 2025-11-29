@@ -29,7 +29,7 @@ class PortfolioService : PortfolioGrpc.PortfolioImplBase() {
                 .setSkills("Kotlin, gRPC, Spring Boot")
                 .setJob("Backend Developer")
                 .setLink("https://github.com/dev-jk")
-                .setProfileImage("https://picsum.photos/seed/ai/800/600")
+                .setThumbnail("https://picsum.photos/seed/ai/800/600")
                 .setThumbs(10000)
                 .setViews(20000)
                 .build()

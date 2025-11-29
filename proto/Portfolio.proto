@@ -20,7 +20,7 @@ message PortfolioContent {
   string skills = 5;
   string job = 6;
   string link = 7;
-  string profileImage = 8;
+  string thumbnail = 8;
   int64 thumbs = 9;
   int64 views = 10;
 }

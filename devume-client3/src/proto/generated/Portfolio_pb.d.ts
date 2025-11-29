@@ -41,8 +41,8 @@ export class PortfolioContent extends jspb.Message {
     setJob(value: string): PortfolioContent;
     getLink(): string;
     setLink(value: string): PortfolioContent;
-    getProfileimage(): string;
-    setProfileimage(value: string): PortfolioContent;
+    getThumbnail(): string;
+    setThumbnail(value: string): PortfolioContent;
     getThumbs(): number;
     setThumbs(value: number): PortfolioContent;
     getViews(): number;
@@ -67,7 +67,7 @@ export namespace PortfolioContent {
         skills: string,
         job: string,
         link: string,
-        profileimage: string,
+        thumbnail: string,
         thumbs: number,
         views: number,
     }

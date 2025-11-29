@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.penguin.api";
+option java_outer_classname = "BlogProto";
+
+service Blog {
+  rpc GetBlogs (BlogRequest) returns (BlogResponse) {}
+}
+
+message BlogRequest {
+  int32 count = 1;
+}
+
+message BlogContent {
+  string id = 1;
+  string title = 2;
+  string summary = 3;
+  string contents = 4;
+  string author = 5;
+  string thumbnail = 6;
+  int64 thumbs = 7;
+  int64 views = 8;
+}
+
+message BlogResponse {
+  repeated BlogContent blogs = 1;
+}

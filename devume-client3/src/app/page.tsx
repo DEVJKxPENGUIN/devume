@@ -1,16 +1,23 @@
 import styles from './page.module.css';
 import {TitleRequest, TitleResponse} from "@/proto/generated/Title_pb";
-import {PortfolioRequest, PortfolioResponse} from "@/proto/generated/Portfolio_pb";
-import {getPortfolioClient, getTitleClient, grpcRequest} from "@/utils/grpcHandler";
+import {
+  PortfolioContent,
+  PortfolioRequest,
+  PortfolioResponse
+} from "@/proto/generated/Portfolio_pb";
+import {getBlogClient, getPortfolioClient, getTitleClient, grpcRequest} from "@/utils/grpcHandler";
 import {Metadata} from "@grpc/grpc-js";
 import DevumeTitle from "@/components/home/DevumeTitle";
 import BackgroundLoop from "@/components/home/BackgroundLoop";
 import PortfolioCard from "@/components/home/PortfolioCard";
+import {BlogContent, BlogRequest, BlogResponse} from "@/proto/generated/Blog_pb";
+import BlogCard from "@/components/home/BlogCard";
 
 export default async function HomePage() {
 
-  const title = await fetchTitle();
-  const portfolios = await fetchPortfolios(6);
+  const title = await fetchTitle()
+  const portfolios = await fetchPortfolios(6)
+  const blogs = await fetchBlogs(10)
 
   return (
       <main className={styles.main}>
@@ -20,14 +27,14 @@ export default async function HomePage() {
             <DevumeTitle/>
             <h2 className={styles.subtitle}>{title}</h2>
             <p className={styles.description}>
-              The best place for developers to showcase their portfolios.
+              The best place for developers to showcase their working records.
             </p>
           </div>
         </section>
 
         <section className={styles.commonSection}>
           <div className={styles.subSection}>
-            <h2 className={styles.sectionTitle}>Portfolios</h2>
+            <h2 className={styles.sectionTitle}>Resumes</h2>
           </div>
           <div className={styles.contentSection}>
             {portfolios.map((portfolio, index) => (
@@ -36,7 +43,7 @@ export default async function HomePage() {
                     title={portfolio.getTitle()}
                     description={portfolio.getDescription()}
                     nickname={portfolio.getAuthor()}
-                    image={portfolio.getProfileimage()}
+                    image={portfolio.getThumbnail()}
                     thumbs={portfolio.getThumbs()}
                     views={portfolio.getViews()}
                 />
@@ -45,11 +52,22 @@ export default async function HomePage() {
         </section>
 
         <section className={styles.commonSection}>
-          <div className={styles.subSection}>
-            <h2 className={styles.sectionTitle}>Blogs</h2>
-          </div>
-          <div className={styles.contentSection}>
+          <div className={styles.contentSectionRow}>
             {/* Blog content will go here */}
+            {blogs.map((blog, index) => (
+                <BlogCard
+                    key={index}
+                    title={blog.getTitle()}
+                    summary={blog.getSummary()}
+                    nickname={blog.getAuthor()}
+                    image={blog.getThumbnail()}
+                    thumbs={blog.getThumbs()}
+                    views={blog.getViews()}
+                />
+            ))}
+          </div>
+          <div className={styles.subSectionReverse}>
+            <h2 className={styles.sectionTitle}>Devlogs</h2>
           </div>
         </section>
       </main>
@@ -58,25 +76,38 @@ export default async function HomePage() {
 
 async function fetchTitle(): Promise<string> {
   try {
-    const request = new TitleRequest();
-    const meta = new Metadata();
-    const response: TitleResponse = await grpcRequest(getTitleClient(), 'getTitle', meta, request);
-    return response.getTitle();
+    const request = new TitleRequest()
+    const meta = new Metadata()
+    const response: TitleResponse = await grpcRequest(getTitleClient(), 'getTitle', meta, request)
+    return response.getTitle()
   } catch (error) {
-    console.error('Failed to fetch title:', error);
-    return "Showcase Your Work"; // Fallback title
+    console.error('Failed to fetch title:', error)
+    return "Showcase Your Work" // Fallback title
   }
 }
 
-async function fetchPortfolios(count: number) {
+async function fetchPortfolios(count: number): Promise<PortfolioContent[]> {
   try {
-    const request = new PortfolioRequest();
-    request.setCount(count);
-    const meta = new Metadata();
-    const response: PortfolioResponse = await grpcRequest(getPortfolioClient(), 'getPortfolios', meta, request);
-    return response.getPortfoliosList();
+    const request = new PortfolioRequest()
+    request.setCount(count)
+    const meta = new Metadata()
+    const response: PortfolioResponse = await grpcRequest(getPortfolioClient(), 'getPortfolios', meta, request)
+    return response.getPortfoliosList()
   } catch (error) {
-    console.error('Failed to fetch portfolios:', error);
+    console.error('Failed to fetch portfolios:', error)
+    return []; // Fallback to an empty array
+  }
+}
+
+async function fetchBlogs(count: number): Promise<BlogContent[]> {
+  try {
+    const request = new BlogRequest()
+    request.setCount(count)
+    const meta = new Metadata()
+    const response: BlogResponse = await grpcRequest(getBlogClient(), 'getBlogs', meta, request)
+    return response.getBlogsList()
+  } catch (error) {
+    console.error('Failed to fetch blogs:', error);
     return []; // Fallback to an empty array
   }
 }
