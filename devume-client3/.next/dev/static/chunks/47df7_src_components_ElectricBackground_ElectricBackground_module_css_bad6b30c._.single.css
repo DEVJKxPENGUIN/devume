@@ -1,0 +1,19 @@
+/* [project]/devume-client3/src/components/ElectricBackground/ElectricBackground.module.css [app-client] (css) */
+.ElectricBackground-module__yzSGHq__container {
+  z-index: -1;
+  background-color: var(--color-background);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.ElectricBackground-module__yzSGHq__canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/*# sourceMappingURL=47df7_src_components_ElectricBackground_ElectricBackground_module_css_bad6b30c._.single.css.map*/

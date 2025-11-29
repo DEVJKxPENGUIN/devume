@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/devume-client3/src/components/home/BackgroundLoop.module.css"],"sourcesContent":[".background {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 0; /* .heroSection 내에서 heroContent 보다 뒤에 위치 */\n    overflow: hidden;\n}\n\n.video {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    width: 100%;\n    height: 75%;\n    object-fit: cover;\n    opacity: 0.05; /* 비디오 투명도 조절 */\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;;AAUA"}}]
+}

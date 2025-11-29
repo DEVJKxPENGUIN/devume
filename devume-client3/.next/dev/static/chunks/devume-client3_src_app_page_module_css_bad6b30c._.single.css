@@ -1,0 +1,58 @@
+/* [project]/devume-client3/src/app/page.module.css [app-client] (css) */
+.page-module__Xo0ciW__main {
+  width: 100%;
+  max-width: var(--layout-max-width);
+  flex-direction: column;
+  margin: 0 auto;
+  display: flex;
+}
+
+.page-module__Xo0ciW__heroSection {
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-module__Xo0ciW__heroContent {
+  z-index: 1;
+  position: relative;
+}
+
+.page-module__Xo0ciW__commonSection {
+  background-color: var(--color-background-third);
+  text-align: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.page-module__Xo0ciW__title {
+  font-family: var(--font-heading), monospace;
+  color: var(--color-text-primary);
+  font-size: 6.75rem;
+}
+
+.page-module__Xo0ciW__subtitle {
+  font-family: var(--font-heading), monospace;
+  color: var(--color-text-primary);
+  font-size: 2rem;
+}
+
+.page-module__Xo0ciW__description {
+  color: var(--color-text-secondary);
+  font-size: 1.25rem;
+}
+
+.page-module__Xo0ciW__sectionTitle {
+  font-family: var(--font-heading), monospace;
+  text-align: center;
+  color: var(--color-text-primary);
+  font-size: 3rem;
+}
+
+/*# sourceMappingURL=devume-client3_src_app_page_module_css_bad6b30c._.single.css.map*/
