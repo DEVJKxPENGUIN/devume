@@ -54,7 +54,7 @@
 
 .contentSection {
   flex-basis: 70%;
-  padding: 2rem;
+  padding: 1.5rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;

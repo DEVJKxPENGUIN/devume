@@ -16,7 +16,8 @@
 .imageWrapper {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  padding-top: 40%; /* 16:9 Aspect Ratio */
+  opacity: 0.75;
 }
 
 .imageWrapper img {
@@ -24,14 +25,14 @@
 }
 
 .content {
-  padding: 16px;
+  padding: 10px;
   flex-grow: 1;
 }
 
 .title {
   font-size: 1.1rem;
   font-weight: 600;
-  margin: 0 0 8px 0;
+  margin: 0 0 4px 0;
   color: var(--color-text-primary);
   white-space: nowrap;
   overflow: hidden;
