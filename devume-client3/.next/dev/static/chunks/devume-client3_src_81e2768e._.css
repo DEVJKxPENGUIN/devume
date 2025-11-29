@@ -101,6 +101,7 @@
   --color-border: #eaeaea;
   --color-text-primary: #111;
   --color-text-secondary: #666;
+  --color-text-reverse: #fff;
   --color-primary: #0070f3;
 }
 
@@ -113,6 +114,7 @@
   --color-card: #1e1e1e;
   --color-text-primary: #f1f1f1;
   --color-text-secondary: #aaa;
+  --color-text-reverse: #111;
   --color-primary: #0070f3;
 }
 

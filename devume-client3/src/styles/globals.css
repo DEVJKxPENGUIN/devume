@@ -20,6 +20,7 @@
   --color-border: #eaeaea;
   --color-text-primary: #111111;
   --color-text-secondary: #666666;
+  --color-text-reverse: #ffffff;
   --color-primary: #0070f3;
 }
 
@@ -33,6 +34,7 @@
   --color-card: #1e1e1e;
   --color-text-primary: #f1f1f1;
   --color-text-secondary: #aaaaaa;
+  --color-text-reverse: #111111;
   --color-primary: #0070f3;
 }
 
