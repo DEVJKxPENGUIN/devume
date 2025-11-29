@@ -1,7 +1,0 @@
-1:"$Sreact.fragment"
-2:I[9376,["/_next/static/chunks/77079baa94547cb7.js","/_next/static/chunks/cb5163663202bc18.js","/_next/static/chunks/d795a3fd978753a9.js"],"default"]
-3:I[50525,["/_next/static/chunks/77079baa94547cb7.js","/_next/static/chunks/91415c378afce405.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-:HL["/_next/static/chunks/82522628f801a4cd.css","style"]
-0:{"buildId":"DKGi59nPGXHqfusxC608V","rsc":["$","$1","c",{"children":[["$","main",null,{"className":"page-module__Xo0ciW__main","children":[["$","section",null,{"className":"page-module__Xo0ciW__heroSection","children":[["$","$L2",null,{}],["$","div",null,{"className":"page-module__Xo0ciW__heroContent","children":[["$","h1",null,{"className":"page-module__Xo0ciW__title","children":"DEVUME"}],["$","h2",null,{"className":"page-module__Xo0ciW__subtitle","children":"local-Your next career starts local"}],["$","p",null,{"className":"page-module__Xo0ciW__description","children":"The best place for developers to showcase their portfolios."}]]}]]}],["$","section",null,{"className":"page-module__Xo0ciW__portfolioSection","children":["$","h2",null,{"className":"page-module__Xo0ciW__sectionTitle","children":"Portfolios"}]}]]}],[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/82522628f801a4cd.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/d795a3fd978753a9.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
-5:null

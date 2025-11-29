@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/devume-client3/src/components/layout/Footer.module.css"],"sourcesContent":[".footer {\n  width: 100%;\n  border-top: 1px solid var(--color-border);\n  background-color: var(--color-background);\n  transition: background-color 0.3s ease, border-color 0.3s ease;\n  margin-top: 1rem;\n}\n\n.container {\n  max-width: var(--layout-max-width);\n  margin: 0 auto;\n  text-align: center;\n  color: var(--color-text-secondary);\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;AAQA"}}]
-}

@@ -1,3 +1,0 @@
-module.exports=[46565,a=>{a.n(a.i(10666))},49955,a=>{a.n(a.i(68407))},47034,a=>{a.n(a.i(62798))},77303,a=>{a.n(a.i(2156))},44881,a=>{a.n(a.i(73166))},80342,a=>{a.v({container:"page-module__PfynHW__container",description:"page-module__PfynHW__description","sub-title":"page-module__PfynHW__sub-title"})},42586,a=>{"use strict";var b=a.i(56627),c=a.i(80342);function d({params:a}){return(0,b.jsxs)("div",{className:c.default.container,children:[(0,b.jsxs)("h1",{className:c.default.title,children:[a.nickname,"'s Profile"]}),(0,b.jsxs)("p",{className:c.default.description,children:["This is the portfolio page for ",a.nickname,"."]})]})}a.s(["default",()=>d])}];
-
-//# sourceMappingURL=devume-client3_3e935d13._.js.map

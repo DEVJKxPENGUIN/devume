@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/devume-client3/src/components/home/DevumeTitle.module.css"],"sourcesContent":[".title {\n  font-size: 6.75rem;\n  font-weight: bold;\n  text-align: center;\n  color: var(--color-text-primary);\n  margin: 0;\n}\n\n.title .letter {\n  display: inline-block;\n  line-height: 1em;\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;AAQA"}}]
-}
