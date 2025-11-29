@@ -1,10 +1,14 @@
 /* [project]/devume-client3/src/styles/globals.css [app-client] (css) */
 :root {
+  --layout-max-width: 80rem;
+  --breakpoint-tablet: 64rem;
+  --breakpoint-mobile: 48rem;
   --font-heading: "Montserrat", sans-serif;
   --font-body: "Roboto", sans-serif;
   --font-mono: "Source Code Pro", monospace;
   --color-background: #fff;
   --color-background-secondary: #f0f2f5;
+  --color-background-third: #0e0e0e;
   --color-foreground: #000;
   --color-card: #f7f7f7;
   --color-border: #eaeaea;
@@ -16,16 +20,17 @@
 [data-theme="dark"] {
   --color-background: #121212;
   --color-background-secondary: #1a1a1a;
+  --color-background-third: #090909;
   --color-foreground: #fff;
-  --color-card: #1e1e1e;
   --color-border: #333;
+  --color-card: #1e1e1e;
   --color-text-primary: #f1f1f1;
   --color-text-secondary: #aaa;
   --color-primary: #0070f3;
 }
 
 html, body {
-  font-family: var(--font-body);
+  font-family: var(--font-body), serif;
   background-color: var(--color-background);
   color: var(--color-text-primary);
   overscroll-behavior: none;
@@ -46,10 +51,17 @@ a {
 }
 
 main {
-  max-width: 1920px;
+  width: 100%;
+  max-width: var(--layout-max-width);
   min-height: calc(100vh - 150px);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0;
+}
+
+section {
+  background-color: var(--color-background-third);
+  border-color: var(--color-border);
+  border-radius: 24px;
 }
 
 /*# sourceMappingURL=devume-client3_src_styles_globals_css_bad6b30c._.single.css.map*/

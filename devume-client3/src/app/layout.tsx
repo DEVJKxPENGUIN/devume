@@ -39,7 +39,7 @@ export default function RootLayout({
         <StoreProvider>
           <ThemeProvider>
             <Header />
-            <main>{children}</main>
+            {children}
             <Footer />
             <ThemeToggleButton />
           </ThemeProvider>

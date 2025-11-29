@@ -78,6 +78,18 @@ This project uses the Next.js server as a **Backend for Frontend (BFF)**. The cl
 - **Global Theme System**: Theming is controlled by CSS variables in `src/styles/globals.css`.
 - **Theme Switching**: `ThemeContext` handles theme state and applies the `data-theme` attribute to the `<html>` element.
 
+#### Layout and Responsive Design
+- **Max Width**: The main content area of the application is constrained to a maximum width of `1280px`. This is managed by a shared `max-width` property on container elements in both the header and the main page sections.
+- **Responsive Breakpoints**: For consistent responsive design, use the CSS variables defined in `src/styles/globals.css`:
+  - `--breakpoint-tablet: 1024px;`
+  - `--breakpoint-mobile: 768px;`
+- **Implementation**: Media queries should use these variables. For example:
+  ```css
+  @media (max-width: var(--breakpoint-tablet)) {
+    /* Styles for tablet and smaller screens */
+  }
+  ```
+
 ### State Management
 - **Redux**: For complex, global application state.
 - **React Context**: For simple, UI-related global state (e.g., theme).

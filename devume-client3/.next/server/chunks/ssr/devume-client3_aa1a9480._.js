@@ -1,3 +1,0 @@
-module.exports=[46565,a=>{a.n(a.i(10666))},49955,a=>{a.n(a.i(68407))},47034,a=>{a.n(a.i(62798))},77303,a=>{a.n(a.i(2156))},44881,a=>{a.n(a.i(73166))},6965,a=>{a.v({container:"page-module__Xo0ciW__container",description:"page-module__Xo0ciW__description",title:"page-module__Xo0ciW__title"})},61257,a=>{"use strict";var b=a.i(56627),c=a.i(6965);function d(){return(0,b.jsxs)("div",{className:c.default.container,children:[(0,b.jsx)("h1",{className:c.default.title,children:"Welcome to Devume!"}),(0,b.jsx)("p",{className:c.default.description,children:"The best place for developers to showcase their portfolios."})]})}a.s(["default",()=>d])}];
-
-//# sourceMappingURL=devume-client3_aa1a9480._.js.map

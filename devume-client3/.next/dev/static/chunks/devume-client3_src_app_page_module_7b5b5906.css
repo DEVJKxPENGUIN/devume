@@ -6,11 +6,19 @@
 
 .page-module__Xo0ciW__heroSection {
   text-align: center;
+  z-index: 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-module__Xo0ciW__heroContent {
+  z-index: 1;
+  position: relative;
 }
 
 .page-module__Xo0ciW__portfolioSection {
