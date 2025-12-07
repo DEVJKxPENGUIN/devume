@@ -3,10 +3,15 @@ import {Metadata} from '@grpc/grpc-js';
 import {TitleClient} from "@/proto/generated/Title_grpc_pb";
 import {PortfolioClient} from "@/proto/generated/Portfolio_grpc_pb";
 import {BlogClient} from "@/proto/generated/Blog_grpc_pb";
+import {LoginClient} from "@/proto/generated/Login_grpc_pb";
+import {UserClient} from "@/proto/generated/User_grpc_pb";
+import {cookies} from "next/headers";
 
 let titleClient: TitleClient | null = null
 let portfolioClient: PortfolioClient | null = null;
 let blogClient: BlogClient | null = null;
+let loginClient: LoginClient | null = null;
+let userClient: UserClient | null = null;
 
 function getGrpcApiUrl(): string {
   const grpcApiUrl = process.env.GRPC_API_URL;
@@ -43,12 +48,34 @@ export function getBlogClient(): BlogClient {
   return blogClient;
 }
 
-export function grpcRequest<TRequest, TResponse>(
+export function getLoginClient(): LoginClient {
+  if (!loginClient) {
+    const grpcApiUrl = getGrpcApiUrl();
+    console.log(`Initializing gRPC login client for URL: ${grpcApiUrl}`);
+    loginClient = new LoginClient(grpcApiUrl, grpc.credentials.createInsecure());
+  }
+  return loginClient;
+}
+
+export function getUserClient(): UserClient {
+  if (!userClient) {
+    const grpcApiUrl = getGrpcApiUrl();
+    console.log(`Initializing gRPC login client for URL: ${grpcApiUrl}`);
+    userClient = new UserClient(grpcApiUrl, grpc.credentials.createInsecure());
+  }
+  return userClient;
+}
+
+export async function grpcRequest<TRequest, TResponse>(
     client: grpc.Client,
     methodName: string,
     meta: Metadata,
     request: TRequest
 ): Promise<TResponse> {
+  const cookie = await cookies()
+  const token = cookie.get('devumeauth')?.value || ''
+  meta.add('Authorization', `Bearer ${token}`)
+
   return new Promise((resolve, reject) => {
     (client as any)[methodName](request, meta, (error: grpc.ServiceError | null, response: TResponse) => {
       if (error) {

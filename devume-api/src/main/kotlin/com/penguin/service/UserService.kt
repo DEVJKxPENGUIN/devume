@@ -19,25 +19,35 @@ class UserService(
 ) : UserGrpc.UserImplBase() {
     private val log = LoggerFactory.getLogger(javaClass)
 
-    @DevumeUser(Role.NORMAL, true)
+    @DevumeUser(Role.GUEST, false)
     override fun getUser(request: UserRequest, responseObserver: StreamObserver<UserResponse>) {
         log.info("Received request [getUser]: $request")
 
         val authUser = ContextUtils.currentUser()
 
-        val user = userRepository.findById(authUser.id)
-            .map {
-                UserResponse.newBuilder()
-                    .setId(it.id)
-                    .setEmail(it.email)
-                    .setNickname(it.nickName)
-                    .setRole(it.role)
-                    .setLastLoginAt(it.lastLoginAt.toString())
-                    .setCreatedAt(it.createdAt.toString())
-                    .build()
-            }.orElseThrow {
-                BaseException(ErrorCode.UNAUTHORIZED, "유저 정보를 찾을 수 없습니다.")
-            }
+        val user = if (authUser.isGuest()) {
+            // guest
+            UserResponse.newBuilder()
+                .setId(0)
+                .setEmail("anonymous")
+                .setNickname("anonymous")
+                .setRole(Role.GUEST.toString())
+                .build()
+        } else {
+            userRepository.findById(authUser.id)
+                .map {
+                    UserResponse.newBuilder()
+                        .setId(it.id)
+                        .setEmail(it.email)
+                        .setNickname(it.nickName)
+                        .setRole(it.role)
+                        .setLastLoginAt(it.lastLoginAt.toString())
+                        .setCreatedAt(it.createdAt.toString())
+                        .build()
+                }.orElseThrow {
+                    BaseException(ErrorCode.UNAUTHORIZED, "유저 정보를 찾을 수 없습니다.")
+                }
+        }
 
         responseObserver.onNext(user)
         responseObserver.onCompleted()
