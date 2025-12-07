@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import {useEffect, useRef} from 'react';
 import styles from './BackgroundLoop.module.css';
 
 const BackgroundLoop = () => {
@@ -23,6 +23,7 @@ const BackgroundLoop = () => {
             playsInline
             className={styles.video}
         />
+        <div className={styles.backdrop}></div>
       </div>
   )
 }

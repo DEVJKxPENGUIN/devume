@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeToggleButton } from "@/components/common/ThemeToggleButton";
 import "@/styles/globals.css";
+import BackgroundLoop from "@/components/layout/BackgroundLoop";
 
 export const metadata: Metadata = {
   title: "Devume",
@@ -38,6 +39,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
         <StoreProvider>
           <ThemeProvider>
+            <BackgroundLoop/>
             <Header />
             {children}
             <Footer />

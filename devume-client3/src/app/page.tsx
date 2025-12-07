@@ -8,7 +8,6 @@ import {
 import {getBlogClient, getPortfolioClient, getTitleClient, grpcRequest} from "@/utils/grpcHandler";
 import {Metadata} from "@grpc/grpc-js";
 import DevumeTitle from "@/components/home/DevumeTitle";
-import BackgroundLoop from "@/components/home/BackgroundLoop";
 import PortfolioCard from "@/components/home/PortfolioCard";
 import {BlogContent, BlogRequest, BlogResponse} from "@/proto/generated/Blog_pb";
 import BlogCard from "@/components/home/BlogCard";
@@ -22,7 +21,6 @@ export default async function HomePage() {
   return (
       <main className={styles.main}>
         <section className={styles.heroSection}>
-          <BackgroundLoop/>
           <div className={styles.heroContent}>
             <DevumeTitle/>
             <h2 className={styles.subtitle}>{title}</h2>
@@ -33,6 +31,7 @@ export default async function HomePage() {
         </section>
 
         <section className={styles.commonSection}>
+          {/*<section className={styles.heroSection}>*/}
           <div className={styles.subSection}>
             <h2 className={styles.sectionTitle}>Resumes</h2>
           </div>
