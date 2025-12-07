@@ -42,7 +42,8 @@
 
 .subSection {
   display: flex;
-  background-color: var(--color-background-third);
+  /*background-color: var(--color-background-third);*/
+  background-color: var(--color-card);
   align-items: flex-start; /* Center title vertically */
   justify-content: right; /* Center title horizontally */
   font-family: var(--font-heading), monospace;
@@ -58,7 +59,8 @@
   justify-content: left; /* Center title horizontally */
   font-family: var(--font-heading), monospace;
   color: var(--color-text-primary);
-  background-color: var(--color-background-third); /* Use a distinct background */
+  /*background-color: var(--color-background-third); !* Use a distinct background *!*/
+  background-color: var(--color-card);
   flex-basis: 30%;
   padding: 2rem;
   border-right: 1px solid var(--border-color);

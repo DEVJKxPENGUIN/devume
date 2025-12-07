@@ -13,10 +13,10 @@
   --font-mono: 'Source Code Pro', monospace;
 
   /* Light Theme Colors */
-  --color-background: rgba(255, 255, 255, 0.8);
-  --color-background-secondary: rgba(240, 242, 245, 0.8);
-  --color-background-third: rgba(238, 231, 231, 0.8);
-  --color-foreground: rgba(0, 0, 0, 0.8);
+  --color-background: rgba(255, 255, 255, 0.9);
+  --color-background-secondary: rgba(240, 242, 245, 0.9);
+  --color-background-third: rgba(238, 231, 231, 0.9);
+  --color-foreground: rgba(0, 0, 0, 0.9);
   --color-card: #f7f7f7;
   --color-border: #eaeaea;
   --color-text-primary: #111111;
@@ -27,12 +27,12 @@
 
 [data-theme='dark'] {
   /* Dark Theme Colors */
-  --color-background: rgba(18, 18, 18, 0.8);
-  --color-background-secondary: rgba(26, 26, 26, 0.8);
-  --color-background-third: rgba(9, 9, 9, 0.8);
-  --color-foreground: rgba(255, 255, 255, 0.8);
+  --color-background: rgba(18, 18, 18, 0.9);
+  --color-background-secondary: rgba(26, 26, 26, 0.9);
+  --color-background-third: rgba(9, 9, 9, 0.9);
+  --color-foreground: rgba(255, 255, 255, 0.9);
   --color-border: #333333;
-  --color-card: #1e1e1e;
+  --color-card: #101010;
   --color-text-primary: #f1f1f1;
   --color-text-secondary: #aaaaaa;
   --color-text-reverse: #111111;
