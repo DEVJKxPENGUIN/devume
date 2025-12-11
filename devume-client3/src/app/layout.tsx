@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { StoreProvider } from "@/store/provider";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { Header } from "@/components/layout/Header";
+import { Header } from "@/components/layout/header/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeToggleButton } from "@/components/common/ThemeToggleButton";
 import "@/styles/globals.css";
