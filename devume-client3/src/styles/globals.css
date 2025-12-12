@@ -16,6 +16,7 @@
   --color-background: rgba(255, 255, 255, 0.9);
   --color-background-secondary: rgba(240, 242, 245, 0.9);
   --color-background-third: rgba(238, 231, 231, 0.9);
+  --color-background-transparent: rgba(238, 231, 231, 0.3);
   --color-foreground: rgba(0, 0, 0, 0.9);
   --color-card: #f7f7f7;
   --color-border: #eaeaea;
@@ -30,6 +31,7 @@
   --color-background: rgba(18, 18, 18, 0.9);
   --color-background-secondary: rgba(26, 26, 26, 0.9);
   --color-background-third: rgba(9, 9, 9, 0.9);
+  --color-background-transparent: rgba(9, 9, 9, 0.3);
   --color-foreground: rgba(255, 255, 255, 0.9);
   --color-border: #333333;
   --color-card: #101010;
