@@ -19,9 +19,15 @@ export const SubBar = (props: SubMenuProps) => {
       <div className={styles.subContainer} onClick={(e) => e.stopPropagation()}>
         {
           subMenus.map((subMenu, index) => (
-              <Link href={subMenu.link} className={styles.subMenu}>
-                {subMenu.title}
-              </Link>
+              subMenu.link === '/logout' ? (
+                  <a key={index} href={subMenu.link} className={styles.subMenu}>
+                    {subMenu.title}
+                  </a>
+              ) : (
+                  <Link key={index} href={subMenu.link} className={styles.subMenu}>
+                    {subMenu.title}
+                  </Link>
+              )
           ))
         }
       </div>
