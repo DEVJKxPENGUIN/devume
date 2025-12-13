@@ -1,6 +1,6 @@
 package com.penguin.service
 
-import com.penguin.api.TitleGrpc
+import com.penguin.api.TitleGrpcKt
 import com.penguin.api.TitleRequest
 import com.penguin.api.TitleResponse
 import com.penguin.utils.PhaseUtils
@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory
 import org.springframework.grpc.server.service.GrpcService
 
 @GrpcService
-class TitleService : TitleGrpc.TitleImplBase() {
+class TitleService : TitleGrpcKt.TitleCoroutineImplBase() {
     private val log = LoggerFactory.getLogger(javaClass)
 
-    override fun getTitle(
+    suspend fun getTitle(
         request: TitleRequest,
         responseObserver: StreamObserver<TitleResponse>
     ) {

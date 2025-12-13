@@ -1,7 +1,7 @@
 package com.penguin.service
 
 import com.penguin.api.PortfolioContent
-import com.penguin.api.PortfolioGrpc
+import com.penguin.api.PortfolioGrpcKt
 import com.penguin.api.PortfolioRequest
 import com.penguin.api.PortfolioResponse
 import io.grpc.stub.StreamObserver
@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory
 import org.springframework.grpc.server.service.GrpcService
 
 @GrpcService
-class PortfolioService : PortfolioGrpc.PortfolioImplBase() {
+class PortfolioService : PortfolioGrpcKt.PortfolioCoroutineImplBase() {
     private val log = LoggerFactory.getLogger(javaClass)
 
-    override fun getPortfolios(
+    suspend fun getPortfolios(
         request: PortfolioRequest,
         responseObserver: StreamObserver<PortfolioResponse>
     ) {

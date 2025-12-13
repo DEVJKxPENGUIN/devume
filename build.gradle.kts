@@ -1,3 +1,4 @@
+import com.google.protobuf.gradle.id
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -44,7 +45,11 @@ subprojects {
 
     dependencies {
         implementation("io.grpc:grpc-services")
+        implementation("io.grpc:grpc-kotlin-stub")
+        implementation("com.google.protobuf:protobuf-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
         implementation("org.springframework.grpc:spring-grpc-spring-boot-starter")
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -138,11 +143,14 @@ subprojects {
 
     protobuf {
         protoc {
-            artifact = "com.google.protobuf:protoc"
+            artifact = "com.google.protobuf:protoc:3.25.1"
         }
         plugins {
             create("grpc") {
                 artifact = "io.grpc:protoc-gen-grpc-java"
+            }
+            create("grpckt") {
+                artifact = "io.grpc:protoc-gen-grpc-kotlin:1.4.1:jdk8@jar"
             }
         }
         generateProtoTasks {
@@ -151,6 +159,12 @@ subprojects {
                     create("grpc") {
                         option("@generated=omit")
                     }
+                    create("grpckt") {
+                        option("@generated=omit")
+                    }
+                }
+                it.builtins {
+                    id("kotlin")
                 }
             }
         }

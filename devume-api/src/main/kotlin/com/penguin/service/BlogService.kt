@@ -1,21 +1,17 @@
 package com.penguin.service
 
-import com.penguin.api.BlogContent
-import com.penguin.api.BlogGrpc
-import com.penguin.api.BlogRequest
-import com.penguin.api.BlogResponse
-import io.grpc.stub.StreamObserver
+import com.penguin.api.*
+import com.penguin.db.repository.PostRepository
 import org.slf4j.LoggerFactory
 import org.springframework.grpc.server.service.GrpcService
 
 @GrpcService
-class BlogService : BlogGrpc.BlogImplBase() {
+class BlogService(
+    private val postRepository: PostRepository
+) : BlogGrpcKt.BlogCoroutineImplBase() {
     private val log = LoggerFactory.getLogger(javaClass)
 
-    override fun getBlogs(
-        request: BlogRequest,
-        responseObserver: StreamObserver<BlogResponse>
-    ) {
+    override suspend fun getBlogs(request: BlogRequest): BlogResponse {
         log.info("Received request [getBlogs]: $request")
 
         // todo
@@ -32,11 +28,20 @@ class BlogService : BlogGrpc.BlogImplBase() {
                 .build()
         }
 
-        val res: BlogResponse = BlogResponse.newBuilder()
+        return BlogResponse.newBuilder()
             .addAllBlogs(mockBlogs)
             .build()
+    }
 
-        responseObserver.onNext(res)
-        responseObserver.onCompleted()
+    override suspend fun preparePost(request: PreparePostRequest): PreparePostResponse {
+        log.info("Received request [preparePost]: $request")
+
+
+        val postId: Long = request.postId
+
+        postRepository.findById(postId)
+        // todo
+        return PreparePostResponse.newBuilder()
+            .build()
     }
 }

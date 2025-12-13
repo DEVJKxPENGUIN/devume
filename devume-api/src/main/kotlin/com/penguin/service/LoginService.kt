@@ -11,11 +11,13 @@ import com.penguin.framework.error.exception.BaseException
 import com.penguin.utils.HostUtils
 import com.penguin.utils.JsonUtils
 import com.penguin.utils.JwtUtils
-import io.grpc.stub.StreamObserver
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.JwkSet
 import io.jsonwebtoken.security.Jwks
 import jakarta.annotation.PostConstruct
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.reactor.awaitSingle
+import kotlinx.coroutines.withContext
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.ApplicationContext
@@ -40,15 +42,15 @@ class LoginService(
     private val webClient: WebClient,
     private val userRepository: UserRepository,
     private val jwtUtils: JwtUtils,
-    private val context: ApplicationContext
-) : LoginGrpc.LoginImplBase() {
+    private val appContext: ApplicationContext
+) : LoginGrpcKt.LoginCoroutineImplBase() {
     private val log = LoggerFactory.getLogger(javaClass)
     private lateinit var PENGUIN_JWKS: JwkSet
 
     @PostConstruct
     @Scheduled(initialDelay = 1, fixedDelay = 1, timeUnit = TimeUnit.DAYS)
     fun cacheOauth2Jwks() {
-        val phase = context.environment.activeProfiles[0]
+        val phase = appContext.environment.activeProfiles[0]
         val jwks = webClient.get()
             .uri("${HostUtils.penguinAuth(phase)}/.well-known/jwks.json")
             .retrieve()
@@ -60,26 +62,17 @@ class LoginService(
             .parse(jwks)
     }
 
-    override fun login(
-        request: LoginRequest,
-        responseObserver: StreamObserver<LoginResponse>
-    ) {
+    override suspend fun login(request: LoginRequest): LoginResponse {
         log.info("Received request [login]: $request")
-
-        val res = LoginResponse.newBuilder()
-            .setLoginUrl("${HostUtils.penguin()}/oauth2/authorize?clientId=${penguinClientId}&redirectUri=${HostUtils.authCallback()}&state=${request.state}&scope=openid")
-            .build()
 
         // 여기서 blocking call 을 쏴도 지장 없는지 확인. - 지장 없다.
 
-        responseObserver.onNext(res)
-        responseObserver.onCompleted()
+        return LoginResponse.newBuilder()
+            .setLoginUrl("${HostUtils.penguin()}/oauth2/authorize?clientId=${penguinClientId}&redirectUri=${HostUtils.authCallback()}&state=${request.state}&scope=openid")
+            .build()
     }
 
-    override fun penguinToken(
-        request: TokenRequest,
-        responseObserver: StreamObserver<TokenResponse>
-    ) {
+    override suspend fun penguinToken(request: TokenRequest): TokenResponse {
         log.info("Received request [penguinToken]: $request")
 
         val code = request.code
@@ -106,7 +99,7 @@ class LoginService(
             }
             .bodyToMono(PenguinTokenResponse::class.java)
             .doOnError { error -> throw error }
-            .block()!!
+            .awaitSingle()
 
         val idToken = tokenResponse.idToken
         val kid = this.parseKid(idToken)
@@ -127,28 +120,28 @@ class LoginService(
         val nickname = payload["nickname"] as String
 
         // 기존 유저 조회
-        val user: User = userRepository.findByProviderId(OidcProvider.penguin.name, sub) ?: run {
-            // 신규 유저 생성
-            userRepository.save(
-                User(
-                    provider = OidcProvider.penguin.name,
-                    providerId = sub,
-                    nickName = nickname,
-                    email = email,
-                    role = Role.NORMAL.name,
-                    idToken = idToken
-                )
-            )
+        val user: User = withContext(Dispatchers.IO) {
+            return@withContext userRepository.findByProviderId(OidcProvider.penguin.name, sub)
+                ?: run {
+                    // 신규 유저 생성
+                    userRepository.save(
+                        User(
+                            provider = OidcProvider.penguin.name,
+                            providerId = sub,
+                            nickName = nickname,
+                            email = email,
+                            role = Role.NORMAL.name,
+                            idToken = idToken
+                        )
+                    )
+                }
         }
 
         // 6. 새로운 로그인 인증용 JWT 토큰을 생성하여 반환한다.
         val newToken = jwtUtils.create(user.id, user.email, user.role, user.nickName)
-        val res = TokenResponse.newBuilder()
+        return TokenResponse.newBuilder()
             .setToken(newToken)
             .build()
-
-        responseObserver.onNext(res)
-        responseObserver.onCompleted()
     }
 
     private fun parseKid(idToken: String): String {
@@ -177,7 +170,10 @@ class LoginService(
             val factory = KeyFactory.getInstance("RSA")
             return factory.generatePublic(spec)
         } catch (e: Exception) {
-            throw BaseException(ErrorCode.INTERNAL_SERVER, "failed to create public key from jwks")
+            throw BaseException(
+                ErrorCode.INTERNAL_SERVER,
+                "failed to create public key from jwks"
+            )
         }
     }
 }
