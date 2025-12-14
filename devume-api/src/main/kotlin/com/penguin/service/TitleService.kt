@@ -4,7 +4,6 @@ import com.penguin.api.TitleGrpcKt
 import com.penguin.api.TitleRequest
 import com.penguin.api.TitleResponse
 import com.penguin.utils.PhaseUtils
-import io.grpc.stub.StreamObserver
 import org.slf4j.LoggerFactory
 import org.springframework.grpc.server.service.GrpcService
 
@@ -12,10 +11,7 @@ import org.springframework.grpc.server.service.GrpcService
 class TitleService : TitleGrpcKt.TitleCoroutineImplBase() {
     private val log = LoggerFactory.getLogger(javaClass)
 
-    suspend fun getTitle(
-        request: TitleRequest,
-        responseObserver: StreamObserver<TitleResponse>
-    ) {
+    override suspend fun getTitle(request: TitleRequest): TitleResponse {
         log.info("Received request [getTitle]: $request")
 
         val phase: String = PhaseUtils.getActiveProfile()
@@ -28,11 +24,8 @@ class TitleService : TitleGrpcKt.TitleCoroutineImplBase() {
             throw IllegalArgumentException("Unknown phase $phase")
         }
 
-        val res: TitleResponse = TitleResponse.newBuilder()
+        return TitleResponse.newBuilder()
             .setTitle(title)
             .build()
-
-        responseObserver.onNext(res)
-        responseObserver.onCompleted()
     }
 }

@@ -74,4 +74,81 @@ class BlogService(
             .setContent(post.content)
             .build()
     }
+
+    override suspend fun validate(request: ValidationRequest): ValidationResponse {
+        try {
+            if (request.title.isNullOrBlank()) {
+                throw BaseException(ErrorCode.VALIDATION_ERROR, "title cannot be empty")
+            }
+
+            if (request.title.length > 200) {
+                throw BaseException(
+                    ErrorCode.VALIDATION_ERROR,
+                    "title must be less than 200 characters"
+                )
+            }
+
+            if (request.title.length < 4) {
+                throw BaseException(
+                    ErrorCode.VALIDATION_ERROR,
+                    "title must be more than 4 characters"
+                )
+            }
+
+            if (request.contents.isNullOrBlank()) {
+                throw BaseException(ErrorCode.VALIDATION_ERROR, "content cannot be empty")
+            }
+
+            if (request.contents.length < 100) {
+                throw BaseException(
+                    ErrorCode.VALIDATION_ERROR,
+                    "content must be more than 100 characters"
+                )
+            }
+
+            return ValidationResponse
+                .newBuilder()
+                .setStatus(0)
+                .setMessage("ok")
+                .build()
+        } catch (e: BaseException) {
+            return ValidationResponse
+                .newBuilder()
+                .setStatus(-1)
+                .setMessage(e.message)
+                .build()
+        }
+    }
+
+    @DevumeUser(Role.NORMAL, false)
+    override suspend fun write(request: WriteRequest): WriteResponse {
+        val validation = this.validate(
+            ValidationRequest.newBuilder()
+                .setTitle(request.title)
+                .setContents(request.contents)
+                .build()
+        )
+
+        if (validation.status != 0) {
+            throw BaseException(ErrorCode.VALIDATION_ERROR, validation.message)
+        }
+
+        val authUser = ContextUtils.currentUser()
+        val post = Post(
+            userId = authUser.id,
+            title = request.title,
+            content = request.contents,
+            thumbnail = request.thumbnail
+        )
+
+        val createdPost = withContext(Dispatchers.IO) {
+            postRepository.save(post)
+        }
+
+        log.info("Saved post: ${createdPost.id}")
+
+        return WriteResponse.newBuilder()
+            .setPostId(createdPost.id)
+            .build()
+    }
 }

@@ -117,7 +117,7 @@ var BlogService = exports.BlogService = {
     responseDeserialize: deserialize_PreparePostResponse,
   },
   validate: {
-    path: '/Blog/validate',
+    path: '/Blog/Validate',
     requestStream: false,
     responseStream: false,
     requestType: Blog_pb.ValidationRequest,
@@ -128,7 +128,7 @@ var BlogService = exports.BlogService = {
     responseDeserialize: deserialize_ValidationResponse,
   },
   write: {
-    path: '/Blog/write',
+    path: '/Blog/Write',
     requestStream: false,
     responseStream: false,
     requestType: Blog_pb.WriteRequest,

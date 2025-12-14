@@ -1424,7 +1424,7 @@ proto.ValidationResponse.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt64());
+      var value = /** @type {number} */ (reader.readInt32());
       msg.setStatus(value);
       break;
     case 2:
@@ -1462,7 +1462,7 @@ proto.ValidationResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getStatus();
   if (f !== 0) {
-    writer.writeInt64(
+    writer.writeInt32(
       1,
       f
     );
@@ -1478,7 +1478,7 @@ proto.ValidationResponse.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional int64 status = 1;
+ * optional int32 status = 1;
  * @return {number}
  */
 proto.ValidationResponse.prototype.getStatus = function() {

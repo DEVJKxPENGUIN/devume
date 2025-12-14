@@ -21,11 +21,14 @@ class Post(
     @Column("content")
     val content: String,
 
+    @Column("thumbnail")
+    val thumbnail: String,
+
     @Column("views")
-    val views: Long,
+    val views: Long = 0,
 
     @Column("thumbs")
-    val thumbs: Long,
+    val thumbs: Long = 0,
 ) : BaseEntity(), Serializable {
 
 

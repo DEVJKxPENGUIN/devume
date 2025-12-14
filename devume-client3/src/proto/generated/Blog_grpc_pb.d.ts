@@ -10,8 +10,8 @@ import * as Blog_pb from "./Blog_pb";
 interface IBlogService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
     getBlogs: IBlogService_IGetBlogs;
     preparePost: IBlogService_IPreparePost;
-    validate: IBlogService_Ivalidate;
-    write: IBlogService_Iwrite;
+    validate: IBlogService_IValidate;
+    write: IBlogService_IWrite;
 }
 
 interface IBlogService_IGetBlogs extends grpc.MethodDefinition<Blog_pb.BlogRequest, Blog_pb.BlogResponse> {
@@ -32,8 +32,8 @@ interface IBlogService_IPreparePost extends grpc.MethodDefinition<Blog_pb.Prepar
     responseSerialize: grpc.serialize<Blog_pb.PreparePostResponse>;
     responseDeserialize: grpc.deserialize<Blog_pb.PreparePostResponse>;
 }
-interface IBlogService_Ivalidate extends grpc.MethodDefinition<Blog_pb.ValidationRequest, Blog_pb.ValidationResponse> {
-    path: "/Blog/validate";
+interface IBlogService_IValidate extends grpc.MethodDefinition<Blog_pb.ValidationRequest, Blog_pb.ValidationResponse> {
+    path: "/Blog/Validate";
     requestStream: false;
     responseStream: false;
     requestSerialize: grpc.serialize<Blog_pb.ValidationRequest>;
@@ -41,8 +41,8 @@ interface IBlogService_Ivalidate extends grpc.MethodDefinition<Blog_pb.Validatio
     responseSerialize: grpc.serialize<Blog_pb.ValidationResponse>;
     responseDeserialize: grpc.deserialize<Blog_pb.ValidationResponse>;
 }
-interface IBlogService_Iwrite extends grpc.MethodDefinition<Blog_pb.WriteRequest, Blog_pb.WriteResponse> {
-    path: "/Blog/write";
+interface IBlogService_IWrite extends grpc.MethodDefinition<Blog_pb.WriteRequest, Blog_pb.WriteResponse> {
+    path: "/Blog/Write";
     requestStream: false;
     responseStream: false;
     requestSerialize: grpc.serialize<Blog_pb.WriteRequest>;
