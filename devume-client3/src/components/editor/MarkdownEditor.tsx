@@ -1,28 +1,15 @@
-"use client";
+'use client'
 
 import React, {useMemo, useState} from 'react';
 import styles from './MarkdownEditor.module.css';
 
-const MarkdownEditor = () => {
-  const [markdownText, setMarkdownText] = useState<string>(`# Welcome to Markdown Editor
+export interface MarkdownEditorProps {
+  content: string;
+  onChange: (content: string) => void;
+}
 
-This is a simple **Markdown** editor built with React (Next.js).
-You can write text on the left, and see the result on the right.
-
-## Supported Features
-
-- Headers (H1, H2, H3)
-- **Bold** text
-- *Italic* text
-- Blockquotes
-- Lists
-
-> "Code is like humor. When you have to explain it, it’s bad." – Cory House
-
-- Item 1
-- Item 2
-- Item 3
-`);
+export default function MarkdownEditor(prop: MarkdownEditorProps) {
+  const [markdownText, setMarkdownText] = useState<string>(prop.content);
 
   const parsedHtml = useMemo(() => {
     if (!markdownText) return '';
@@ -89,7 +76,10 @@ You can write text on the left, and see the result on the right.
         <div className={styles.editorArea}>
         <textarea
             value={markdownText}
-            onChange={(e) => setMarkdownText(e.target.value)}
+            onChange={(e) => {
+              setMarkdownText(e.target.value)
+              prop.onChange(e.target.value);
+            }}
             className={styles.textarea}
             placeholder="# Start typing Markdown..."
         />
@@ -105,5 +95,3 @@ You can write text on the left, and see the result on the right.
       </div>
   );
 };
-
-export default MarkdownEditor;

@@ -5,7 +5,11 @@ import Link from "next/link";
 import {UserBar} from "@/components/layout/header/UserBar";
 import {SubBar, SubMenu} from "@/components/layout/header/SubBar";
 import {useEffect, useState} from "react";
-import {UserProps} from "@/context/UserContext";
+
+interface UserProps {
+  nickname: string;
+  role: string;
+}
 
 export const Bar = (props: UserProps) => {
   const nickname = props.nickname

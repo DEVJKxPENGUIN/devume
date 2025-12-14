@@ -140,3 +140,101 @@ export namespace PreparePostResponse {
         content?: string,
     }
 }
+
+export class ValidationRequest extends jspb.Message { 
+    getTitle(): string;
+    setTitle(value: string): ValidationRequest;
+    getContents(): string;
+    setContents(value: string): ValidationRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): ValidationRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: ValidationRequest): ValidationRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: ValidationRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): ValidationRequest;
+    static deserializeBinaryFromReader(message: ValidationRequest, reader: jspb.BinaryReader): ValidationRequest;
+}
+
+export namespace ValidationRequest {
+    export type AsObject = {
+        title: string,
+        contents: string,
+    }
+}
+
+export class ValidationResponse extends jspb.Message { 
+    getStatus(): number;
+    setStatus(value: number): ValidationResponse;
+    getMessage(): string;
+    setMessage(value: string): ValidationResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): ValidationResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: ValidationResponse): ValidationResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: ValidationResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): ValidationResponse;
+    static deserializeBinaryFromReader(message: ValidationResponse, reader: jspb.BinaryReader): ValidationResponse;
+}
+
+export namespace ValidationResponse {
+    export type AsObject = {
+        status: number,
+        message: string,
+    }
+}
+
+export class WriteRequest extends jspb.Message { 
+
+    hasPostid(): boolean;
+    clearPostid(): void;
+    getPostid(): number | undefined;
+    setPostid(value: number): WriteRequest;
+    getTitle(): string;
+    setTitle(value: string): WriteRequest;
+    getContents(): string;
+    setContents(value: string): WriteRequest;
+    getThumbnail(): string;
+    setThumbnail(value: string): WriteRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): WriteRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: WriteRequest): WriteRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: WriteRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): WriteRequest;
+    static deserializeBinaryFromReader(message: WriteRequest, reader: jspb.BinaryReader): WriteRequest;
+}
+
+export namespace WriteRequest {
+    export type AsObject = {
+        postid?: number,
+        title: string,
+        contents: string,
+        thumbnail: string,
+    }
+}
+
+export class WriteResponse extends jspb.Message { 
+    getPostid(): number;
+    setPostid(value: number): WriteResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): WriteResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: WriteResponse): WriteResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: WriteResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): WriteResponse;
+    static deserializeBinaryFromReader(message: WriteResponse, reader: jspb.BinaryReader): WriteResponse;
+}
+
+export namespace WriteResponse {
+    export type AsObject = {
+        postid: number,
+    }
+}

@@ -48,6 +48,50 @@ function deserialize_PreparePostResponse(buffer_arg) {
   return Blog_pb.PreparePostResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_ValidationRequest(arg) {
+  if (!(arg instanceof Blog_pb.ValidationRequest)) {
+    throw new Error('Expected argument of type ValidationRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_ValidationRequest(buffer_arg) {
+  return Blog_pb.ValidationRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_ValidationResponse(arg) {
+  if (!(arg instanceof Blog_pb.ValidationResponse)) {
+    throw new Error('Expected argument of type ValidationResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_ValidationResponse(buffer_arg) {
+  return Blog_pb.ValidationResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_WriteRequest(arg) {
+  if (!(arg instanceof Blog_pb.WriteRequest)) {
+    throw new Error('Expected argument of type WriteRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_WriteRequest(buffer_arg) {
+  return Blog_pb.WriteRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_WriteResponse(arg) {
+  if (!(arg instanceof Blog_pb.WriteResponse)) {
+    throw new Error('Expected argument of type WriteResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_WriteResponse(buffer_arg) {
+  return Blog_pb.WriteResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 
 var BlogService = exports.BlogService = {
   getBlogs: {
@@ -71,6 +115,28 @@ var BlogService = exports.BlogService = {
     requestDeserialize: deserialize_PreparePostRequest,
     responseSerialize: serialize_PreparePostResponse,
     responseDeserialize: deserialize_PreparePostResponse,
+  },
+  validate: {
+    path: '/Blog/validate',
+    requestStream: false,
+    responseStream: false,
+    requestType: Blog_pb.ValidationRequest,
+    responseType: Blog_pb.ValidationResponse,
+    requestSerialize: serialize_ValidationRequest,
+    requestDeserialize: deserialize_ValidationRequest,
+    responseSerialize: serialize_ValidationResponse,
+    responseDeserialize: deserialize_ValidationResponse,
+  },
+  write: {
+    path: '/Blog/write',
+    requestStream: false,
+    responseStream: false,
+    requestType: Blog_pb.WriteRequest,
+    responseType: Blog_pb.WriteResponse,
+    requestSerialize: serialize_WriteRequest,
+    requestDeserialize: deserialize_WriteRequest,
+    responseSerialize: serialize_WriteResponse,
+    responseDeserialize: deserialize_WriteResponse,
   },
 };
 

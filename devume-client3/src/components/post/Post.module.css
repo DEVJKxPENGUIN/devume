@@ -1,0 +1,33 @@
+.title {
+  display: flex;
+  background-color: transparent;
+  border: 0;
+  width: 100%;
+  color: var(--color-text-primary);
+  font-size: 3rem;
+  text-align: center;
+  outline: none;
+  caret-shape: underscore;
+  font-family: var(--font-heading), monospace;
+  padding: 0.6rem 0;
+}
+
+.postwrap {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.submitArea {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.write {
+  width: 16rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+}

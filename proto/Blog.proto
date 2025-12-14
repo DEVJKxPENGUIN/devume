@@ -7,6 +7,8 @@ option java_outer_classname = "BlogProto";
 service Blog {
   rpc GetBlogs (BlogRequest) returns (BlogResponse) {}
   rpc PreparePost (PreparePostRequest) returns (PreparePostResponse) {}
+  rpc validate(ValidationRequest) returns (ValidationResponse) {}
+  rpc write(WriteRequest) returns (WriteResponse) {}
 }
 
 message BlogRequest {
@@ -35,4 +37,25 @@ message PreparePostRequest {
 message PreparePostResponse {
   optional string title = 1;
   optional string content = 2;
+}
+
+message ValidationRequest {
+  string title = 1;
+  string contents = 2;
+}
+
+message ValidationResponse {
+  int64 status = 1;
+  string message = 2;
+}
+
+message WriteRequest {
+  optional int64 postId = 1;
+  string title = 2;
+  string contents = 3;
+  string thumbnail = 4;
+}
+
+message WriteResponse {
+  int64 postId = 1;
 }
