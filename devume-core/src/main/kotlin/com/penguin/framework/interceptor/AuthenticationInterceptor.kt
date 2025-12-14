@@ -3,6 +3,7 @@ package com.penguin.framework.interceptor
 import com.penguin.domain.oidc.AuthUser
 import com.penguin.domain.oidc.Role
 import com.penguin.framework.annotation.DevumeUser
+import com.penguin.framework.custom.ExceptionHandler.Companion.ERROR_CODE
 import com.penguin.framework.error.ErrorCode
 import com.penguin.framework.error.exception.BaseException
 import com.penguin.utils.ContextUtils
@@ -35,32 +36,43 @@ class AuthenticationInterceptor(
     ): ServerCall.Listener<ReqT> {
         log.info("Received request [${serverCall.methodDescriptor.fullMethodName}]")
 
-        val annotation = this.getAnnotation(serverCall)
-            ?: return serverCallHandler.startCall(serverCall, metadata)
-        val idToken = this.getAuthorizationHeader(metadata)
         var user = AuthUser.ofGuest()
 
-        if (!idToken.isNullOrBlank()) {
-            val claims = jwtUtils.getClaimsWithVerify(idToken)
-            claims?.let {
-                val id = it.subject.toLong()
-                val email = it["email"] as String
-                val role = it["role"] as String
-                val nickname = it["nickname"] as String
-                user = AuthUser(id, email, Role.valueOf(role), nickname)
-            }
-        }
+        try {
+            val annotation = this.getAnnotation(serverCall)
+                ?: return serverCallHandler.startCall(serverCall, metadata)
+            val idToken = this.getAuthorizationHeader(metadata)
 
-        if (!user.hasRole(annotation.min)) {
-            if (annotation.redirectLoginPage && user.isGuest()) {
+            if (!idToken.isNullOrBlank()) {
+                val claims = jwtUtils.getClaimsWithVerify(idToken)
+                claims?.let {
+                    val id = it.subject.toLong()
+                    val email = it["email"] as String
+                    val role = it["role"] as String
+                    val nickname = it["nickname"] as String
+                    user = AuthUser(id, email, Role.valueOf(role), nickname)
+                }
+            }
+
+            if (!user.hasRole(annotation.min)) {
+                if (annotation.redirectLoginPage && user.isGuest()) {
+                    throw BaseException(
+                        ErrorCode.NO_AUTHORIZED_ROLE_REDIRECT,
+                        "접근권한이 없습니다. 로그인 해주세요."
+                    )
+                }
                 throw BaseException(
-                    ErrorCode.NO_AUTHORIZED_ROLE_REDIRECT,
-                    "접근권한이 없습니다. 로그인 해주세요."
+                    ErrorCode.NO_AUTHORIZED_ROLE,
+                    "접근권한이 없습니다 : ${annotation.min.name}"
                 )
             }
-            throw BaseException(
-                ErrorCode.NO_AUTHORIZED_ROLE,
-                "접근권한이 없습니다 : ${annotation.min.name}"
+
+        } catch (e: BaseException) {
+            val metadata = Metadata()
+            metadata.put(ERROR_CODE, e.errorCode.value.toString())
+            serverCall.close(
+                e.errorCode.grpcStatus,
+                metadata
             )
         }
 

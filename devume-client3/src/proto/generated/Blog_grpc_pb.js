@@ -26,6 +26,28 @@ function deserialize_BlogResponse(buffer_arg) {
   return Blog_pb.BlogResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_PreparePostRequest(arg) {
+  if (!(arg instanceof Blog_pb.PreparePostRequest)) {
+    throw new Error('Expected argument of type PreparePostRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_PreparePostRequest(buffer_arg) {
+  return Blog_pb.PreparePostRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_PreparePostResponse(arg) {
+  if (!(arg instanceof Blog_pb.PreparePostResponse)) {
+    throw new Error('Expected argument of type PreparePostResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_PreparePostResponse(buffer_arg) {
+  return Blog_pb.PreparePostResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 
 var BlogService = exports.BlogService = {
   getBlogs: {
@@ -38,6 +60,17 @@ var BlogService = exports.BlogService = {
     requestDeserialize: deserialize_BlogRequest,
     responseSerialize: serialize_BlogResponse,
     responseDeserialize: deserialize_BlogResponse,
+  },
+  preparePost: {
+    path: '/Blog/PreparePost',
+    requestStream: false,
+    responseStream: false,
+    requestType: Blog_pb.PreparePostRequest,
+    responseType: Blog_pb.PreparePostResponse,
+    requestSerialize: serialize_PreparePostRequest,
+    requestDeserialize: deserialize_PreparePostRequest,
+    responseSerialize: serialize_PreparePostResponse,
+    responseDeserialize: deserialize_PreparePostResponse,
   },
 };
 

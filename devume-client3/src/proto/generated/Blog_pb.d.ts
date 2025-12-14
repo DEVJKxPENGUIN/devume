@@ -88,3 +88,55 @@ export namespace BlogResponse {
         blogsList: Array<BlogContent.AsObject>,
     }
 }
+
+export class PreparePostRequest extends jspb.Message { 
+
+    hasPostid(): boolean;
+    clearPostid(): void;
+    getPostid(): number | undefined;
+    setPostid(value: number): PreparePostRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PreparePostRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PreparePostRequest): PreparePostRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PreparePostRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PreparePostRequest;
+    static deserializeBinaryFromReader(message: PreparePostRequest, reader: jspb.BinaryReader): PreparePostRequest;
+}
+
+export namespace PreparePostRequest {
+    export type AsObject = {
+        postid?: number,
+    }
+}
+
+export class PreparePostResponse extends jspb.Message { 
+
+    hasTitle(): boolean;
+    clearTitle(): void;
+    getTitle(): string | undefined;
+    setTitle(value: string): PreparePostResponse;
+
+    hasContent(): boolean;
+    clearContent(): void;
+    getContent(): string | undefined;
+    setContent(value: string): PreparePostResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PreparePostResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PreparePostResponse): PreparePostResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PreparePostResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PreparePostResponse;
+    static deserializeBinaryFromReader(message: PreparePostResponse, reader: jspb.BinaryReader): PreparePostResponse;
+}
+
+export namespace PreparePostResponse {
+    export type AsObject = {
+        title?: string,
+        content?: string,
+    }
+}

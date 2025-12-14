@@ -19,7 +19,7 @@ class ExceptionHandler : GrpcExceptionHandler {
         val metadata = Metadata()
 
         if (exception is BaseException) {
-            metadata.put(ERROR_CODE, exception.errorCode.name)
+            metadata.put(ERROR_CODE, exception.errorCode.value.toString())
             return exception.errorCode.grpcStatus
                 .withDescription("${exception.errorCode.name}::${exception.message}")
                 .withCause(exception)

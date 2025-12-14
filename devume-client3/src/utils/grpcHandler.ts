@@ -5,7 +5,8 @@ import {PortfolioClient} from "@/proto/generated/Portfolio_grpc_pb";
 import {BlogClient} from "@/proto/generated/Blog_grpc_pb";
 import {LoginClient} from "@/proto/generated/Login_grpc_pb";
 import {UserClient} from "@/proto/generated/User_grpc_pb";
-import {cookies} from "next/headers";
+import {cookies, headers} from "next/headers";
+import {redirect} from "next/navigation";
 
 let titleClient: TitleClient | null = null
 let portfolioClient: PortfolioClient | null = null;
@@ -76,13 +77,36 @@ export async function grpcRequest<TRequest, TResponse>(
   const token = cookie.get('devumeauth')?.value || ''
   meta.add('Authorization', `Bearer ${token}`)
 
-  return new Promise((resolve, reject) => {
-    (client as any)[methodName](request, meta, (error: grpc.ServiceError | null, response: TResponse) => {
-      if (error) {
-        console.error(`gRPC Error (${methodName}):`, error);
-        return reject(error);
+  try {
+    return await new Promise((resolve, reject) => {
+      (client as any)[methodName](request, meta, (error: grpc.ServiceError | null, response: TResponse) => {
+        if (error) {
+          return reject(error)
+        }
+        resolve(response)
+      })
+    })
+  } catch (error: any) {
+    if (error.metadata) {
+
+      const appErrorCode = error.metadata.get("x-error-code")[0]
+
+      const currentPath = (await headers()).get("x-current-path") || ''
+
+      console.log('currentPath', currentPath)
+
+      // no authorized -> redirect login
+      if (appErrorCode == '-5') {
+        redirect('http://localhost:3000/login?redirectUri=' + encodeURIComponent(currentPath))
       }
-      resolve(response);
-    });
-  });
+
+      // no authorized -> redirect error
+      if (appErrorCode == '-4') {
+
+      }
+
+      console.error(`gRPC Error (${methodName}): ${error.message}`, appErrorCode)
+    }
+    throw error
+  }
 }

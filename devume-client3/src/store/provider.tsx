@@ -1,14 +1,10 @@
 'use client';
 
-import { useRef } from 'react';
-import { Provider } from 'react-redux';
-import { makeStore, AppStore } from './store';
+import React, {useRef} from 'react';
+import {Provider} from 'react-redux';
+import {AppStore, makeStore} from './store';
 
-export const StoreProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export default function StoreProvider({children}: { children: React.ReactNode }) {
   const storeRef = useRef<AppStore | null>(null);
   if (!storeRef.current) {
     // Create the store instance the first time this renders
@@ -16,4 +12,4 @@ export const StoreProvider = ({
   }
 
   return <Provider store={storeRef.current}>{children}</Provider>;
-};
+}

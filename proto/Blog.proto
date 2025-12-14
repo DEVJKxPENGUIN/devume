@@ -6,6 +6,7 @@ option java_outer_classname = "BlogProto";
 
 service Blog {
   rpc GetBlogs (BlogRequest) returns (BlogResponse) {}
+  rpc PreparePost (PreparePostRequest) returns (PreparePostResponse) {}
 }
 
 message BlogRequest {
@@ -25,4 +26,13 @@ message BlogContent {
 
 message BlogResponse {
   repeated BlogContent blogs = 1;
+}
+
+message PreparePostRequest {
+  optional int64 postId = 1;
+}
+
+message PreparePostResponse {
+  optional string title = 1;
+  optional string content = 2;
 }

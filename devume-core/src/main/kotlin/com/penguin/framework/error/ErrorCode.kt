@@ -13,6 +13,7 @@ enum class ErrorCode(
     UNAUTHORIZED(Status.UNAUTHENTICATED, -3, "cannot find valid token"),
     NO_AUTHORIZED_ROLE(Status.PERMISSION_DENIED, -4, "no authorized role"),
     NO_AUTHORIZED_ROLE_REDIRECT(Status.PERMISSION_DENIED, -5, "no authorized role"),
-    INVALID_STATETOKEN(Status.INVALID_ARGUMENT, -6, "invalid state token")
+    INVALID_STATETOKEN(Status.INVALID_ARGUMENT, -6, "invalid state token"),
+    RESOURCE_NOT_FOUND(Status.NOT_FOUND, -7, "Resource not found"),
     ;
 }
