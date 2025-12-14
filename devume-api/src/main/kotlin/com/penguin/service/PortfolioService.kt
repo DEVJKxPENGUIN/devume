@@ -4,18 +4,14 @@ import com.penguin.api.PortfolioContent
 import com.penguin.api.PortfolioGrpcKt
 import com.penguin.api.PortfolioRequest
 import com.penguin.api.PortfolioResponse
-import io.grpc.stub.StreamObserver
 import org.slf4j.LoggerFactory
 import org.springframework.grpc.server.service.GrpcService
 
 @GrpcService
 class PortfolioService : PortfolioGrpcKt.PortfolioCoroutineImplBase() {
     private val log = LoggerFactory.getLogger(javaClass)
+    override suspend fun getPortfolios(request: PortfolioRequest): PortfolioResponse {
 
-    suspend fun getPortfolios(
-        request: PortfolioRequest,
-        responseObserver: StreamObserver<PortfolioResponse>
-    ) {
         log.info("Received request [getPortfolios]: $request")
 
         // todo
@@ -35,11 +31,8 @@ class PortfolioService : PortfolioGrpcKt.PortfolioCoroutineImplBase() {
                 .build()
         }
 
-        val res: PortfolioResponse = PortfolioResponse.newBuilder()
+        return PortfolioResponse.newBuilder()
             .addAllPortfolios(mockPortfolios)
             .build()
-
-        responseObserver.onNext(res)
-        responseObserver.onCompleted()
     }
 }
