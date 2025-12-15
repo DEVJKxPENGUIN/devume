@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.slf4j.LoggerFactory
 import org.springframework.grpc.server.service.GrpcService
+import java.time.LocalDateTime
 
 @GrpcService
 class BlogService(
@@ -134,6 +135,40 @@ class BlogService(
         }
 
         val authUser = ContextUtils.currentUser()
+        if (request.hasPostId()) {
+            // update
+            val post: Post = withContext(Dispatchers.IO) {
+                postRepository.findById(request.postId)
+                    .orElseThrow {
+                        BaseException(
+                            ErrorCode.RESOURCE_NOT_FOUND,
+                            "no post with id ${request.postId}"
+                        )
+                    }
+            }
+
+            if (authUser.id != post.userId) {
+                throw BaseException(
+                    ErrorCode.NO_AUTHORIZED_ROLE,
+                    "you cannot rewrite post with id ${authUser.id}"
+                )
+            }
+
+            post.title = request.title
+            post.content = request.contents
+            post.thumbnail = request.thumbnail
+            post.updatedAt = LocalDateTime.now()
+
+            val rewritePost = withContext(Dispatchers.IO) {
+                postRepository.save(post)
+            }
+
+            return WriteResponse.newBuilder()
+                .setPostId(rewritePost.id)
+                .build()
+        }
+
+        // new write
         val post = Post(
             userId = authUser.id,
             title = request.title,

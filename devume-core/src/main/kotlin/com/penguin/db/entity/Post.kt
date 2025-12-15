@@ -16,19 +16,19 @@ class Post(
     val userId: Long,
 
     @Column("title")
-    val title: String,
+    var title: String,
 
     @Column("content")
-    val content: String,
+    var content: String,
 
     @Column("thumbnail")
-    val thumbnail: String,
+    var thumbnail: String,
 
     @Column("views")
-    val views: Long = 0,
+    var views: Long = 0,
 
     @Column("thumbs")
-    val thumbs: Long = 0,
+    var thumbs: Long = 0,
 ) : BaseEntity(), Serializable {
 
 
