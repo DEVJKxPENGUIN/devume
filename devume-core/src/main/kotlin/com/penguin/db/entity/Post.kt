@@ -2,9 +2,9 @@ package com.penguin.db.entity
 
 import com.penguin.framework.common.BaseEntity
 import org.springframework.data.annotation.Id
+import org.springframework.data.annotation.Transient
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
-import org.springframework.data.annotation.Transient
 import java.io.Serializable
 
 @Table(name = "post")
@@ -30,9 +30,8 @@ class Post(
 
     @Column("thumbs")
     var thumbs: Long = 0,
-
-    @Transient
-    var user: User? = null,
 ) : BaseEntity(), Serializable {
 
+    @Transient
+    var user: User? = null
 }

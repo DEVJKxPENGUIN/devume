@@ -72,6 +72,4 @@ class PostRepositoryImpl(
             return@RowMapper post
         })
     }
-
-
 }

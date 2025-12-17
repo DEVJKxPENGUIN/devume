@@ -33,7 +33,7 @@ class BlogService(
                 .setTitle(blog.title)
                 .setSummary(blog.content.substring(100.coerceAtMost(blog.content.length)))
                 .setContents(blog.content)
-                .setAuthor(blog.user?.nickName) // fixme
+                .setAuthor(blog.user?.nickName)
                 .setThumbnail(blog.thumbnail)
                 .setThumbs(blog.thumbs)
                 .setViews(blog.views)
