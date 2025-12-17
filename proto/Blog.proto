@@ -5,14 +5,19 @@ option java_package = "com.penguin.api";
 option java_outer_classname = "BlogProto";
 
 service Blog {
-  rpc GetBlogs (BlogRequest) returns (BlogResponse) {}
+  rpc GetBlogs (BlogListRequest) returns (BlogListResponse) {}
+  rpc GetBlog (BlogRequest) returns (BlogContent) {}
   rpc PreparePost (PreparePostRequest) returns (PreparePostResponse) {}
   rpc Validate(ValidationRequest) returns (ValidationResponse) {}
   rpc Write(WriteRequest) returns (WriteResponse) {}
 }
 
-message BlogRequest {
+message BlogListRequest {
   int32 count = 1;
+}
+
+message BlogRequest {
+  int64 postId = 1;
 }
 
 message BlogContent {
@@ -26,7 +31,7 @@ message BlogContent {
   int64 views = 8;
 }
 
-message BlogResponse {
+message BlogListResponse {
   repeated BlogContent blogs = 1;
 }
 

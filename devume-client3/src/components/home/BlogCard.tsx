@@ -12,13 +12,13 @@ interface BlogCardProps {
 }
 
 const BlogCard = ({
-                         title,
-                         summary,
-                         nickname,
-                         image,
-                         thumbs,
-                         views
-                       }: BlogCardProps) => {
+                    title,
+                    summary,
+                    nickname,
+                    image,
+                    thumbs,
+                    views
+                  }: BlogCardProps) => {
   return (
       <div className={styles.card}>
         <div className={styles.imageWrapper}>

@@ -3,6 +3,7 @@ package com.penguin.service
 import com.penguin.api.*
 import com.penguin.db.entity.Post
 import com.penguin.db.repository.PostRepository
+import com.penguin.db.repository.UserRepository
 import com.penguin.domain.oidc.Role
 import com.penguin.framework.annotation.DevumeUser
 import com.penguin.framework.error.ErrorCode
@@ -16,32 +17,65 @@ import java.time.LocalDateTime
 
 @GrpcService
 class BlogService(
-    private val postRepository: PostRepository
+    private val postRepository: PostRepository,
+    private val userRepository: UserRepository
 ) : BlogGrpcKt.BlogCoroutineImplBase() {
     private val log = LoggerFactory.getLogger(javaClass)
 
-    override suspend fun getBlogs(request: BlogRequest): BlogResponse {
+    override suspend fun getBlogs(request: BlogListRequest): BlogListResponse {
         log.info("Received request [getBlogs]: $request")
 
-        // todo
-
-        val mockBlogs = (1..request.count).map { i ->
+        val blogs = withContext(Dispatchers.IO) {
+            postRepository.findRecentBlogs(request.count)
+        }.map { blog ->
             BlogContent.newBuilder()
-                .setId(i.toString())
-                .setTitle("Blog Title $i")
-                .setSummary("This is a mock Blog summary for item $i.")
-                .setAuthor("Author $i")
-                .setThumbnail("https://picsum.photos/seed/tech/800/600")
-                .setThumbs(999)
-                .setViews(999)
+                .setId(blog.id.toString())
+                .setTitle(blog.title)
+                .setSummary(blog.content.substring(100.coerceAtMost(blog.content.length)))
+                .setContents(blog.content)
+                .setAuthor(blog.user?.nickName) // fixme
+                .setThumbnail(blog.thumbnail)
+                .setThumbs(blog.thumbs)
+                .setViews(blog.views)
                 .build()
         }
 
-        return BlogResponse.newBuilder()
-            .addAllBlogs(mockBlogs)
+        return BlogListResponse.newBuilder()
+            .addAllBlogs(blogs)
             .build()
     }
 
+    override suspend fun getBlog(request: BlogRequest): BlogContent {
+        log.info("Received request [getBlog]: $request")
+
+        val blog = withContext(Dispatchers.IO) {
+            postRepository.findById(request.postId)
+                .orElseThrow {
+                    BaseException(
+                        ErrorCode.RESOURCE_NOT_FOUND,
+                        "no post found with id ${request.postId}"
+                    )
+                }
+        }
+
+        val user = withContext(Dispatchers.IO) {
+            userRepository.findById(blog.userId)
+                .orElseThrow {
+                    BaseException(ErrorCode.RESOURCE_NOT_FOUND, "no user with id ${blog.userId}")
+                }
+        }
+
+        return BlogContent.newBuilder()
+            .setId(blog.id.toString())
+            .setTitle(blog.title)
+            .setSummary(blog.content)
+            .setAuthor(user.nickName)
+            .setContents(blog.content)
+            .setThumbnail(blog.thumbnail)
+            .setThumbs(blog.thumbs)
+            .setViews(blog.views)
+            .build()
+    }
 
     @DevumeUser(Role.NORMAL, true)
     override suspend fun preparePost(request: PreparePostRequest): PreparePostResponse {

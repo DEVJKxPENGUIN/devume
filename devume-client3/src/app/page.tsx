@@ -9,7 +9,7 @@ import {getBlogClient, getPortfolioClient, getTitleClient, grpcRequest} from "@/
 import {Metadata} from "@grpc/grpc-js";
 import DevumeTitle from "@/components/home/DevumeTitle";
 import PortfolioCard from "@/components/home/PortfolioCard";
-import {BlogContent, BlogRequest, BlogResponse} from "@/proto/generated/Blog_pb";
+import {BlogContent, BlogListRequest, BlogListResponse} from "@/proto/generated/Blog_pb";
 import BlogCard from "@/components/home/BlogCard";
 
 export default async function HomePage() {
@@ -100,10 +100,10 @@ async function fetchPortfolios(count: number): Promise<PortfolioContent[]> {
 
 async function fetchBlogs(count: number): Promise<BlogContent[]> {
   try {
-    const request = new BlogRequest()
+    const request = new BlogListRequest()
     request.setCount(count)
     const meta = new Metadata()
-    const response: BlogResponse = await grpcRequest(getBlogClient(), 'getBlogs', meta, request)
+    const response: BlogListResponse = await grpcRequest(getBlogClient(), 'getBlogs', meta, request)
     return response.getBlogsList()
   } catch (error) {
     console.error('Failed to fetch blogs:', error);

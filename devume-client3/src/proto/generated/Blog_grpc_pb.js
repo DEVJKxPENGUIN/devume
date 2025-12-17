@@ -4,6 +4,39 @@
 var grpc = require('@grpc/grpc-js');
 var Blog_pb = require('./Blog_pb.js');
 
+function serialize_BlogContent(arg) {
+  if (!(arg instanceof Blog_pb.BlogContent)) {
+    throw new Error('Expected argument of type BlogContent');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_BlogContent(buffer_arg) {
+  return Blog_pb.BlogContent.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_BlogListRequest(arg) {
+  if (!(arg instanceof Blog_pb.BlogListRequest)) {
+    throw new Error('Expected argument of type BlogListRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_BlogListRequest(buffer_arg) {
+  return Blog_pb.BlogListRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_BlogListResponse(arg) {
+  if (!(arg instanceof Blog_pb.BlogListResponse)) {
+    throw new Error('Expected argument of type BlogListResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_BlogListResponse(buffer_arg) {
+  return Blog_pb.BlogListResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_BlogRequest(arg) {
   if (!(arg instanceof Blog_pb.BlogRequest)) {
     throw new Error('Expected argument of type BlogRequest');
@@ -13,17 +46,6 @@ function serialize_BlogRequest(arg) {
 
 function deserialize_BlogRequest(buffer_arg) {
   return Blog_pb.BlogRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_BlogResponse(arg) {
-  if (!(arg instanceof Blog_pb.BlogResponse)) {
-    throw new Error('Expected argument of type BlogResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_BlogResponse(buffer_arg) {
-  return Blog_pb.BlogResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_PreparePostRequest(arg) {
@@ -98,12 +120,23 @@ var BlogService = exports.BlogService = {
     path: '/Blog/GetBlogs',
     requestStream: false,
     responseStream: false,
+    requestType: Blog_pb.BlogListRequest,
+    responseType: Blog_pb.BlogListResponse,
+    requestSerialize: serialize_BlogListRequest,
+    requestDeserialize: deserialize_BlogListRequest,
+    responseSerialize: serialize_BlogListResponse,
+    responseDeserialize: deserialize_BlogListResponse,
+  },
+  getBlog: {
+    path: '/Blog/GetBlog',
+    requestStream: false,
+    responseStream: false,
     requestType: Blog_pb.BlogRequest,
-    responseType: Blog_pb.BlogResponse,
+    responseType: Blog_pb.BlogContent,
     requestSerialize: serialize_BlogRequest,
     requestDeserialize: deserialize_BlogRequest,
-    responseSerialize: serialize_BlogResponse,
-    responseDeserialize: deserialize_BlogResponse,
+    responseSerialize: serialize_BlogContent,
+    responseDeserialize: deserialize_BlogContent,
   },
   preparePost: {
     path: '/Blog/PreparePost',

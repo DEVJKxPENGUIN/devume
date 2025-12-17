@@ -6,9 +6,29 @@
 
 import * as jspb from "google-protobuf";
 
-export class BlogRequest extends jspb.Message { 
+export class BlogListRequest extends jspb.Message { 
     getCount(): number;
-    setCount(value: number): BlogRequest;
+    setCount(value: number): BlogListRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): BlogListRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: BlogListRequest): BlogListRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: BlogListRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): BlogListRequest;
+    static deserializeBinaryFromReader(message: BlogListRequest, reader: jspb.BinaryReader): BlogListRequest;
+}
+
+export namespace BlogListRequest {
+    export type AsObject = {
+        count: number,
+    }
+}
+
+export class BlogRequest extends jspb.Message { 
+    getPostid(): number;
+    setPostid(value: number): BlogRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): BlogRequest.AsObject;
@@ -22,7 +42,7 @@ export class BlogRequest extends jspb.Message {
 
 export namespace BlogRequest {
     export type AsObject = {
-        count: number,
+        postid: number,
     }
 }
 
@@ -67,23 +87,23 @@ export namespace BlogContent {
     }
 }
 
-export class BlogResponse extends jspb.Message { 
+export class BlogListResponse extends jspb.Message { 
     clearBlogsList(): void;
     getBlogsList(): Array<BlogContent>;
-    setBlogsList(value: Array<BlogContent>): BlogResponse;
+    setBlogsList(value: Array<BlogContent>): BlogListResponse;
     addBlogs(value?: BlogContent, index?: number): BlogContent;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): BlogResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: BlogResponse): BlogResponse.AsObject;
+    toObject(includeInstance?: boolean): BlogListResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: BlogListResponse): BlogListResponse.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: BlogResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): BlogResponse;
-    static deserializeBinaryFromReader(message: BlogResponse, reader: jspb.BinaryReader): BlogResponse;
+    static serializeBinaryToWriter(message: BlogListResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): BlogListResponse;
+    static deserializeBinaryFromReader(message: BlogListResponse, reader: jspb.BinaryReader): BlogListResponse;
 }
 
-export namespace BlogResponse {
+export namespace BlogListResponse {
     export type AsObject = {
         blogsList: Array<BlogContent.AsObject>,
     }

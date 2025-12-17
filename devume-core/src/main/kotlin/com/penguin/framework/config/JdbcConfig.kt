@@ -33,5 +33,4 @@ class JdbcConfig(
 
         return HikariDataSource(config)
     }
-
 }
