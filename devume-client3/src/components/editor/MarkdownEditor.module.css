@@ -53,6 +53,7 @@
   color: var(--color-text-primary);
   border-bottom: 1px solid var(--color-border);
   padding-bottom: 0.5rem;
+  scroll-margin-top: 100px; /* 스크롤 이동 시 헤더 여백 */
 }
 
 .mdH2 {
@@ -62,6 +63,7 @@
   margin-bottom: 1rem;
   margin-top: 1.5rem;
   color: var(--color-text-primary);
+  scroll-margin-top: 100px;
 }
 
 .mdH3 {
@@ -71,6 +73,7 @@
   margin-bottom: 0.75rem;
   margin-top: 1rem;
   color: var(--color-text-primary);
+  scroll-margin-top: 100px;
 }
 
 .mdP {
@@ -120,7 +123,6 @@
   height: 1rem;
 }
 
-
 .sideBar {
   width: 20rem;
   display: flex;
@@ -132,4 +134,36 @@
   margin-top: 2rem;
   padding-left: 1rem;
   border-left: 1px solid var(--color-border);
+}
+
+.navH1 {
+  padding: 0;
+  margin: 0 0 1rem 0rem;
+  color: var(--color-text-secondary);
+}
+
+.navH2 {
+  padding: 0;
+  margin: 0 0 1rem 1rem;
+  color: var(--color-text-secondary);
+}
+
+.navH3 {
+  padding: 0;
+  margin: 0 0 1rem 2rem;
+  color: var(--color-text-secondary);
+}
+
+.navItem {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.navItem:hover {
+  color: var(--color-text-primary);
+}
+
+.active {
+  color: var(--color-text-primary) !important;
+  font-weight: 600;
 }
