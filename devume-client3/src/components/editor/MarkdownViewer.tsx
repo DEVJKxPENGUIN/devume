@@ -5,6 +5,7 @@ import styles from './MarkdownEditor.module.css';
 
 export interface MarkdownViewerProps {
   content: string;
+  showSidebar: boolean;
 }
 
 export default function MarkdownViewer(prop: MarkdownViewerProps) {
@@ -71,11 +72,20 @@ export default function MarkdownViewer(prop: MarkdownViewerProps) {
   }, [markdownText]);
 
   return (
-      <div className={styles.previewArea}>
-        <div
-            className="markdown-preview"
-            dangerouslySetInnerHTML={{__html: parsedHtml}}
-        />
+      <div className={styles.previewWrapper}>
+        <div className={styles.preview}>
+          <div
+              className="markdown-preview"
+              dangerouslySetInnerHTML={{__html: parsedHtml}}
+          />
+
+        </div>
+        {prop.showSidebar && (
+            <div className={styles.sideBar}>
+              side navigator
+            </div>
+        )
+        }
       </div>
   )
 }

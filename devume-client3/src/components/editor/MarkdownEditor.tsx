@@ -16,19 +16,21 @@ export default function MarkdownEditor(prop: MarkdownEditorProps) {
       <div className={styles.container}>
         {/* Editor Area */}
         <div className={styles.editorArea}>
-        <textarea
-            value={markdownText}
-            onChange={(e) => {
-              setMarkdownText(e.target.value)
-              prop.onChange(e.target.value);
-            }}
-            className={styles.textarea}
-            placeholder="# Start typing Markdown..."
-        />
+          <textarea
+              value={markdownText}
+              onChange={(e) => {
+                setMarkdownText(e.target.value)
+                prop.onChange(e.target.value);
+              }}
+              className={styles.textarea}
+              placeholder="# Start typing Markdown..."
+          />
         </div>
 
         {/* Preview Area */}
-        <MarkdownViewer content={markdownText}/>
+        <div className={styles.previewArea}>
+          <MarkdownViewer content={markdownText} showSidebar={false}/>
+        </div>
       </div>
   );
 };

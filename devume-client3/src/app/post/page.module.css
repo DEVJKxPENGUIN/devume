@@ -4,7 +4,6 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
 }
 
 .editSection {
@@ -24,7 +23,6 @@
 
 .blogTitle {
   font-size: 2.2rem;
-
 }
 
 .logSection {
@@ -36,20 +34,48 @@
 .logTitleWrapper {
   position: relative;
   width: 100%;
-  height: 10rem;
+  height: 20rem;
+  border-top-right-radius: 24px;
+  border-top-left-radius: 24px;
   overflow: hidden;
 }
 
 .logThumbnail {
   object-fit: cover;
+  z-index: 0;
 }
 
-.logTitle {
+.logTitleOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
+  align-items: flex-end;
+  padding-left: 2rem;
+  padding-bottom: 1rem;
+  background: linear-gradient(to top, var(--color-background) 0%, transparent 100%);
+  z-index: 1;
+}
 
+.logTitleText {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+}
+
+.logContentWrapper {
+  display: flex;
+  flex-direction: row;
 }
 
 .logContent {
   display: flex;
-
+  width: 100%;
+  flex-direction: column;
+  min-width: 0; /* Prevents overflow in flex items */
 }

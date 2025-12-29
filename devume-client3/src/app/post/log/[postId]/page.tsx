@@ -16,15 +16,13 @@ export default async function PostViewPage({params}: { params: Promise<{ postId:
 
   const post = await fetchPost()
 
-  const thumbnail = post.getThumbnail()
-
   // todo -> get blog info
   // blog title, blog menus
   // post category - user db
 
   // todo - post 창 그릴 것.
   return (
-      <main>
+      <main className={styles.main}>
         {/* todo blogSection 영역은 api 화 해야한다. */}
         <section className={styles.blogSection}>
           <div className={styles.blogTitle}>
@@ -33,20 +31,28 @@ export default async function PostViewPage({params}: { params: Promise<{ postId:
         </section>
         <section className={styles.logSection}>
           <div className={styles.logTitleWrapper}>
-            <Image
-                src={post.getThumbnail()}
-                alt={post.getTitle()}
-                fill
-                priority
-            />
+            {post.getThumbnail() && (
+                <Image
+                    src={post.getThumbnail()}
+                    alt={post.getTitle()}
+                    fill
+                    className={styles.logThumbnail}
+                    priority
+                />
+            )}
+            <div className={styles.logTitleOverlay}>
+              <h1 className={styles.logTitleText}>
+                {post.getTitle()}
+              </h1>
+            </div>
+          </div>
+          <div className={styles.logContentWrapper}>
+            <div className={styles.logContent}>
+              <MarkdownViewer content={post.getContents()} showSidebar={true}/>
+            </div>
+
           </div>
 
-          <div className={styles.logTitle}>
-            {post.getTitle()}
-          </div>
-          <div className={styles.logContent}>
-            <MarkdownViewer content={post.getContents()}/>
-          </div>
         </section>
       </main>
   )

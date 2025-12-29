@@ -26,7 +26,18 @@
 }
 
 .previewArea {
+  display: flex;
   width: 50%;
+}
+
+.previewWrapper {
+  display: flex;
+  width: 100%;
+}
+
+.preview {
+  display: flex;
+  flex: 1;
   height: 100%;
   padding: 1.5rem;
   overflow-y: auto;
@@ -107,4 +118,18 @@
 
 .mdBr {
   height: 1rem;
+}
+
+
+.sideBar {
+  width: 20rem;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  height: fit-content;
+  position: sticky;
+  top: 6rem; /* Adjust based on header height */
+  margin-top: 2rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--color-border);
 }
