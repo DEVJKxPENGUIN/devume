@@ -1,0 +1,42 @@
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  padding: 2rem;
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin-top: 1rem;
+  max-width: 600px;
+}
+
+.subtitle {
+  font-family: var(--font-heading), monospace;
+  font-size: 1.25rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.5rem;
+}
+
+.button {
+  width: 30rem;
+  height: 3rem;
+  font-size: 1.2rem;
+  font-family: var(--font-mono), monospace;
+  background-color: var(--color-background-transparent);
+  margin-top: 2rem;
+}
+
+@media (max-width: var(--breakpoint-mobile)) {
+  .subtitle {
+    font-size: 1rem;
+  }
+  .description {
+    font-size: 0.9rem;
+  }
+}
+

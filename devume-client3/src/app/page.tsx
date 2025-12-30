@@ -7,10 +7,10 @@ import {
 } from "@/proto/generated/Portfolio_pb";
 import {getBlogClient, getPortfolioClient, getTitleClient, grpcRequest} from "@/utils/grpcHandler";
 import {Metadata} from "@grpc/grpc-js";
-import DevumeTitle from "@/components/home/DevumeTitle";
 import PortfolioCard from "@/components/home/PortfolioCard";
 import {BlogContent, BlogListRequest, BlogListResponse} from "@/proto/generated/Blog_pb";
 import BlogCard from "@/components/home/BlogCard";
+import HeroContent from "@/components/home/HeroContent";
 
 export default async function HomePage() {
 
@@ -21,13 +21,7 @@ export default async function HomePage() {
   return (
       <main className={styles.main}>
         <section className={styles.heroSection}>
-          <div className={styles.heroContent}>
-            <DevumeTitle/>
-            <h2 className={styles.subtitle}>{title}</h2>
-            <p className={styles.description}>
-              The best place for developers to showcase their working records.
-            </p>
-          </div>
+          <HeroContent title={title}/>
         </section>
 
         <section className={styles.commonSection}>
