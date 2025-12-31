@@ -50,7 +50,7 @@ export const Bar = (props: UserProps) => {
   return (
       <div>
         <div className={styles.container}>
-          <Link href="/devume-client3/public" className={styles.logo}>
+          <Link href="/" className={styles.logo}>
             DEVUME
           </Link>
           <nav className={styles.nav}>

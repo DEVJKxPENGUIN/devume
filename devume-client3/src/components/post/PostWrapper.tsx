@@ -78,7 +78,7 @@ export default function PostWrapper(props: PostProps) {
             console.log(data)
 
             const postId = data.postid
-            redirect('/post/' + postId)
+            redirect('/post/log/' + postId)
           }
         },
       ]

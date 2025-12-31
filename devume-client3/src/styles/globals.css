@@ -20,6 +20,7 @@
   --color-foreground: rgba(0, 0, 0, 0.9);
   --color-card: #f7f7f7;
   --color-border: #eaeaea;
+  --color-border-impact: #232323;
   --color-text-primary: #111111;
   --color-text-secondary: #666666;
   --color-text-reverse: #ffffff;
@@ -34,6 +35,7 @@
   --color-background-transparent: rgba(9, 9, 9, 0.3);
   --color-foreground: rgba(255, 255, 255, 0.9);
   --color-border: #333333;
+  --color-border-impact: #eaeaea;
   --color-card: #101010;
   --color-text-primary: #f1f1f1;
   --color-text-secondary: #aaaaaa;

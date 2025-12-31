@@ -1,8 +1,12 @@
+'use client'
+
 import Image from 'next/image';
 import styles from './BlogCard.module.css';
 import {Eye, ThumbsUp} from 'lucide-react';
+import {useRouter} from 'next/navigation';
 
-interface BlogCardProps {
+export interface BlogCardProps {
+  blogId: string;
   title: string;
   summary: string;
   nickname: string;
@@ -11,38 +15,35 @@ interface BlogCardProps {
   views: number;
 }
 
-const BlogCard = ({
-                    title,
-                    summary,
-                    nickname,
-                    image,
-                    thumbs,
-                    views
-                  }: BlogCardProps) => {
+export default function BlogCard(prop: BlogCardProps) {
+
+  const router = useRouter()
+
   return (
-      <div className={styles.card}>
+      <div
+          className={styles.card}
+          onClick={() => router.push(`/post/log/${prop.blogId}`)}
+      >
         <div className={styles.imageWrapper}>
-          <Image src={image} alt={title} layout="fill" objectFit="cover"/>
+          <Image src={prop.image} alt={prop.title} layout="fill" objectFit="cover"/>
         </div>
         <div className={styles.content}>
-          <h3 className={styles.title}>{title}</h3>
-          <p className={styles.summary}>{summary}</p>
+          <h3 className={styles.title}>{prop.title}</h3>
+          <p className={styles.summary}>{prop.summary}</p>
         </div>
         <div className={styles.footer}>
-          <span className={styles.nickname}>{nickname}</span>
+          <span className={styles.nickname}>{prop.nickname}</span>
           <div className={styles.stats}>
             <div className={styles.statItem}>
               <ThumbsUp size={14}/>
-              <span>{thumbs}</span>
+              <span>{prop.thumbs}</span>
             </div>
             <div className={styles.statItem}>
               <Eye size={14}/>
-              <span>{views}</span>
+              <span>{prop.views}</span>
             </div>
           </div>
         </div>
       </div>
   );
 };
-
-export default BlogCard;

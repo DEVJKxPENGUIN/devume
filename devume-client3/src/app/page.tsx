@@ -50,6 +50,7 @@ export default async function HomePage() {
             {blogs.map((blog, index) => (
                 <BlogCard
                     key={index}
+                    blogId={blog.getId()}
                     title={blog.getTitle()}
                     summary={blog.getSummary()}
                     nickname={blog.getAuthor()}

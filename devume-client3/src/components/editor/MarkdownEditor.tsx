@@ -14,6 +14,13 @@ export default function MarkdownEditor(prop: MarkdownEditorProps) {
 
   return (
       <div className={styles.container}>
+        {/* Preview Area */}
+        <div className={styles.previewArea}>
+          <MarkdownViewer content={markdownText} showSidebar={false}/>
+        </div>
+
+        <div className={styles.border} />
+
         {/* Editor Area */}
         <div className={styles.editorArea}>
           <textarea
@@ -25,11 +32,6 @@ export default function MarkdownEditor(prop: MarkdownEditorProps) {
               className={styles.textarea}
               placeholder="# Start typing Markdown..."
           />
-        </div>
-
-        {/* Preview Area */}
-        <div className={styles.previewArea}>
-          <MarkdownViewer content={markdownText} showSidebar={false}/>
         </div>
       </div>
   );
