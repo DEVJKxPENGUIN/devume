@@ -11,10 +11,12 @@ import {redirect} from "next/navigation";
 export interface PostProps {
   title: string;
   content: string;
+  thumbnail: string;
 }
 
 export default function PostWrapper(props: PostProps) {
   const [title, setTitle] = useState<string>(props.title)
+  const [thumbnail, setThumbnail] = useState<string>(props.thumbnail)
   const [content, setContent] = useState<string>(props.content)
   const {showAlert} = useAlert()
 
@@ -69,7 +71,7 @@ export default function PostWrapper(props: PostProps) {
                 // todo id
                 title: title,
                 contents: content,
-                thumbnail: 'todo',
+                thumbnail: thumbnail,
               })
             })
 
@@ -87,7 +89,11 @@ export default function PostWrapper(props: PostProps) {
 
   return (
       <div className={styles.postwrap}>
-        <PostTitleInput title={title || ''} onChange={setTitle}/>
+        <PostTitleInput
+            title={title || ''}
+            onTitleChange={title => setTitle(title)}
+            onThumbnailChange={thumbnail => setThumbnail(thumbnail)}
+        />
         <MarkdownEditor content={content} onChange={setContent}/>
         <div className={styles.submitArea}>
           <Button

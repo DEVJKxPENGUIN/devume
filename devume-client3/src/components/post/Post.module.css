@@ -5,11 +5,17 @@
   overflow: hidden;
 }
 
+.thumbnail {
+  object-fit: cover;
+  z-index: 0;
+}
+
 .uploadThumbnail {
   display: flex;
   width: 100%;
   justify-content: right;
   padding-right: 2rem;
+  padding-top: 1rem;
 }
 
 .uploadThumbnailButton {
