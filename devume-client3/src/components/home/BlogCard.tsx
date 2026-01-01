@@ -25,7 +25,12 @@ export default function BlogCard(prop: BlogCardProps) {
           onClick={() => router.push(`/post/log/${prop.blogId}`)}
       >
         <div className={styles.imageWrapper}>
-          <Image src={prop.image} alt={prop.title} layout="fill" objectFit="cover"/>
+          <Image
+              src={prop.image}
+              alt={prop.title}
+              fill
+              style={{objectFit: 'cover'}}
+          />
         </div>
         <div className={styles.content}>
           <h3 className={styles.title}>{prop.title}</h3>

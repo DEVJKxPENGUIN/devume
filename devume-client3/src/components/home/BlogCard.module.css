@@ -7,6 +7,8 @@
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   /*border: 1px solid var(--border-color);*/
   opacity: 85%;
+  width: 100%;
+  height: 12rem;
 }
 
 .card:hover {
@@ -17,8 +19,10 @@
 
 .imageWrapper {
   position: relative;
-  width: 35%;
-  padding-top: 20%; /* 16:9 Aspect Ratio */
+  width: 20rem;
+  flex-shrink: 0;
+  overflow: hidden;
+  /*padding-top: 20%; !* 16:9 Aspect Ratio *!*/
 }
 
 .imageWrapper img {
