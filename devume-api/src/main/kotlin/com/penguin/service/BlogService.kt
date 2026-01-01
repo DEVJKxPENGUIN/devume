@@ -31,7 +31,7 @@ class BlogService(
             BlogContent.newBuilder()
                 .setId(blog.id.toString())
                 .setTitle(blog.title)
-                .setSummary(blog.content.substring(100.coerceAtMost(blog.content.length)))
+                .setSummary(blog.content.substring(0, blog.content.length.coerceAtMost(200)))
                 .setContents(blog.content)
                 .setAuthor(blog.user?.nickName)
                 .setThumbnail(blog.thumbnail)

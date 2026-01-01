@@ -19,9 +19,11 @@
 
 .imageWrapper {
   position: relative;
-  width: 20rem;
+  display: flex;
   flex-shrink: 0;
   overflow: hidden;
+  width: 30%;
+  /*flex-grow: 1;*/
   /*padding-top: 20%; !* 16:9 Aspect Ratio *!*/
 }
 
@@ -31,12 +33,12 @@
 
 .content {
   padding: 10px;
-  flex-grow: 1;
+  width: 60%;
 }
 
 .title {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.6rem;
+  font-weight: 400;
   margin: 0 0 4px 0;
   color: var(--color-text-primary);
   white-space: nowrap;
@@ -53,7 +55,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 2.7rem; /* 0.9rem * 1.5 line-height * 2 lines */
+  height: 6rem; /* 0.9rem * 1.5 line-height * 2 lines */
 }
 
 .footer {
