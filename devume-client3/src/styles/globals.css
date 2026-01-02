@@ -14,9 +14,11 @@
 
   /* Light Theme Colors */
   --color-background: rgba(255, 255, 255, 0.9);
-  --color-background-secondary: rgba(240, 242, 245, 0.9);
-  --color-background-third: rgba(238, 231, 231, 0.9);
-  --color-background-transparent: rgba(238, 231, 231, 0.3);
+  --color-background-secondary: rgba(242, 242, 242, 0.9);
+  --color-background-third: rgba(231, 231, 231, 0.9);
+  --color-background-transparent: rgba(231, 231, 231, 0.3);
+  --color-background-transparent-semi: rgba(255, 255, 255, 0.6);
+  --color-background-primary: rgba(255, 255, 255, 1);
   --color-foreground: rgba(0, 0, 0, 0.9);
   --color-card: #f7f7f7;
   --color-border: #eaeaea;
@@ -33,6 +35,8 @@
   --color-background-secondary: rgba(26, 26, 26, 0.9);
   --color-background-third: rgba(9, 9, 9, 0.9);
   --color-background-transparent: rgba(9, 9, 9, 0.3);
+  --color-background-transparent-semi: rgba(9, 9, 9, 0.6);
+  --color-background-primary: rgba(0, 0, 0, 1);
   --color-foreground: rgba(255, 255, 255, 0.9);
   --color-border: #333333;
   --color-border-impact: #eaeaea;
@@ -54,6 +58,7 @@ body {
   color: var(--color-text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
   overscroll-behavior: none; /* Prevents scroll bouncing on iOS/macOS */
+  cursor: default;
 }
 
 
@@ -92,6 +97,6 @@ main {
 section {
   display: flex;
   border-radius: 24px;
-  background-color: var(--color-background-third);
+  background-color: var(--color-background-transparent-semi);
   border-color: var(--color-border);
 }
