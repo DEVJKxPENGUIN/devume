@@ -70,7 +70,7 @@
   font-weight: 600;
   margin-bottom: 1rem;
   margin-top: 1.5rem;
-  color: var(--color-text-primary);
+  color: var(--color-text-secondary);
   scroll-margin-top: 100px;
 }
 
@@ -80,13 +80,13 @@
   font-weight: 500;
   margin-bottom: 0.75rem;
   margin-top: 1rem;
-  color: var(--color-text-primary);
+  color: var(--color-text-secondary);
   scroll-margin-top: 100px;
 }
 
 .mdP {
   margin-bottom: 1rem;
-  color: var(--color-text-primary);
+  color: var(--color-text-secondary);
   line-height: 1.75rem;
 }
 
