@@ -37,6 +37,28 @@ function deserialize_BlogListResponse(buffer_arg) {
   return Blog_pb.BlogListResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_BlogProfileRequest(arg) {
+  if (!(arg instanceof Blog_pb.BlogProfileRequest)) {
+    throw new Error('Expected argument of type BlogProfileRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_BlogProfileRequest(buffer_arg) {
+  return Blog_pb.BlogProfileRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_BlogProfileResponse(arg) {
+  if (!(arg instanceof Blog_pb.BlogProfileResponse)) {
+    throw new Error('Expected argument of type BlogProfileResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_BlogProfileResponse(buffer_arg) {
+  return Blog_pb.BlogProfileResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_BlogRequest(arg) {
   if (!(arg instanceof Blog_pb.BlogRequest)) {
     throw new Error('Expected argument of type BlogRequest');
@@ -170,6 +192,17 @@ var BlogService = exports.BlogService = {
     requestDeserialize: deserialize_WriteRequest,
     responseSerialize: serialize_WriteResponse,
     responseDeserialize: deserialize_WriteResponse,
+  },
+  getBlogProfile: {
+    path: '/Blog/GetBlogProfile',
+    requestStream: false,
+    responseStream: false,
+    requestType: Blog_pb.BlogProfileRequest,
+    responseType: Blog_pb.BlogProfileResponse,
+    requestSerialize: serialize_BlogProfileRequest,
+    requestDeserialize: deserialize_BlogProfileRequest,
+    responseSerialize: serialize_BlogProfileResponse,
+    responseDeserialize: deserialize_BlogProfileResponse,
   },
 };
 

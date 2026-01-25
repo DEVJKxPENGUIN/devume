@@ -13,6 +13,7 @@ interface IBlogService extends grpc.ServiceDefinition<grpc.UntypedServiceImpleme
     preparePost: IBlogService_IPreparePost;
     validate: IBlogService_IValidate;
     write: IBlogService_IWrite;
+    getBlogProfile: IBlogService_IGetBlogProfile;
 }
 
 interface IBlogService_IGetBlogs extends grpc.MethodDefinition<Blog_pb.BlogListRequest, Blog_pb.BlogListResponse> {
@@ -60,6 +61,15 @@ interface IBlogService_IWrite extends grpc.MethodDefinition<Blog_pb.WriteRequest
     responseSerialize: grpc.serialize<Blog_pb.WriteResponse>;
     responseDeserialize: grpc.deserialize<Blog_pb.WriteResponse>;
 }
+interface IBlogService_IGetBlogProfile extends grpc.MethodDefinition<Blog_pb.BlogProfileRequest, Blog_pb.BlogProfileResponse> {
+    path: "/Blog/GetBlogProfile";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<Blog_pb.BlogProfileRequest>;
+    requestDeserialize: grpc.deserialize<Blog_pb.BlogProfileRequest>;
+    responseSerialize: grpc.serialize<Blog_pb.BlogProfileResponse>;
+    responseDeserialize: grpc.deserialize<Blog_pb.BlogProfileResponse>;
+}
 
 export const BlogService: IBlogService;
 
@@ -69,6 +79,7 @@ export interface IBlogServer extends grpc.UntypedServiceImplementation {
     preparePost: grpc.handleUnaryCall<Blog_pb.PreparePostRequest, Blog_pb.PreparePostResponse>;
     validate: grpc.handleUnaryCall<Blog_pb.ValidationRequest, Blog_pb.ValidationResponse>;
     write: grpc.handleUnaryCall<Blog_pb.WriteRequest, Blog_pb.WriteResponse>;
+    getBlogProfile: grpc.handleUnaryCall<Blog_pb.BlogProfileRequest, Blog_pb.BlogProfileResponse>;
 }
 
 export interface IBlogClient {
@@ -87,6 +98,9 @@ export interface IBlogClient {
     write(request: Blog_pb.WriteRequest, callback: (error: grpc.ServiceError | null, response: Blog_pb.WriteResponse) => void): grpc.ClientUnaryCall;
     write(request: Blog_pb.WriteRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: Blog_pb.WriteResponse) => void): grpc.ClientUnaryCall;
     write(request: Blog_pb.WriteRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: Blog_pb.WriteResponse) => void): grpc.ClientUnaryCall;
+    getBlogProfile(request: Blog_pb.BlogProfileRequest, callback: (error: grpc.ServiceError | null, response: Blog_pb.BlogProfileResponse) => void): grpc.ClientUnaryCall;
+    getBlogProfile(request: Blog_pb.BlogProfileRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: Blog_pb.BlogProfileResponse) => void): grpc.ClientUnaryCall;
+    getBlogProfile(request: Blog_pb.BlogProfileRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: Blog_pb.BlogProfileResponse) => void): grpc.ClientUnaryCall;
 }
 
 export class BlogClient extends grpc.Client implements IBlogClient {
@@ -106,4 +120,7 @@ export class BlogClient extends grpc.Client implements IBlogClient {
     public write(request: Blog_pb.WriteRequest, callback: (error: grpc.ServiceError | null, response: Blog_pb.WriteResponse) => void): grpc.ClientUnaryCall;
     public write(request: Blog_pb.WriteRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: Blog_pb.WriteResponse) => void): grpc.ClientUnaryCall;
     public write(request: Blog_pb.WriteRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: Blog_pb.WriteResponse) => void): grpc.ClientUnaryCall;
+    public getBlogProfile(request: Blog_pb.BlogProfileRequest, callback: (error: grpc.ServiceError | null, response: Blog_pb.BlogProfileResponse) => void): grpc.ClientUnaryCall;
+    public getBlogProfile(request: Blog_pb.BlogProfileRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: Blog_pb.BlogProfileResponse) => void): grpc.ClientUnaryCall;
+    public getBlogProfile(request: Blog_pb.BlogProfileRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: Blog_pb.BlogProfileResponse) => void): grpc.ClientUnaryCall;
 }

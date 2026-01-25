@@ -63,6 +63,8 @@ export class BlogContent extends jspb.Message {
     setThumbs(value: number): BlogContent;
     getViews(): number;
     setViews(value: number): BlogContent;
+    getUserid(): number;
+    setUserid(value: number): BlogContent;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): BlogContent.AsObject;
@@ -84,6 +86,7 @@ export namespace BlogContent {
         thumbnail: string,
         thumbs: number,
         views: number,
+        userid: number,
     }
 }
 
@@ -256,5 +259,54 @@ export class WriteResponse extends jspb.Message {
 export namespace WriteResponse {
     export type AsObject = {
         postid: number,
+    }
+}
+
+export class BlogProfileRequest extends jspb.Message { 
+    getUserid(): number;
+    setUserid(value: number): BlogProfileRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): BlogProfileRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: BlogProfileRequest): BlogProfileRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: BlogProfileRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): BlogProfileRequest;
+    static deserializeBinaryFromReader(message: BlogProfileRequest, reader: jspb.BinaryReader): BlogProfileRequest;
+}
+
+export namespace BlogProfileRequest {
+    export type AsObject = {
+        userid: number,
+    }
+}
+
+export class BlogProfileResponse extends jspb.Message { 
+    getTitle(): string;
+    setTitle(value: string): BlogProfileResponse;
+    getSummary(): string;
+    setSummary(value: string): BlogProfileResponse;
+    getThumbnail(): string;
+    setThumbnail(value: string): BlogProfileResponse;
+    getIntroduce(): string;
+    setIntroduce(value: string): BlogProfileResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): BlogProfileResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: BlogProfileResponse): BlogProfileResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: BlogProfileResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): BlogProfileResponse;
+    static deserializeBinaryFromReader(message: BlogProfileResponse, reader: jspb.BinaryReader): BlogProfileResponse;
+}
+
+export namespace BlogProfileResponse {
+    export type AsObject = {
+        title: string,
+        summary: string,
+        thumbnail: string,
+        introduce: string,
     }
 }

@@ -1,0 +1,93 @@
+
+# 목표
+개발자를 위한 포트폴리오/포스팅 사이트 플랫폼 ui/ux 디자인
+
+# 제목
+Devume
+
+# 컨셉 (아래 참조)
+The art style of Arknights: Endfield (set for a general 2026 release) is defined as "realistic anime" or "anime-inspired realism". It evolves the signature aesthetic of the original Arknights while transitioning into a fully 3D environment. 
+Core Visual Pillars
+Techwear Aesthetic: Character designs heavily feature functional "techwear," prioritizing utility-focused outfits over traditional fanservice.
+Industrial Sci-Fi & Realism: The environments utilize meticulously processed textures (e.g., stained concrete) to create a believable, physical space. The world design often blends traditional Chinese architectural foundations with a functional sci-fi twist.
+Advanced 3D Rendering: The 3D models utilize high-end techniques for expressive faces and dynamic hair, including layered rendering for eyebrows and crisp hair shadows to maintain the 2D "Arknights essence" in a 3D space.
+Minimalist UI/UX: Following its predecessor, the game maintains a sleek, minimalistic, and "tech-layered" graphic design style. 
+Key Contributors
+Lead Character Designer: Liduke, a prominent artist for the original Arknights, serves as the lead character designer, ensuring visual cohesion between the two titles. 
+Official Resources
+For official concept art and visual updates, you can follow the Official Arknights: Endfield X (Twitter) Account or visit the Gryphline Official Website. 
+
+# 페이지
+## 랜딩 페이지
+- hero section
+- resume 리스트 노출 (6개)
+- post 리스트 노출 (6개)
+
+## post 작성 페이지
+- 제목 작성 영역 (썸네일 추가 버튼 및 이미지)
+- 포스팅 그룹 지정 영역
+- 미리보기 영역
+- 글 작성 영역 (기본 마크다운)
+
+## post 조회 페이지
+- post 작성자의 블로그 상단 노출
+- post 보기 영역
+- 우측에 현재 스크롤 마크다운 헤더에 따른 위치 요약 노출 영역
+- 댓글 영역
+- post 작성자의 다른 글 목록 영역
+
+## blog 조회 페이지
+- 유저의 blog 메인 페이지
+- blog 상단은 간단한 소개 및 홈/소개/포트폴리오/포스팅 메뉴
+
+### 홈 영역
+- 간단한 글 작성 또는 이미지 노출
+### 홈 영역 수정하기 화면
+- 홈 영역에 대해 글 작성/이미지 업로드 가능
+
+### 소개 영역
+- 공통화된 유저의 이름/소속/대학/이력/소개글 등을 노출
+### 소개 영역 수정하기 화면
+- 이름/소속/대학/이력/소개글/썸네일 등을 입력받는 화면
+
+### 포트폴리오 영역
+- 해당 유저가 작성한 포트폴리오에 대해 리스팅
+
+### 포스팅 영역
+- 해당 유저가 작성한 포스팅에 대해 리스팅
+- 우측에는 유저가 직접 설정한 포스팅 그룹 메뉴리스트 노출
+- 포스팅 그룹 메뉴를 클릭하면 해당 포스팅 그룹에 해당하는 포스팅들만 리스팅
+
+## 포트폴리오 작성 영역
+- 포트폴리오에 대한 기본적인 정보 입력 받는 화면
+
+-----------------------------------------------
+너는 시니어 디자이너야. 위 작업내용을 바탕으로 각 페이지들의 ui/ux 를 컨셉에 맞게 만들어주고,
+ui 컴포넌트/테마/컬러 등은 추출해서 따로 모은 후 재활용 해줘.
+
+
+
+2차 질의
+
+1. Add a tag input field to the PostCreatePage for users to add relevant tags to their posts. These tags should be displayed on the PostViewPage.
+
+2. Enhance the Markdown editor on the PostCreatePage with a rich text toolbar that includes buttons for bold, italics, code blocks, and lists, improving the WYSIWYG experience.
+
+3. Implement a commenting system on the PostViewPage where users can leave comments, including their avatar and username, below the post content.
+
+4. 컨셉에 더욱 충실하게 애니메이션 효과를 넣어줘. hover, 페이지 전환, 스크롤링 등장
+https://endfield.gryphline.com/en-us#notice 엔드필드 사이트에 적용된 여러 효과들과 컴포넌트들을 참조해서 더욱 컨셉에 맞는 디테일을 보강해줘.
+
+3차 질의
+Implement subtle hover effects on the clickable elements within the PostViewPage, such as the author's profile link and the navigation links in the sidebar, to provide visual feedback.
+
+Apply a parallax scrolling effect to the header image on the PostViewPage, and animate the title to appear with a slight delay and upward motion after the image settles.
+
+Implement smooth page transition animations for navigating between the LandingPage, PostViewPage, and BlogPage, using a fade-in/fade-out effect with a subtle color overlay that matches the theme.
+
+hero section background 등은 three js 를 활용해서 현재 컨셉에 맞는 애니메이션 오브젝트를 만들어줘.
+
+4차 질의
+1. 현재 hover 시 진동하는 이펙트는 정신사나워. 진동 대신 빠르게 살짝 깜빡이는 효과를 줘.
+
+2. Sci-Fi HUD / Tech HUD 요런 컨셉으로 herosection 의 three js 를 다시 그려줘.

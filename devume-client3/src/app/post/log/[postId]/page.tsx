@@ -4,6 +4,7 @@ import {getBlogClient, grpcRequest} from "@/utils/grpcHandler";
 import {Metadata} from "@grpc/grpc-js";
 import MarkdownViewer from "@/components/editor/MarkdownViewer";
 import Image from "next/image";
+import BlogHeader from "@/components/blog/BlogHeader";
 
 export default async function PostViewPage({params}: { params: Promise<{ postId: number }> }) {
   const {postId} = await params
@@ -16,6 +17,7 @@ export default async function PostViewPage({params}: { params: Promise<{ postId:
 
   const post = await fetchPost()
 
+
   // todo -> get blog info
   // blog title, blog menus
   // post category - user db
@@ -24,11 +26,14 @@ export default async function PostViewPage({params}: { params: Promise<{ postId:
   return (
       <main className={styles.main}>
         {/* todo blogSection 영역은 api 화 해야한다. */}
-        <section className={styles.blogSection}>
-          <div className={styles.blogTitle}>
-            Devjk's diary
-          </div>
-        </section>
+        <BlogHeader
+            userId={post.getUserid()}
+        />
+        {/*<section className={styles.blogSection}>*/}
+        {/*  <div className={styles.blogTitle}>*/}
+        {/*    Devjk's diary*/}
+        {/*  </div>*/}
+        {/*</section>*/}
         <section className={styles.logSection}>
           <div className={styles.logTitleWrapper}>
             {post.getThumbnail() && (

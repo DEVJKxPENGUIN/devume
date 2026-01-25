@@ -10,6 +10,7 @@ service Blog {
   rpc PreparePost (PreparePostRequest) returns (PreparePostResponse) {}
   rpc Validate(ValidationRequest) returns (ValidationResponse) {}
   rpc Write(WriteRequest) returns (WriteResponse) {}
+  rpc GetBlogProfile (BlogProfileRequest) returns (BlogProfileResponse) {}
 }
 
 message BlogListRequest {
@@ -29,6 +30,7 @@ message BlogContent {
   string thumbnail = 6;
   int64 thumbs = 7;
   int64 views = 8;
+  int64 userId = 9;
 }
 
 message BlogListResponse {
@@ -63,4 +65,15 @@ message WriteRequest {
 
 message WriteResponse {
   int64 postId = 1;
+}
+
+message BlogProfileRequest {
+  int64 userId = 1;
+}
+
+message BlogProfileResponse {
+  string title = 1;
+  string summary = 2;
+  string thumbnail = 3;
+  string introduce = 4;
 }

@@ -1,7 +1,9 @@
 package com.penguin.service
 
 import com.penguin.api.*
+import com.penguin.db.entity.Blog
 import com.penguin.db.entity.Post
+import com.penguin.db.repository.BlogRepository
 import com.penguin.db.repository.PostRepository
 import com.penguin.db.repository.UserRepository
 import com.penguin.domain.oidc.Role
@@ -18,7 +20,8 @@ import java.time.LocalDateTime
 @GrpcService
 class BlogService(
     private val postRepository: PostRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val blogRepository: BlogRepository
 ) : BlogGrpcKt.BlogCoroutineImplBase() {
     private val log = LoggerFactory.getLogger(javaClass)
 
@@ -74,6 +77,7 @@ class BlogService(
             .setThumbnail(blog.thumbnail)
             .setThumbs(blog.thumbs)
             .setViews(blog.views)
+            .setUserId(user.id)
             .build()
     }
 
@@ -218,6 +222,32 @@ class BlogService(
 
         return WriteResponse.newBuilder()
             .setPostId(createdPost.id)
+            .build()
+    }
+
+    override suspend fun getBlogProfile(request: BlogProfileRequest): BlogProfileResponse {
+
+        val blog = withContext(Dispatchers.IO) {
+            blogRepository.findByUserId(request.userId)
+                ?: run {
+                    val user = userRepository.findById(request.userId)
+                        .orElseThrow {
+                            BaseException(
+                                ErrorCode.RESOURCE_NOT_FOUND,
+                                "no user with id ${request.userId}"
+                            )
+                        }
+
+                    val newBlog = Blog.create(user.id, user.nickName)
+                    blogRepository.save(newBlog)
+                }
+        }
+
+        return BlogProfileResponse.newBuilder()
+            .setTitle(blog.title)
+            .setSummary(blog.summary)
+            .setThumbnail(blog.thumbnail)
+            .setIntroduce(blog.introduce)
             .build()
     }
 }
